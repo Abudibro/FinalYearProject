@@ -9,41 +9,33 @@ export default function LogIn({navigation}) {
   const [username, changeUsername] = useState(null);
   const [email, changeEmail] = useState(null);
   const [password, changePassword] = useState(null);
+  const [usernameIsValid, setUsernameIsValid] = useState(true);
   const [upperAndLowerExist, setUpperAndLowerExist] = useState(false);
   const [numberExists, setNumberExists] = useState(false);
   const [specialExists, setSpecialExists] = useState(false);
   const [eightCharsExist, setEightCharsExist] = useState(false);
-
-  const onChangePassword = async text => {
-    await changePassword(text);
-    await checkPasswordIsValid();
-  }
-
+  
   const checkPasswordIsValid = text => {
     changePassword(text);
     let upper = 0, lower = 0, special = 0, num = 0
-    const specialChars = new RegExp(/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/);
 
     for (let char of text) {
-      if (!isNaN(char)) num++;
-      else {
-        if (char.toUpperCase() == char) upper++;
-        if (char.toLowerCase() == char) lower++;
-        if (specialChars.test(char)) special++;
-      }
+      !isNaN(char) ? num++
+      : /^[A-Z]*$/.test(char) ? upper++
+      : /^[a-z]*$/.test(char) ? lower++
+      : /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(char) ? special++
+      : null
     }
     
     upper >= 1 && lower >= 1 ? setUpperAndLowerExist(true) : setUpperAndLowerExist(false)
     special >= 1 ? setSpecialExists(true) : setSpecialExists(false)
     num >= 1 ? setNumberExists(true) : setNumberExists(false)
     text.length >= 8 ? setEightCharsExist(true) : setEightCharsExist(false)
-    
 
-    // return upper>=1 && lower >= 1 && special >= 1 && num >= 1 && upper + lower + num + special >= 8
     return upperAndLowerExist && specialExists && numberExists && eightCharsExist
   }
 
-  const onSignInClick = () => {if (username == "Hijazi" && password == "123") props.toggleSignIn(true);}
+  const onSignInClick = () => {if (username == "Hijazi" && password == "123") navigation.navigate('Home');}
 
   return (
     <View style={styles.container}>
@@ -53,8 +45,8 @@ export default function LogIn({navigation}) {
         </View>
         <View style={{flex: 2.9, justifyContent: 'space-between'}}>
           <View>
-            <TextInputBox placeholder="Enter your username" margin={3} label="Username" onChange={changeUsername}/>
-            <TextInputBox placeholder="Enter your email address" margin={3} label='Email' onChange={changeEmail}/>
+            <TextInputBox placeholder="Enter your username" margin={3} label="Username" icon={usernameIsValid} iconName={"checkmark-circle-sharp"} iconColor={"#2846c4"} onChange={changeUsername}/>
+            <TextInputBox placeholder="Enter your email address" margin={3} label='Email'  onChange={changeEmail}/>
             <View style={{margin: 3}}>
               <Header size={15} margin={12} weight='600'>Password</Header>
               
