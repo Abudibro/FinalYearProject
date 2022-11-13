@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { View, Dimensions, TextInput } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import { View, Dimensions, TextInput, StyleSheet } from 'react-native';
 import Header from './Header'
 
 export default function TextInputBox(props) {
@@ -15,7 +14,7 @@ export default function TextInputBox(props) {
         }
         <View style={{
             margin: 5,
-            borderColor: "#2846c4",
+            borderColor: props.iconColor ? props.iconColor : "#2846c4",
             borderWidth: isFocusOn || props.icon ? 2 : 0,
             width: width,
             borderRadius: 13,
@@ -41,12 +40,17 @@ export default function TextInputBox(props) {
             >  
             </TextInput>
             {
-                props.icon ? <Icon name={props.iconName} size={25} color={props.iconColor} style={{
-                    position: 'absolute',
-                    left: width - 40
-                }}/> : null
+                props.icon != null ? 
+                props.icon(25, props.iconColor, styles.icon) : null
             }
         </View>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+    icon: {
+        position: 'absolute',
+        left: (Dimensions.get('window').width * 0.85) - 36
+    }
+});
