@@ -1,20 +1,26 @@
 import { useState } from 'react';
-import { StyleSheet, View, Dimensions } from 'react-native';
+import { StyleSheet, View, Dimensions, TouchableOpacity } from 'react-native';
 import ButtonCustom from '../components/Button';
 import Header from '../components/Header'
 import TextInputBox from '../components/TextInput'
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo'
 
-export default function LogIn({navigation}) {
+export default function SignUp({navigation}) {
   const [username, changeUsername] = useState(null);
   const [email, changeEmail] = useState(null);
   const [password, changePassword] = useState(null);
+  const [hidePassword, toggleHidePassword] = useState(true);
   const [usernameIsValid, setUsernameIsValid] = useState(true);
   const [upperAndLowerExist, setUpperAndLowerExist] = useState(false);
   const [numberExists, setNumberExists] = useState(false);
   const [specialExists, setSpecialExists] = useState(false);
   const [eightCharsExist, setEightCharsExist] = useState(false);
+
+  const checkUsernameIsValid = () => {
+    if (!username) return null
+    return username.length == 3
+  }
   
   const checkPasswordIsValid = text => {
     changePassword(text);
@@ -38,15 +44,26 @@ export default function LogIn({navigation}) {
 
   const onSignInClick = () => {if (username == "Hijazi" && password == "123") navigation.navigate('Home');}
 
-  const testEmailValidity = () => {
+  const checkEmailIsValid = () => {
     if (!email) return null
     else return (/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.test(email))
   }
 
-  console.log(testEmailValidity())
+  console.log(checkEmailIsValid())
 
   const Checkmark = (size, color, style) => {return (<Ionicons name={"checkmark-circle-sharp"} size={size} color={color} style={style} />)}
   const Cross = (size, color, style) => {return (<Entypo name={"circle-with-cross"} size={size} color={color} style={style} />)}
+  const EyeWithLine = (size, color, style) => {return (
+    <TouchableOpacity style={style} onPress={() => toggleHidePassword(true)}>
+      <Entypo name={"eye-with-line"} size={size} color={color} />
+    </TouchableOpacity>
+  )}
+  const Eye = (size, color, style) => {return (
+    <TouchableOpacity style={style} onPress={() => toggleHidePassword(false)}>
+      <Entypo name={"eye"} size={size} color={color} />
+    </TouchableOpacity>
+  )}
+
 
   return (
     <View style={styles.container}>
@@ -59,15 +76,15 @@ export default function LogIn({navigation}) {
             <TextInputBox placeholder="Enter your username"
               margin={3}
               label="Username"
-              icon={usernameIsValid ? Checkmark : usernameIsValid != null ? Cross : null}
-              iconColor={usernameIsValid ? "#019501" : usernameIsValid != null ? "#b30000" : null}
+              icon={checkUsernameIsValid() ? Checkmark : checkUsernameIsValid() != null ? Cross : null}
+              iconColor={checkUsernameIsValid() ? "#019501" : checkUsernameIsValid() != null ? "#b30000" : null}
               onChange={changeUsername}
             />
             <TextInputBox placeholder="Enter your email address"
               margin={3}
               label='Email'
-              icon={testEmailValidity() ? Checkmark : testEmailValidity() != null ? Cross : null}
-              iconColor={testEmailValidity() ? "#019501" : testEmailValidity() != null ? "#b30000" : null}
+              icon={checkEmailIsValid() ? Checkmark : checkEmailIsValid() != null ? Cross : null}
+              iconColor={checkEmailIsValid() ? "#019501" : checkEmailIsValid() != null ? "#b30000" : null}
               onChange={changeEmail}
             />
             <View style={{margin: 3}}>
@@ -102,12 +119,21 @@ export default function LogIn({navigation}) {
               </View>
 
 
-              <TextInputBox noLabel placeholder="Create your password" margin={3} onChange={checkPasswordIsValid}/>
+              <TextInputBox
+                noLabel
+                placeholder="Create your password"
+                margin={3}
+                onChange={checkPasswordIsValid}
+                showPassword={hidePassword}
+                icon={hidePassword ? Eye : EyeWithLine}
+                iconColor={"#848484"}
+                noBorder
+              />
             </View>
           </View>
         </View>
-        <View style={{alignItems: 'center', marginTop: 20, flex: .7, justifyContent: 'center'}}>
-          <ButtonCustom onClick={onSignInClick} size={16} weight={"600"} disabled={!(usernameIsValid && testEmailValidity() && checkPasswordIsValid())} >Sign Up</ButtonCustom>
+        <View style={{alignItems: 'center', marginTop: 20, flex: 1, justifyContent: 'center'}}>
+        <ButtonCustom onClick={onSignInClick} size={16} weight={"600"} disabled={!(checkUsernameIsValid() && checkEmailIsValid() && upperAndLowerExist && specialExists && numberExists && eightCharsExist)} >Sign Up</ButtonCustom>
           <View style={{flexDirection: 'row', margin: 20}}>
             <Header size={10}>Already have an account? </Header>
             <Header size={10} color={"#2846c4"} onPress={() =>navigation.navigate('LogIn')}>Sign In</Header>
