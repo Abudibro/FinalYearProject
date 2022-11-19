@@ -1,14 +1,17 @@
 import { useState } from 'react';
-import { StyleSheet, View, Dimensions } from 'react-native';
+import { StyleSheet, View, Dimensions, ScrollView } from 'react-native';
 import ButtonCustom from '../components/Button';
 import Header from '../components/Header'
 import TextInputBox from '../components/TextInput'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import HomeProductCard from '../components/HomeProductCard';
+
+const width = (Dimensions.get('window').width * 0.85) + 4;
 
 export default function Home({navigation}) {
     const [user, setUser] = useState({
         id:15,
-        username: "Hijazi",
+        username: "Mohammad",
         email: "Hijazi@gmail.com",
         searches: ["Bike", "PS5", "Keyboard"],
         viewed: [121232, 23144, 21443],
@@ -34,14 +37,36 @@ export default function Home({navigation}) {
                     <Header size={50} margin={0}>Hello,</Header>
                     <Header size={30} margin={0} weight={"500"}>{user.username}</Header>
                 </View>
-                <ButtonCustom height={86} width={140} weight={"700"} size={15} icon={<FontAwesome name='plus' size={25} style={{color: '#f1f1f1'}} />}>
-                    New Listing
+                <ButtonCustom static height={72} width={130} weight={"700"} size={15} borderRadius={20} icon={<FontAwesome name='plus' size={30} style={{color: '#f1f1f1'}}/>}>
+                    New{"\n"}
+                    Listing
                 </ButtonCustom>
             </View>
-            <View style={{flex: 1}}>
-
+            <View style={styles.searchSection}>
+                <TextInputBox placeholder="Help me find..." margin={3} noLabel />
             </View>
-            <View style={{flex: 4}}>
+            <View style={styles.cardSectionWrapper}>
+                <View style={styles.cardSection}>
+                    <Header size={23} >You recently viewed</Header>
+                    <ScrollView horizontal={true}>
+                        <HomeProductCard />
+                        <HomeProductCard />
+                        <HomeProductCard />
+                        <HomeProductCard />
+                        <HomeProductCard />
+                    </ScrollView>
+                </View>
+
+                <View style={styles.cardSection}>
+                    <Header size={23} >Your listed items</Header>
+                    <ScrollView horizontal={true}>
+                        <HomeProductCard />
+                        <HomeProductCard />
+                        <HomeProductCard />
+                        <HomeProductCard />
+                        <HomeProductCard />
+                    </ScrollView>
+                </View>
 
             </View>
         </View>
@@ -60,8 +85,18 @@ const styles = StyleSheet.create({
   topSection: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-between',
     alignItems: 'flex-end',
-    width: "100%"
+    width: width
+  },
+  searchSection: {
+    flex: 1,
+    justifyContent: 'space-around'
+  },
+  cardSectionWrapper: {
+    flex: 4, width: '100%', alignItems: 'center'
+  },
+  cardSection: {
+    flex: 1, width: '100%', alignItems: 'center' //, justifyContent:'space-around'
   }
 });

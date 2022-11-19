@@ -6,7 +6,7 @@ export default function ButtonCustom(props) {
             width: props.width ? props.width : (Dimensions.get('window').width * 0.85) + 4,
             height: props.height ? props.height : 57,
             backgroundColor: '#2846c4',
-            borderRadius: 12,
+            borderRadius: props.borderRadius ? props.borderRadius : 12,
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'space-evenly',
