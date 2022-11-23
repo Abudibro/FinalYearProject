@@ -1,13 +1,30 @@
-import { useState } from 'react';
-import { StyleSheet, View, Dimensions } from 'react-native';
+import { useEffect, useState } from 'react';
+import { StyleSheet, View, Dimensions, TouchableOpacity } from 'react-native';
 import ButtonCustom from '../components/Button';
 import Header from '../components/Header'
 import TextInputBox from '../components/TextInput'
+import Entypo from 'react-native-vector-icons/Entypo'
 
-export default function LogIn({navigation}) {
+export default function LogIn({navigation, route}) {
+
+  useEffect(() => {
+    route.params.changeNav(-1);
+  }, [])
 
   const [username, changeUsername] = useState(null);
   const [password, changePassword] = useState(null);
+  const [hidePassword, toggleHidePassword] = useState(true);
+
+  const EyeWithLine = (size, color, style) => {return (
+    <TouchableOpacity style={style} onPress={() => toggleHidePassword(true)}>
+      <Entypo name={"eye-with-line"} size={size} color={color} />
+    </TouchableOpacity>
+  )}
+  const Eye = (size, color, style) => {return (
+    <TouchableOpacity style={style} onPress={() => toggleHidePassword(false)}>
+      <Entypo name={"eye"} size={size} color={color} />
+    </TouchableOpacity>
+  )}
 
   const onSignInClick = () => {if (username == 'Hijazi' && password == "123") navigation.navigate('Home') }
   
@@ -20,7 +37,16 @@ export default function LogIn({navigation}) {
         <View style={{flex: 2.7, justifyContent: 'space-between'}}>
           <View>
             <TextInputBox placeholder="Enter your username" margin={3} label="Username" onChange={changeUsername}/>
-            <TextInputBox placeholder="Enter your password" margin={3} label='Password' onChange={changePassword}/>
+            <TextInputBox
+              label='Password'
+              placeholder="Enter your password"
+              margin={3}
+              onChange={changePassword}
+              showPassword={hidePassword}
+              icon={hidePassword ? Eye : EyeWithLine}
+              iconColor={"#848484"}
+              noBorder
+            />
           </View>
           <View style={{alignItems: 'center'}}>
             <ButtonCustom onClick={onSignInClick} size={16} weight={"600"}>Sign In</ButtonCustom>

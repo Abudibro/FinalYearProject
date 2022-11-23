@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { StyleSheet, View, Dimensions, TouchableOpacity } from 'react-native';
 import ButtonCustom from '../components/Button';
 import Header from '../components/Header'
@@ -6,7 +6,11 @@ import TextInputBox from '../components/TextInput'
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo'
 
-export default function SignUp({navigation}) {
+export default function SignUp({navigation, route}) {
+  useEffect(() => {
+    route.params.changeNav(-1);
+  }, [])
+
   const [username, changeUsername] = useState(null);
   const [email, changeEmail] = useState(null);
   const [password, changePassword] = useState(null);

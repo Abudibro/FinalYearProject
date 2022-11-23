@@ -1,17 +1,23 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { StyleSheet, View, Dimensions, ScrollView } from 'react-native';
 import ButtonCustom from '../components/Button';
 import Header from '../components/Header'
 import TextInputBox from '../components/TextInput'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import HomeProductCard from '../components/HomeProductCard';
+import Nav from '../components/Nav';
 
 const width = (Dimensions.get('window').width * 0.85) + 4;
 
-export default function Home({navigation}) {
+export default function Home({navigation, route}) {
+    
+    useEffect(() => {
+        route.params.changeNav(1);
+    }, [])
+
     const [user, setUser] = useState({
         id:15,
-        username: "Mohammad",
+        username: "Shaam9",
         email: "Hijazi@gmail.com",
         searches: ["Bike", "PS5", "Keyboard"],
         viewed: [121232, 23144, 21443],
@@ -97,6 +103,6 @@ const styles = StyleSheet.create({
     flex: 4, width: '100%', alignItems: 'center'
   },
   cardSection: {
-    flex: 1, width: '100%', alignItems: 'center' //, justifyContent:'space-around'
+    flex: 1, width: '100%', alignItems: 'center'
   }
 });
