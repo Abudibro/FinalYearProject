@@ -5,11 +5,13 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import LogIn from './pages/LogIn';
 import SignUp from './pages/SignUp';
+import Home from './pages/Home';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   const [isSignedIn, toggleSignIn] = useState(false);
+
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAwareScrollView  keyboardShouldPersistTaps={'always'} contentContainerStyle={{flex:1}}>
@@ -18,6 +20,7 @@ export default function App() {
           <Stack.Navigator screenOptions={{
             headerShown: false
           }}>
+            <Stack.Screen name="Home" component={Home} />
             <Stack.Screen name="LogIn" component={LogIn} />
             <Stack.Screen name="SignUp" component={SignUp} />
           </Stack.Navigator>

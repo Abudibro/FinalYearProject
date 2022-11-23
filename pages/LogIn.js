@@ -9,7 +9,8 @@ export default function LogIn({navigation}) {
   const [username, changeUsername] = useState(null);
   const [password, changePassword] = useState(null);
 
-  const onSignInClick = () => {if (username == 'Hijazi' && password == "123") navigation.navigate('SignUp') }
+  const onSignInClick = () => {if (username == 'Hijazi' && password == "123") navigation.navigate('Home') }
+  
   return (
     <View style={styles.container}>
         <View style={{flex: 1.5, justifyContent: 'center'}}>
