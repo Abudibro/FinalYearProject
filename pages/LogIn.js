@@ -5,11 +5,9 @@ import Header from '../components/Header'
 import TextInputBox from '../components/TextInput'
 import Entypo from 'react-native-vector-icons/Entypo'
 
-export default function LogIn({navigation, route}) {
+export default function LogIn({navigation, changeNav}) {
 
-  useEffect(() => {
-    route.params.changeNav(-1);
-  }, [])
+  useEffect(() => changeNav(-1), [])
 
   const [username, changeUsername] = useState(null);
   const [password, changePassword] = useState(null);

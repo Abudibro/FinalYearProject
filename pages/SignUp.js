@@ -6,10 +6,8 @@ import TextInputBox from '../components/TextInput'
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo'
 
-export default function SignUp({navigation, route}) {
-  useEffect(() => {
-    route.params.changeNav(-1);
-  }, [])
+export default function SignUp({navigation, changeNav}) {
+  useEffect(() => changeNav(-1), [])
 
   const [username, changeUsername] = useState(null);
   const [email, changeEmail] = useState(null);

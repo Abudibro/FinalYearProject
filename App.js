@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { StyleSheet, SafeAreaView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -22,9 +22,17 @@ export default function App() {
           <Stack.Navigator screenOptions={{
             headerShown: false
           }}>
-            <Stack.Screen name="LogIn" component={LogIn} options={{changeNav: changeNav}}  />
-            <Stack.Screen name="SignUp" component={SignUp} options={{changeNav: changeNav}}/>
-            <Stack.Screen name="Home" component={Home} options={{changeNav: changeNav}}/>
+            <Stack.Screen name="Home" >
+              {(props) => <Home {...props} changeNav={changeNav} />}
+            </Stack.Screen>
+
+            <Stack.Screen name="LogIn" >
+              {(props) => <LogIn {...props} changeNav={changeNav} />}
+            </Stack.Screen>
+
+            <Stack.Screen name="SignUp" >
+              {(props) => <SignUp {...props} changeNav={changeNav} />}
+            </Stack.Screen>
           </Stack.Navigator>
 
         </NavigationContainer>

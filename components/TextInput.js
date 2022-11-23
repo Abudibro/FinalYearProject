@@ -35,6 +35,8 @@ export default function TextInputBox(props) {
                     fontSize: 16,
                     width: width-25
                 }}
+                defaultValue={props.initialValue ? props.initialValue : null}
+                autoFocus={props.autoFocus}
                 onFocus={() => toggleFocus(true)}
                 onBlur={() => toggleFocus(false)}
                 placeholder={props.placeholder}

@@ -9,11 +9,9 @@ import Nav from '../components/Nav';
 
 const width = (Dimensions.get('window').width * 0.85) + 4;
 
-export default function Home({navigation, route}) {
+export default function Home({navigation, changeNav}) {
     
-    useEffect(() => {
-        route.params.changeNav(1);
-    }, [])
+    useEffect(() => changeNav(1), [])
 
     const [user, setUser] = useState({
         id:15,
@@ -34,7 +32,16 @@ export default function Home({navigation, route}) {
         // }
         ],
         transactions: [2423534, 43232543, 43264565467]
-    }); 
+    });
+    const [search, setSearch] = useState('');
+
+    // if (search.length > 0){
+    //     return (
+    //         <View>
+    //             <TextInputBox initialValue={search} margin={3} noLabel onChange={setSearch} autoFocus />
+    //         </View>
+    //     );
+    // }
 
     return (
         <View style={styles.container}> 
@@ -49,7 +56,7 @@ export default function Home({navigation, route}) {
                 </ButtonCustom>
             </View>
             <View style={styles.searchSection}>
-                <TextInputBox placeholder="Help me find..." margin={3} noLabel />
+                <TextInputBox placeholder="Help me find..." margin={3} noLabel onChange={setSearch} />
             </View>
             <View style={styles.cardSectionWrapper}>
                 <View style={styles.cardSection}>
