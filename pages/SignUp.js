@@ -6,8 +6,7 @@ import TextInputBox from '../components/TextInput'
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo'
 
-export default function SignUp({navigation, changeNav}) {
-  useEffect(() => changeNav(-1), [])
+export default function SignUp({navigation}) {
 
   const [username, changeUsername] = useState(null);
   const [email, changeEmail] = useState(null);
@@ -49,7 +48,7 @@ export default function SignUp({navigation, changeNav}) {
   }
 
   const onSignUpClick = () => {
-    if (username == "Hijazi" && password == "Test1234!") navigation.navigate('Home');
+    if (username == "Hijazi" && password == "Test1234!") navigation.navigate('SignedIn');
   }
 
   const Checkmark = (size, color, style) => {return (<Ionicons name={"checkmark-circle-sharp"} size={size} color={color} style={style} />)}
@@ -136,7 +135,7 @@ export default function SignUp({navigation, changeNav}) {
         <ButtonCustom onClick={onSignUpClick} size={16} weight={"600"} disabled={!(checkUsernameIsValid() && checkEmailIsValid() && upperAndLowerExist && specialExists && numberExists && eightCharsExist)} >Sign Up</ButtonCustom>
         <View style={{flexDirection: 'row', margin: 20}}>
           <Header size={10}>Already have an account? </Header>
-          <Header size={10} color={"#2846c4"} onPress={() =>navigation.navigate('LogIn')}>Sign In</Header>
+          <Header size={10} color={"#2846c4"} onPress={() =>checkEmailIsValid('LogIn')}>Sign In</Header>
         </View>
       </View>
     </View>

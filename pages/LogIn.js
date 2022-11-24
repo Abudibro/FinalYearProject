@@ -5,9 +5,7 @@ import Header from '../components/Header'
 import TextInputBox from '../components/TextInput'
 import Entypo from 'react-native-vector-icons/Entypo'
 
-export default function LogIn({navigation, changeNav}) {
-
-  useEffect(() => changeNav(-1), [])
+export default function LogIn({navigation}) {
 
   const [username, changeUsername] = useState(null);
   const [password, changePassword] = useState(null);
@@ -24,7 +22,7 @@ export default function LogIn({navigation, changeNav}) {
     </TouchableOpacity>
   )}
 
-  const onSignInClick = () => {if (username == 'Hijazi' && password == "123") navigation.navigate('Home') }
+  const onSignInClick = () => {if (username == 'Hijazi' && password == "123") navigation.navigate('SignedIn') }
   
   return (
     <View style={styles.container}>
