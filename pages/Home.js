@@ -10,8 +10,6 @@ import SearchSuggestion from '../components/SearchSuggestion';
 const width = (Dimensions.get('window').width * 0.85) + 4;
 
 export default function Home({navigation, changeNav}) {
-    
-    useEffect(() => changeNav(1), [])
 
     const [user, setUser] = useState({
         id:15,
@@ -44,7 +42,16 @@ export default function Home({navigation, changeNav}) {
                         <Header size={50} margin={0}>Hello,</Header>
                         <Header size={30} margin={0} weight={"500"}>{user.username}</Header>
                     </View>
-                    <ButtonCustom static height={72} width={130} weight={"700"} size={15} borderRadius={20} icon={<FontAwesome name='plus' size={30} style={{color: '#f1f1f1'}}/>}>
+                    <ButtonCustom
+                        static
+                        height={72}
+                        width={130}
+                        weight={"700"}
+                        size={15}
+                        borderRadius={20}
+                        icon={<FontAwesome name='plus' size={30} style={{color: '#f1f1f1'}}/>}
+                        onClick={() => {navigation.navigate('New Listing')}}
+                    >
                         New{"\n"}
                         Listing
                     </ButtonCustom>

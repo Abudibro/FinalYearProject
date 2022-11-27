@@ -44,7 +44,7 @@ export default function Nav({nav, changeNav}) {
 const styles = StyleSheet.create({
     wrapper: {
         position: 'absolute',
-        top: Dimensions.get('window').height*.9,
+        top: Dimensions.get('window').height*.83,
         alignSelf: 'center',
         backgroundColor: 'black',
         flexDirection: 'row',

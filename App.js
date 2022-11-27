@@ -10,24 +10,20 @@ import SignedIn from './pages/SignedIn';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [isSignedIn, toggleSignIn] = useState(false);
+  const [isSignedIn, toggleSignIn] = useState(true);
 
   return (
     <SafeAreaView style={styles.container}>
-      <KeyboardAwareScrollView  keyboardShouldPersistTaps={'always'} contentContainerStyle={{flex:1}}>
-        <NavigationContainer>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{headerShown: false}}>
           
-          <Stack.Navigator screenOptions={{headerShown: false}}>
-            
-            <Stack.Screen name="LogIn" component={LogIn} />
-            <Stack.Screen name="SignUp" component={SignUp} />
-            <Stack.Screen name="SignedIn" component={SignedIn} />
+          <Stack.Screen name="SignedIn" component={SignedIn} />
+          <Stack.Screen name="LogIn" component={LogIn} />
+          <Stack.Screen name="SignUp" component={SignUp} />
 
-          </Stack.Navigator>
-
-        </NavigationContainer>
-      </KeyboardAwareScrollView>
-    </SafeAreaView>
+        </Stack.Navigator>
+      </NavigationContainer>
+   </SafeAreaView>
   );
 }
 
