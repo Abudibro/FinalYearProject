@@ -25,8 +25,10 @@ export default function SignedIn() {
                             : nav == 3 ?
                             (props) => <MeetUps {...props} changeNav={changeNav} />
 
-                            :
+                            : nav == 4 ?
                             (props) => <Account {...props} changeNav={changeNav} />
+
+                            : null
                         }
                     </Stack.Screen>
                     <Stack.Screen name='New Listing'>
