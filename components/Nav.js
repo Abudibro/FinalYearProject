@@ -1,18 +1,20 @@
 import { View, StyleSheet, Dimensions, TouchableOpacity } from 'react-native'
+import { useNavigation } from '@react-navigation/native';
 
 import Entypo from 'react-native-vector-icons/Entypo'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 
 export default function Nav({nav, changeNav}) {
+    const navigation = useNavigation();
 
-    console.log(nav);
+    console.log(navigation);
 
     return (
-        <View style={styles.wrapper} >
+        <View style={styles.wrapper}>
             <TouchableOpacity activeOpacity={.7} onPress={() => {
                 if (nav == 1) return;
-                changeNav(1);
+                navigation.navigate("Main Page")
             }}>
                 <Entypo name='home' size={35} color={nav == 1 || nav == 5 ? '#2846c4' : '#848484'} />
             </TouchableOpacity>
