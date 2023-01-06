@@ -14,7 +14,7 @@ export default function Nav({nav, changeNav}) {
                 if (nav == 1) return;
                 changeNav(1);
             }}>
-                <Entypo name='home' size={35} color={nav == 1 ? '#2846c4' : '#848484'} />
+                <Entypo name='home' size={35} color={nav == 1 || nav == 5 ? '#2846c4' : '#848484'} />
             </TouchableOpacity>
 
             <TouchableOpacity activeOpacity={.7} onPress={() => {

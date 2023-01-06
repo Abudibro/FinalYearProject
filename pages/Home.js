@@ -50,7 +50,7 @@ export default function Home({navigation, changeNav}) {
                         size={15}
                         borderRadius={20}
                         icon={<FontAwesome name='plus' size={30} style={{color: '#f1f1f1'}}/>}
-                        onClick={() => {navigation.navigate('New Listing')}}
+                        onClick={() => {changeNav(5)}}
                     >
                         New{"\n"}
                         Listing

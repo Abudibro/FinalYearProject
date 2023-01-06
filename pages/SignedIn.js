@@ -25,12 +25,14 @@ export default function SignedIn() {
                             : nav == 3 ?
                             (props) => <MeetUps {...props} changeNav={changeNav} />
 
-                            :
+                            : nav == 4 ?
                             (props) => <Account {...props} changeNav={changeNav} />
+
+                            : nav == 5 ?
+                            (props) => <NewListing {...props} changeNav={changeNav} />
+
+                            : null
                         }
-                    </Stack.Screen>
-                    <Stack.Screen name='New Listing'>
-                        {(props) => <NewListing {...props} changeNav={changeNav} />}
                     </Stack.Screen>
                     {/* <Stack.Screen name='View Listing'>
                         {(props) => <ViewListing {...props} changeNav={changeNav} />}
