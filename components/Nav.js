@@ -14,7 +14,7 @@ export default function Nav({nav, changeNav}) {
         <View style={styles.wrapper}>
             <TouchableOpacity activeOpacity={.7} onPress={() => {
                 if (nav == 1) return;
-                navigation.navigate("Main Page")
+                changeNav(1)
             }}>
                 <Entypo name='home' size={35} color={nav == 1 || nav == 5 ? '#2846c4' : '#848484'} />
             </TouchableOpacity>

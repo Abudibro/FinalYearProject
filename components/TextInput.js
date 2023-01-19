@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { View, Dimensions, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Dimensions, TextInput, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import Header from './Header'
 
 export default function TextInputBox(props) {
@@ -8,10 +8,12 @@ export default function TextInputBox(props) {
 
   return (
     <View style={{margin: props.margin ? props.margin : 0}}>
-        {
-            !props.noLabel &&
-            <Header size={15} margin={12} weight='600'>{props.label}</Header>
-        }
+        <View style={{paddingLeft: 19}}>
+            {
+                !props.noLabel &&
+                <Header size={15} margin={12} weight='600'>{props.label}</Header>
+            }
+        </View>
         <View style={{
             margin: 5,
             borderColor: !isFocusOn ? "#181818" : "#2846c4",
@@ -23,18 +25,29 @@ export default function TextInputBox(props) {
             alignItems: 'center'
             }}
             onTouch
-        >
+        > 
+        {
+            props.prefix &&
+            <Text style={{
+                color: "#848484",
+                fontSize: 16,
+                paddingLeft: !isFocusOn ? 15 : 13
+            }}>
+                {props.prefix}
+            </Text>
+        }
             <TextInput
                 style={{
                     backgroundColor: "#181818",
                     borderRadius: 13,
                     borderColor: null,
                     height: isFocusOn || props.icon ? 53 : 57,
-                    padding: isFocusOn || props.icon ? 12 : 14,
+                    paddingLeft: isFocusOn || props.icon ? 12 : 14,
                     color: "#848484",
                     fontSize: 16,
-                    width: width-25
+                    width: width*.8
                 }}
+                keyboardType={props.int && 'numeric'}
                 defaultValue={props.initialValue ? props.initialValue : null}
                 autoFocus={props.autoFocus}
                 onFocus={() => toggleFocus(true)}
@@ -60,5 +73,10 @@ const styles = StyleSheet.create({
         position: 'absolute',
         left: (Dimensions.get('window').width * 0.85) - 36,
         opacity: .7
+    }, 
+    prefix: {
+        color: "#848484",
+        fontSize: 16,
+        paddingLeft: 15
     }
 });

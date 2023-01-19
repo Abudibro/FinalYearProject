@@ -8,7 +8,7 @@ import NewListing from './NewListing'
 const Stack = createNativeStackNavigator();
 
 export default function SignedIn() {
-    const [nav, changeNav] = useState(1);
+    const [nav, changeNav] = useState(5);
     return(
         <>
             <KeyboardAwareScrollView  keyboardShouldPersistTaps={'always'} contentContainerStyle={{flex:1}} style={{backgroundColor: '#0d0d0d'}}>
@@ -29,7 +29,7 @@ export default function SignedIn() {
                             (props) => <Account {...props} changeNav={changeNav} />
 
                             : nav == 5 ?
-                            (props) => <NewListing {...props} changeNav={changeNav} />
+                            (props) => <NewListing {...props} changeNav={changeNav} nav={nav}/>
 
                             : null
                         }

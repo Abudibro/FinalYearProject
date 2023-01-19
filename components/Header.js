@@ -8,7 +8,8 @@ export default function Header(props) {
             fontSize: props.size ? props.size : "35",
             fontWeight: props.weight ? props.weight : "bold",
             margin: props.margin ? props.margin : 0,
-            marginHorizontal: props.marginH ? props.marginH : 0
+            marginHorizontal: props.marginH ? props.marginH : 0,
+            paddingLeft: props.paddingLeft ? props.paddingLeft : 0
         }
       }
     onPress={props.onPress}>

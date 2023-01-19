@@ -88,30 +88,30 @@ export default function SignUp({navigation}) {
             onChange={changeEmail}
           />
           <View style={{margin: 3}}>
-            <Header size={15} margin={12} weight='600'>Password</Header>
+            <Header size={15} margin={12} weight='600' paddingLeft={19} >Password</Header>
             
-            <View style={{margin: 3, marginLeft: 10, flexDirection: 'row', alignItems: 'center', opacity: eightCharsExist ? 1 : 0.7}}>
+            <View style={{margin: 3, marginLeft: 19, flexDirection: 'row', alignItems: 'center', opacity: eightCharsExist ? 1 : 0.7}}>
               {
                 Checkmark(23, "#FFF")
               }
               <Header size={10} margin={3} weight={"400"}> 8 characters minimum</Header>
             </View>
 
-            <View style={{margin: 3, marginLeft: 10, flexDirection: 'row', alignItems: 'center', opacity: upperAndLowerExist ? 1 : 0.7}}>
+            <View style={{margin: 3, marginLeft: 19, flexDirection: 'row', alignItems: 'center', opacity: upperAndLowerExist ? 1 : 0.7}}>
               {
                 Checkmark(23, "#FFF")
               }
               <Header size={10} margin={3} weight={"400"}> An uppercase and a lower case letter</Header>
             </View>
 
-            <View style={{margin: 3, marginLeft: 10, flexDirection: 'row', alignItems: 'center', opacity: numberExists ? 1 : 0.7}}>
+            <View style={{margin: 3, marginLeft: 19, flexDirection: 'row', alignItems: 'center', opacity: numberExists ? 1 : 0.7}}>
               {
                 Checkmark(23, "#FFF")
               }
               <Header size={10} margin={3} weight={"400"}> A number</Header>
             </View>
 
-            <View style={{margin: 3, marginLeft: 10, marginBottom: 10, flexDirection: 'row', alignItems: 'center', opacity: specialExists ? 1 : 0.7}}>
+            <View style={{margin: 3, marginLeft: 19, marginBottom: 10, flexDirection: 'row', alignItems: 'center', opacity: specialExists ? 1 : 0.7}}>
               {
                 Checkmark(23, "#FFF")
               }
