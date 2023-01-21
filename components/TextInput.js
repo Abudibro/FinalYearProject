@@ -42,7 +42,7 @@ export default function TextInputBox(props) {
                     borderRadius: 13,
                     borderColor: null,
                     height: isFocusOn || props.icon ? 53 : 57,
-                    paddingLeft: isFocusOn || props.icon ? 12 : 14,
+                    paddingLeft: props.prefix ? 14 : isFocusOn || props.icon ? 12 : 14,
                     color: "#848484",
                     fontSize: 16,
                     width: width*.8

@@ -1,12 +1,10 @@
 import { useState } from "react";
 import { StyleSheet, Dimensions, View, Text, TextInput } from "react-native";
-import Header from "../components/Header";
+import ConditionDropdown from "../components/ConditionDropdpwn";
 import TextInputBox from "../components/TextInput";
 
 export default function NewListing(props) {
     const [price, setPrice] = useState(null)
-
-    console.log(price)
 
     return(
         <View style={styles.container}>
@@ -25,6 +23,9 @@ export default function NewListing(props) {
             >
                 {price}
             </TextInputBox>
+
+            {/* Condition */}
+            <ConditionDropdown />
         </View>
     )
 }

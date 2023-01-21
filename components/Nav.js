@@ -8,8 +8,6 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 export default function Nav({nav, changeNav}) {
     const navigation = useNavigation();
 
-    console.log(navigation);
-
     return (
         <View style={styles.wrapper}>
             <TouchableOpacity activeOpacity={.7} onPress={() => {
