@@ -1,17 +1,21 @@
 import { useState } from "react";
 import { StyleSheet, Dimensions, View, Text, TextInput } from "react-native";
 import ConditionDropdown from "../components/ConditionDropdpwn";
+import Description from "../components/Description";
+import AddPhotos from "../components/AddPhotos";
 import TextInputBox from "../components/TextInput";
 
 export default function NewListing(props) {
     const [price, setPrice] = useState(null)
+    const [condition, setCondition] = useState(null)
+    const [description, setDescription] = useState(null)
 
     return(
         <View style={styles.container}>
             {/* Name */}
             
-
-
+            {/* Image */}
+            <AddPhotos/>
 
             {/* Price */}
             <TextInputBox
@@ -25,7 +29,14 @@ export default function NewListing(props) {
             </TextInputBox>
 
             {/* Condition */}
-            <ConditionDropdown />
+            <ConditionDropdown setCondition={setCondition} condition={condition}/>
+
+            {/* Description */}
+            <Description
+                label='Description'
+                placeholder="Enter a description"
+                onChange={setDescription}
+            ></Description>
         </View>
     )
 }

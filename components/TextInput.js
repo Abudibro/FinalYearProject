@@ -5,6 +5,8 @@ import Header from './Header'
 export default function TextInputBox(props) {
     const [isFocusOn, toggleFocus] = useState(false);
     const width = (Dimensions.get('window').width * 0.85) + 4
+    // width = props.prefix ? width-40 : width
+    const height = props.height ? props.height : 57
 
   return (
     <View style={{margin: props.margin ? props.margin : 0}}>
@@ -24,7 +26,6 @@ export default function TextInputBox(props) {
             backgroundColor: "#181818",
             alignItems: 'center'
             }}
-            onTouch
         > 
         {
             props.prefix &&
@@ -41,12 +42,15 @@ export default function TextInputBox(props) {
                     backgroundColor: "#181818",
                     borderRadius: 13,
                     borderColor: null,
-                    height: isFocusOn || props.icon ? 53 : 57,
+                    height: isFocusOn || props.icon ? height-4 : height,
                     paddingLeft: props.prefix ? 14 : isFocusOn || props.icon ? 12 : 14,
                     color: "#848484",
                     fontSize: 16,
-                    width: width*.8
+                    width: props.prefix && isFocusOn ? width-36 : props.prefix ? width-40 : isFocusOn ? width-4 : width,
+                    paddingTop: 0,
+                    paddingBottom: 0
                 }}
+                // multiline={true}
                 keyboardType={props.int && 'numeric'}
                 defaultValue={props.initialValue ? props.initialValue : null}
                 autoFocus={props.autoFocus}
