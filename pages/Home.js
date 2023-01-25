@@ -9,7 +9,7 @@ import SearchSuggestion from '../components/SearchSuggestion';
 
 const width = (Dimensions.get('window').width * 0.85) + 4;
 
-export default function Home({navigation, changeNav}) {
+export default function Home({changeNav}) {
 
     const [user, setUser] = useState({
         id:15,

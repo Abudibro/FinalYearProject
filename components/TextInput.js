@@ -5,7 +5,6 @@ import Header from './Header'
 export default function TextInputBox(props) {
     const [isFocusOn, toggleFocus] = useState(false);
     const width = (Dimensions.get('window').width * 0.85) + 4
-    // width = props.prefix ? width-40 : width
     const height = props.height ? props.height : 57
 
   return (
