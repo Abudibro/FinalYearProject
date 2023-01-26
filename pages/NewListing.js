@@ -5,6 +5,7 @@ import Description from "../components/Description";
 import AddPhotos from "../components/AddPhotos";
 import TextInputBox from "../components/TextInput";
 import ButtonCustom from '../components/Button'
+import Header from "../components/Header";
 
 export default function NewListing({changeNav}) {
     const [name, setName] = useState(null)
@@ -12,20 +13,28 @@ export default function NewListing({changeNav}) {
     const [condition, setCondition] = useState(null)
     const [description, setDescription] = useState(null)
     const [images, setImages] = useState(null);
+
+    console.log()
     
     const isListingPreviewDisabled = () => {
-        return name == null || price == null || images === null || condition === null || description === null
+        return name == null
+            || price == null
+            || images === null
+            || condition === null
+            || description === null
+            || name.trim().length === 0
+            || price.trim().length === 0
+            || description.trim().length === 0
+            || images[0].uri === undefined
     }
-
-    console.log(isListingPreviewDisabled())
-
-    // const onPreviewListingClick = () => {
-
-    // }
 
     return(
         <ScrollView style={{flex: 1, backgroundColor: '#0d0d0d'}}> 
             <View style={styles.container}>
+                <Header center margin={25} >
+                    Tell us what you're selling
+                </Header>
+
                 {/* Name */}
                 <TextInputBox
                     label="Name"
