@@ -4,17 +4,35 @@ import ConditionDropdown from "../components/ConditionDropdpwn";
 import Description from "../components/Description";
 import AddPhotos from "../components/AddPhotos";
 import TextInputBox from "../components/TextInput";
+import ButtonCustom from '../components/Button'
 
-export default function NewListing(props) {
+export default function NewListing({changeNav}) {
+    const [name, setName] = useState(null)
     const [price, setPrice] = useState(null)
     const [condition, setCondition] = useState(null)
     const [description, setDescription] = useState(null)
     const [images, setImages] = useState(null);
+    
+    const isListingPreviewDisabled = () => {
+        return name == null || price == null || images === null || condition === null || description === null
+    }
+
+    console.log(isListingPreviewDisabled())
+
+    // const onPreviewListingClick = () => {
+
+    // }
 
     return(
         <ScrollView style={{flex: 1, backgroundColor: '#0d0d0d'}}> 
             <View style={styles.container}>
                 {/* Name */}
+                <TextInputBox
+                    label="Name"
+                    placeholder="Name your listing"
+                    margin={15}
+                    onChange={setName}
+                />
                 
                 {/* Image */}
                 <AddPhotos setImages={setImages} images={images} />
@@ -39,6 +57,9 @@ export default function NewListing(props) {
                     placeholder="Enter a description"
                     onChange={setDescription}
                 ></Description>
+
+                {/* Preview Listing */}
+                <ButtonCustom onClick={() => changeNav(3)} marginBottom={Dimensions.get('window').height*.1} marginTop={Dimensions.get('window').height*.02} size={16} weight={"600"} disabled={isListingPreviewDisabled()} >Preview Listing</ButtonCustom>
             </View>
         </ScrollView>
     )

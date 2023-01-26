@@ -29,7 +29,7 @@ export default function SignedIn() {
                             (props) => <Account {...props} changeNav={changeNav} />
 
                             : nav == 5 ?
-                            (props) => <NewListing {...props} changeNav={changeNav} nav={nav}/>
+                            (props) => <NewListing {...props} changeNav={changeNav} />
 
                             : null
                         }

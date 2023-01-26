@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { Button, Image, View, Platform, StyleSheet, Dimensions, TouchableOpacity, ScrollView } from 'react-native';
+import { Image, StyleSheet, Dimensions, TouchableOpacity, ScrollView } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import Entypo from 'react-native-vector-icons/Entypo'
 import Header from './Header';
@@ -7,7 +6,6 @@ import Header from './Header';
 const width = (Dimensions.get('window').width * 0.85) + 4
 
 export default function AddPhotos(props) {
-
   const {images, setImages} = props;
 
   const styles = StyleSheet.create({
@@ -40,7 +38,6 @@ export default function AddPhotos(props) {
   })
 
   const pickImage = async () => {
-    // No permissions request is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       orderedSelection: true,
