@@ -135,7 +135,7 @@ export default function SignUp({navigation}) {
         <ButtonCustom onClick={onSignUpClick} size={16} weight={"600"} disabled={!(checkUsernameIsValid() && checkEmailIsValid() && upperAndLowerExist && specialExists && numberExists && eightCharsExist)} >Sign Up</ButtonCustom>
         <View style={{flexDirection: 'row', margin: 20}}>
           <Header size={10}>Already have an account? </Header>
-          <Header size={10} color={"#2846c4"} onPress={() =>checkEmailIsValid('LogIn')}>Sign In</Header>
+          <Header size={10} color={"#2846c4"} onPress={() => navigation.navigate('LogIn')}>Sign In</Header>
         </View>
       </View>
     </View>

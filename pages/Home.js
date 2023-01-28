@@ -1,19 +1,27 @@
 import { useEffect, useState } from 'react';
-import { StyleSheet, View, Dimensions, ScrollView } from 'react-native';
+import { StyleSheet, View, Dimensions, ScrollView, TouchableOpacity } from 'react-native';
 import ButtonCustom from '../components/Button';
 import Header from '../components/Header'
 import TextInputBox from '../components/TextInput'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import HomeProductCard from '../components/HomeProductCard';
 import SearchSuggestion from '../components/SearchSuggestion';
+import TitleSection from '../components/TitleSection'
 
 const width = (Dimensions.get('window').width * 0.85) + 4;
 
-export default function Home({changeNav}) {
+export default function Home({ navigation }) {
+
+    const SearchIcon = (size, color, style) => {return (
+        <TouchableOpacity style={style} onPress={() => navigation.navigate('view-listing')}>
+          <MaterialCommunityIcons name={"arrow-right-circle"} size={size} color={color} />
+        </TouchableOpacity>
+    )}
 
     const [user, setUser] = useState({
         id:15,
-        username: "Shaam9",
+        username: "Usman😈",
         email: "Hijazi@gmail.com",
         searches: ["Bike", "PS5", "Keyboard"],
         viewed: [121232, 23144, 21443],
@@ -32,11 +40,14 @@ export default function Home({changeNav}) {
         transactions: [2423534, 43232543, 43264565467]
     });
     const [search, setSearch] = useState('');
+    const [searchResults, setSearchResults] = useState([]); // send this to the search result page. this is pulled from the database, and recommendations for search are taken from this
 
     return (
-        <View style={search.length > 0 ? styles.containerSearching : styles.container}> 
+        <ScrollView style={{flex: 1, backgroundColor: '#0d0d0d'}}>
+            <View style={styles.container}> 
             {
-                search.length == 0 &&
+              search.length == 0 &&
+							<TitleSection>
                 <View style={styles.topSection}> 
                     <View> 
                         <Header size={50} margin={0}>Hello,</Header>
@@ -50,15 +61,23 @@ export default function Home({changeNav}) {
                         size={15}
                         borderRadius={20}
                         icon={<FontAwesome name='plus' size={30} style={{color: '#f1f1f1'}}/>}
-                        onClick={() => {changeNav(5)}}
+                        onClick={() => {navigation.navigate('new-listing')}}
                     >
                         New{"\n"}
                         Listing
                     </ButtonCustom>
                 </View>
+							</TitleSection>
             }
             <View style={styles.searchSection}>
-                <TextInputBox placeholder="Help me find..." margin={3} noLabel onChange={setSearch} />
+							<TextInputBox
+							placeholder="I want to buy..."
+							margin={3}
+							noLabel
+							onChange={setSearch}
+							icon={search.length > 0 ? SearchIcon : null}
+							iconColor="#2846c4"
+                />
             </View>
             {
                 search.length == 0 &&
@@ -84,7 +103,6 @@ export default function Home({changeNav}) {
                             <HomeProductCard />
                         </ScrollView>
                     </View>
-
                 </View>
             }
             {
@@ -97,46 +115,40 @@ export default function Home({changeNav}) {
                 </View>
             }
         </View>
+			</ScrollView>
     );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    height: Dimensions.get('window').height,
-    width: Dimensions.get('window').width,
-    backgroundColor: '#0d0d0d',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  containerSearching: {
-    height: Dimensions.get('window').height,
-    width: Dimensions.get('window').width,
-    backgroundColor: '#0d0d0d',
-    alignItems: 'center',
-    justifyContent: 'flex-start'
-  },
+	container: {
+		flex: 1,
+		backgroundColor: '#0d0d0d',
+		alignItems: 'center',
+		justifyContent: 'flex-start',
+	},
   topSection: {
-    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-end',
-    width: width
+    width: width,
+		// marginVertical: 30
   },
   searchSection: {
-    flex: 1,
+    marginTop: 20,
     justifyContent: 'center',
     alignItems: 'center'
   },
   searchResults: {
-    flex: 5,
+		marginVertical: 20,
     alignItems: 'center',
     justifyContent: 'flex-start'
   },
   cardSectionWrapper: {
-    flex: 4, width: '100%', alignItems: 'center'
+		marginTop: 10,
+    width: '100%', alignItems: 'center'
   },
   cardSection: {
-    flex: 1, width: '100%', alignItems: 'center'
+		marginTop: 20,
+    width: '100%', alignItems: 'center'
   }
 });

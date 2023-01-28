@@ -1,12 +1,10 @@
 import { View, StyleSheet, Dimensions, TouchableOpacity } from 'react-native'
-import { useNavigation } from '@react-navigation/native';
 
 import Entypo from 'react-native-vector-icons/Entypo'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 
 export default function Nav({nav, changeNav}) {
-    const navigation = useNavigation();
 
     return (
         <View style={styles.wrapper}>

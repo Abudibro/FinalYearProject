@@ -1,18 +1,22 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Home from './Home';
 import Nav from '../components/Nav'
 import NewListing from './NewListing'
+import ViewListing from './ViewListing'
 
 const Stack = createNativeStackNavigator();
 
+// https://reactnavigation.org/docs/tab-based-navigation/
+// LOOK AT THIS
+
 export default function SignedIn() {
-    const [nav, changeNav] = useState(5);
+    const [nav, changeNav] = useState(1);
     return(
         <>
             <KeyboardAwareScrollView  keyboardShouldPersistTaps={'always'} contentContainerStyle={{flex:1}} style={{backgroundColor: '#0d0d0d'}}>
-                <Stack.Navigator screenOptions={{headerShown: false}}>
+                <Stack.Navigator screenOptions={{headerShown: false, gestureEnabled: false}}>
 
                     <Stack.Screen name="Main Page">
                         {
@@ -34,16 +38,17 @@ export default function SignedIn() {
                             : null
                         }
                     </Stack.Screen>
-                    {/* <Stack.Screen name='View Listing'>
+                    <Stack.Screen name='view-listing'>
                         {(props) => <ViewListing {...props} changeNav={changeNav} />}
-                    </Stack.Screen> */}
+                    </Stack.Screen>
                     {/* <Stack.Screen name='Search'>
                         {(props) => <Search {...props} changeNav={changeNav} />}
                     </Stack.Screen> */}
-
+                    <React.Fragment>
+                        <Nav nav={nav} changeNav={changeNav} />
+                    </React.Fragment>
                 </Stack.Navigator>
             </KeyboardAwareScrollView>
-            <Nav nav={nav} changeNav={changeNav} />
         </>
     )
 }

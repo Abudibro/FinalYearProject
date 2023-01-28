@@ -6,6 +6,8 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import LogIn from './pages/LogIn';
 import SignUp from './pages/SignUp';
 import SignedIn from './pages/SignedIn';
+import Nav2 from './components/Nav2';
+import Nav from './components/Nav';
 
 const Stack = createNativeStackNavigator();
 
@@ -14,15 +16,17 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <NavigationContainer>
-        <Stack.Navigator screenOptions={{headerShown: false}}>
-          
-          <Stack.Screen name="SignedIn" component={SignedIn} />
-          <Stack.Screen name="LogIn" component={LogIn} />
-          <Stack.Screen name="SignUp" component={SignUp} />
+      <KeyboardAwareScrollView  keyboardShouldPersistTaps={'always'} contentContainerStyle={{flex: 1}} bounces={false}>
+        <NavigationContainer>
+          <Stack.Navigator screenOptions={{headerShown: false, gestureEnabled: false}}>
+            
+            <Stack.Screen name="SignedIn" component={Nav2} />
+            <Stack.Screen name="LogIn" component={LogIn} />
+            <Stack.Screen name="SignUp" component={SignUp} />
 
-        </Stack.Navigator>
-      </NavigationContainer>
+          </Stack.Navigator>
+        </NavigationContainer>
+      </KeyboardAwareScrollView>
    </SafeAreaView>
   );
 }

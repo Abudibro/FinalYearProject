@@ -14,7 +14,7 @@ export default function Header(props) {
         }
       }
     onPress={props.onPress}>
-        {props.children}
+			{props.children}
     </Text>
   );
 }

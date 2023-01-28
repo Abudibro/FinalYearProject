@@ -48,7 +48,7 @@ export default function LogIn({navigation}) {
             <ButtonCustom onClick={onSignInClick} size={16} weight={"600"}>Sign In</ButtonCustom>
             <View style={{flexDirection: 'row', margin: 20}}>
               <Header size={10}>Don't have an account? </Header>
-              <Header size={10} color={"#2846c4"} onPress={() =>navigation.navigate('SignUp')}>Sign Up</Header>
+              <Header size={10} color={"#2846c4"} onPress={() => navigation.navigate('SignUp')}>Sign Up</Header>
             </View>
           </View>
         </View>
