@@ -9,8 +9,6 @@ const width = (Dimensions.get('window').width * 0.85) + 4
 export default function AddPhotos(props) {
   const {images, setImages} = props;
 
-  console.log(images)
-
   const styles = StyleSheet.create({
     box: {
       width: width,
@@ -28,7 +26,6 @@ export default function AddPhotos(props) {
     image: {
       width: width,
       height: width,
-      marginRight: 10,
       borderRadius: 18,
     },
     imagesScroll: {
@@ -78,8 +75,8 @@ export default function AddPhotos(props) {
         return (
           <View>
             <Image source={{ uri: image.uri }} style={styles.image} key={i} />
-            <TouchableOpacity style={[styles.iconWrapper, {top: 10, left: width-52}]} activeOpacity={.8} onPress={() => removeImage(i)}>
-              <Entypo name='cross' color='#f1f1f1' style={styles.icon} />
+            <TouchableOpacity key={i+1} style={[styles.iconWrapper, {top: 10, left: width-52}]} activeOpacity={.8} onPress={() => removeImage(i)}>
+              <Entypo key={i+2} name='cross' color='#f1f1f1' style={styles.icon} />
             </TouchableOpacity>
           </View>
         );
@@ -96,7 +93,7 @@ export default function AddPhotos(props) {
 
     :
     <>
-      <ScrollView horizontal={true} style={styles.imagesScroll} contentContainerStyle={{alignItems: 'center'}}>
+      <ScrollView horizontal={true} style={styles.imagesScroll} bounces={false} pagingEnabled={true}>
         {renderImages()}
       </ScrollView>
       <TouchableOpacity style={[styles.iconWrapper, {top: 249+width}]} activeOpacity={.8} onPress={pickImage}>

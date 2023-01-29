@@ -35,18 +35,17 @@ export default function Description(props) {
     <View>
         <Header paddingLeft={19} size={15} margin={17} weight='600'>{props.label}</Header>
         <View style={styles.borderView}> 
-            <TextInput
-                style={styles.text}
-                multiline={true}
-                autoFocus={props.autoFocus}
-                onFocus={() => toggleFocus(true)}
-                onBlur={() => toggleFocus(false)}
-                placeholder={props.placeholder}
-                placeholderTextColor='#848484'
-                onChangeText={text => props.onChange(text)}
-            >  
-            </TextInput>
-
+					<TextInput
+							style={styles.text}
+							multiline={true}
+							autoFocus={props.autoFocus}
+							onFocus={() => toggleFocus(true)}
+							onBlur={() => toggleFocus(false)}
+							placeholder={props.placeholder}
+							placeholderTextColor='#848484'
+							onChangeText={text => props.onChange(text)}
+					>  
+					</TextInput>
         </View>
     </View>
   );

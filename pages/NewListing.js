@@ -8,7 +8,7 @@ import ButtonCustom from '../components/Button'
 import Header from "../components/Header";
 import TitleSection from "../components/TitleSection";
 
-export default function NewListing({changeNav}) {
+export default function NewListing({navigation}) {
     const [name, setName] = useState(null)
     const [price, setPrice] = useState(null)
     const [condition, setCondition] = useState(null)
@@ -35,9 +35,9 @@ export default function NewListing({changeNav}) {
 					</Header> */}
 
 					<TitleSection>
-					<Header center >
-							Tell us what you're selling
-					</Header>
+						<Header center >
+								Tell us what you're selling
+						</Header>
 					</TitleSection>
 
 					
@@ -75,7 +75,9 @@ export default function NewListing({changeNav}) {
 					></Description>
 
 					{/* Preview Listing */}
-					<ButtonCustom onClick={() => changeNav(3)} marginBottom={Dimensions.get('window').height*.1} marginTop={Dimensions.get('window').height*.02} size={16} weight={"600"} disabled={isListingPreviewDisabled()} >Preview Listing</ButtonCustom>
+					<ButtonCustom onClick={() => navigation.navigate('preview-listing', {listing: {
+						name, price, condition, images, description
+					}})} marginBottom={Dimensions.get('window').height*.1} marginTop={Dimensions.get('window').height*.02} size={16} weight={"600"} disabled={isListingPreviewDisabled()} >Preview Listing</ButtonCustom>
 				</View>
 			</ScrollView>
     )
