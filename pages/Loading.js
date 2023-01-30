@@ -1,38 +1,56 @@
-import React, { useRef, useEffect } from 'react';
-import { Button, StyleSheet, View } from 'react-native';
+import React, { useRef, useEffect, useState } from 'react';
+import { Button, StyleSheet, TouchableOpacity, View } from 'react-native';
 import LottieView from 'lottie-react-native';
-// import { DangerZone } from 'expo';
-// const { Lottie } = DangerZone;
+import Lottie from 'lottie-react-native';
+import loading from '../assets/99274-loading.json';
+import tick from '../assets/tick.json'
 
 export default function Loading() {
-  const animation = useRef(null);
-  useEffect(() => {
+	const [isLoading, setIsLoading] = useState(true)
+
+  const loadingAnimation = useRef(null);
+	const tickAnimation = useRef(null);
+
+	console.log(isLoading);
+
+	useEffect(() => {
     // You can control the ref programmatically, rather than using autoPlay
-    // animation.current?.play();
+    loadingAnimation.current?.play(15, 47);
   }, []);
+
+	useEffect(() => {
+		loadingAnimation.current?.play(15, 47)
+		!isLoading && loadingAnimation.current?.pause();
+		tickAnimation.current?.play();
+	}, [isLoading]);
 
   return (
     <View style={styles.animationContainer}>
-      <LottieView
-        autoPlay
-        ref={animation}
-        style={{
-          width: 200,
-          height: 200,
-          backgroundColor: '#eee',
-        }}
-        // Find more Lottie files at https://lottiefiles.com/featured
-        source={require('../assets/99274-loading.json')}
-      />
-      <View style={styles.buttonContainer}>
-        <Button
-          title="Restart Animation"
-          onPress={() => {
-            animation.current?.reset();
-            animation.current?.play();
-          }}
-        />
-      </View>
+			{	isLoading ?
+				<LottieView
+				autoPlay
+				ref={loadingAnimation}
+				style={{
+					width: 150,
+					height: 150,
+					backgroundColor: '#0d0d0d',
+					marginBottom: 35
+				}}
+				source={loading}
+			/>
+			:
+			<LottieView
+				loop={false}
+				ref={tickAnimation}
+				style={{
+					width: 90,
+					height: 90,
+					backgroundColor: '#0d0d0d',
+				}}
+				speed={.7}
+				source={tick}
+			/>
+			}
     </View>
   );
 }
