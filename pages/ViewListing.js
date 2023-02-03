@@ -7,13 +7,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
 const width = (Dimensions.get('window').width * 0.85) + 4;
 
 export default function ViewListing({navigation, route}) {
- {/**
-Options:
-	1. Data for viewed items is pulled on main screen, and passed onto this class, can instantly render when clicked on
-	2. Only IDs and images are pulled to Home page, when clicking, rest of information is pulled to screen -> better option
-	3. Send everything, on Page refresh, get data pulled again. On buy now click, check that the item hasn't been bought
-*/}
-	const { id } = route.params;
+	const { id, ownListing } = route.params;
 
 	useEffect(() => {
 		// Get item info using id
@@ -22,8 +16,21 @@ Options:
 
 	const [numberRevealed, setNumberRevealed] = useState(false)
 	const [liked, setLiked] = useState(false);
-	const item = useState({
+	const [listing, setListing] = useState({
+		listingID: id,
+		condition: "New", 
+		description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis ut diam quam nulla porttitor. Venenatis tellus in metus vulputate eu scelerisque felis. Diam in arcu cursus euismod quis viverra. Nibh ipsum consequat nisl vel pretium. Dignissim suspendisse in est ante. Id consectetur purus ut faucibus pulvinar elementum integer enim neque. Pellentesque diam volutpat commodo sed egestas. Vel elit scelerisque mauris pellentesque. Eget duis at tellus at urna. Amet facilisis magna etiam tempor orci eu. Et malesuada fames ac turpis egestas sed tempus urna. Enim praesent elementum facilisis leo vel. Nisi quis eleifend quam adipiscing. Facilisis leo vel fringilla est ullamcorper eget nulla facilisi. Viverra aliquet eget sit amet tellus. Vitae turpis massa sed elementum tempus egestas sed. Enim ut tellus elementum sagittis vitae et. Ultrices mi tempus imperdiet nulla. Et odio pellentesque diam volutpat commodo sed egestas egestas. Urna nunc id cursus metus aliquam. Sed ullamcorper morbi tincidunt ornare massa eget egestas. Id volutpat lacus laoreet non. Molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Vitae suscipit tellus mauris a diam maecenas sed enim. Suspendisse in est ante in nibh mauris. Dignissim sodales ut eu sem integer vitae.",
+		images: [
+			{"assetId": "259C9570-436F-4AC0-A7B1-04C7F745B579/L0/001", "fileName": "IMG_0837.jpg", "fileSize": 5630126, "height": 4032, "type": "image", "uri": "file:///var/mobile/Containers/Data/Application/099A6AD5-697F-449A-B22A-505B1A826615/Library/Caches/ExponentExperienceData/%2540anonymous%252FFinalYearProject-d4a926bf-56ee-4a53-b828-de92aaf5df39/ImagePicker/70F0267A-13AC-4945-96AC-356337626FF7.jpg", "width": 3024},
+			{"assetId": "CD58EA64-21E6-473A-AC5C-45DA4326543C/L0/001", "fileName": "IMG_0838.jpg", "fileSize": 5440396, "height": 4032, "type": "image", "uri": "file:///var/mobile/Containers/Data/Application/099A6AD5-697F-449A-B22A-505B1A826615/Library/Caches/ExponentExperienceData/%2540anonymous%252FFinalYearProject-d4a926bf-56ee-4a53-b828-de92aaf5df39/ImagePicker/828F7669-79FB-41BB-87B4-2070D8FC5B6A.jpg", "width": 3024},
+			{"assetId": "CD58EA64-21E6-473A-AC5C-45DA4326543C/L0/001", "fileName": "IMG_0838.jpg", "fileSize": 5440396, "height": 4032, "type": "image", "uri": "file:///var/mobile/Containers/Data/Application/099A6AD5-697F-449A-B22A-505B1A826615/Library/Caches/ExponentExperienceData/%2540anonymous%252FFinalYearProject-d4a926bf-56ee-4a53-b828-de92aaf5df39/ImagePicker/828F7669-79FB-41BB-87B4-2070D8FC5B6A.jpg", "width": 3024},
+		],
+		name: "Boris Bike",
+		price: "35",
+		sellerID: 13
 	})
+
+	const {condition, description, images, name, price, sellerID} = listing;
 
 	const styles  = StyleSheet.create({
 		container: {
@@ -76,15 +83,20 @@ Options:
 
 	const renderImages = () => {
     return(
-      item.images.map((image, i) => <Image source={{ uri: image.uri }} style={styles.image} key={i} /> )
+      listing.images.map((image, i) => <Image source={{ uri: image.uri }} style={styles.image} key={i} /> )
     )
   }
 
-	const onBuyNowClick = () => navigation.navigate('loading')
+	const onBuyNowClick = () => {}
 	// On buy now click, check that the item hasn't been bought
 
 	return (
 		<ScrollView bounces={false} style={styles.container} contentContainerStyle={styles.containerChildren}>
+
+			{
+				ownListing &&
+				<ButtonCustom onClick={() => navigation.navigate('new-listing', {listing: listing, edit: true})} bg='#46484d' marginBottom={10} marginTop={15} size={16} weight={"600"}>Edit Listing</ButtonCustom>
+			}
 
 			<ScrollView horizontal={true} style={styles.imagesScroll} bounces={false} pagingEnabled={true}>
 				{renderImages()}
@@ -120,7 +132,7 @@ Options:
 				</Text>
 			</View>
 
-			<ButtonCustom disabled={route.params.disabled} onClick={onBuyNowClick} marginBottom={90} marginTop={15} size={16} weight={"600"}>Buy Now</ButtonCustom>
+			<ButtonCustom disabled={ownListing} onClick={onBuyNowClick} marginBottom={90} marginTop={15} size={16} weight={"600"}>Buy Now</ButtonCustom>
 		</ScrollView>
 	)
 }

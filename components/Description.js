@@ -44,6 +44,7 @@ export default function Description(props) {
 							placeholder={props.placeholder}
 							placeholderTextColor='#848484'
 							onChangeText={text => props.onChange(text)}
+							defaultValue={props.initialValue ? props.initialValue : null}
 					>  
 					</TextInput>
         </View>

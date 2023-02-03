@@ -20,7 +20,7 @@ export default function Home({ navigation }) {
     )}
 
     const [user, setUser] = useState({
-        id:13,
+        id:15,
         username: "Hijazi",
         email: "Hijazi@gmail.com",
         searches: ["Bike", "PS5", "Keyboard"],
@@ -53,7 +53,7 @@ export default function Home({ navigation }) {
 			return (
 				recentlyViewed.map((item, i) => {
 					return (
-						<HomeProductCard image={item.image} key={i} onPress={() => navigation.navigate('view-listing', {id: item.id, ownItem: user.id === item.sellerID })}/>
+						<HomeProductCard image={item.image} key={i} onPress={() => navigation.navigate('view-listing', {id: item.id, ownListing: user.id === item.sellerID })}/>
 					)
 				})
 			)
@@ -63,7 +63,7 @@ export default function Home({ navigation }) {
 			return (
 				recentlyViewed.map((item, i) => {
 					return (
-						<HomeProductCard image={item.image} key={i} onPress={() => navigation.navigate('view-listing', {id: item.id, sellerID: sellerID })}/>
+						<HomeProductCard image={item.image} key={i} onPress={() => navigation.navigate('view-listing', {id: item.id, ownListing: true })}/>
 					)
 				})
 			)

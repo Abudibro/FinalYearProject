@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { StyleSheet, Dimensions, View, ScrollView } from "react-native";
 import ConditionDropdown from "../components/ConditionDropdpwn";
 import Description from "../components/Description";
@@ -8,12 +8,25 @@ import ButtonCustom from '../components/Button'
 import Header from "../components/Header";
 import TitleSection from "../components/TitleSection";
 
-export default function NewListing({ navigation }) {
-    const [name, setName] = useState(null)
-    const [price, setPrice] = useState(null)
-    const [condition, setCondition] = useState(null)
-    const [description, setDescription] = useState(null)
-    const [images, setImages] = useState(null);
+export default function NewListing({ navigation, route }) {
+		var edit = false;
+		var listing = null;
+		if (route.params?.edit) {
+			edit = true;
+			listing = route.params.listing;
+		}
+
+    const [name, setName] = useState(edit ? listing.name : null)
+    const [price, setPrice] = useState(edit ? listing.price : null)
+    const [condition, setCondition] = useState(edit ? listing.condition : null)
+    const [description, setDescription] = useState(edit ? listing.description : null)
+    const [images, setImages] = useState(edit ? listing.images : null);
+		
+		// useEffect(() => {
+		// 	if (route.params.edit) {
+
+		// 	}
+		// }, []);
     
     const isListingPreviewDisabled = () => {
         return name == null
@@ -24,7 +37,7 @@ export default function NewListing({ navigation }) {
 				|| name.trim().length === 0
 				|| price.trim().length === 0
 				|| description.trim().length === 0
-				|| images[0].uri === undefined
+				|| images.length === 0
     }
 
     return(
@@ -42,6 +55,7 @@ export default function NewListing({ navigation }) {
 							placeholder="Name your listing"
 							margin={15}
 							onChange={setName}
+							initialValue={name}
 					/>
 					
 					{/* Image */}
@@ -54,6 +68,7 @@ export default function NewListing({ navigation }) {
 							onChange={setPrice}
 							prefix={'£'}
 							int
+							initialValue={price}
 					>
 							{price}
 					</TextInputBox>
@@ -66,11 +81,12 @@ export default function NewListing({ navigation }) {
 							label='Description'
 							placeholder="Enter a description"
 							onChange={setDescription}
+							initialValue={description}
 					></Description>
 
 					{/* Preview Listing */}
 					<ButtonCustom onClick={() => navigation.navigate('preview-listing', {listing: {
-						name, price, condition, images, description
+						name, price, condition, images, description, edit, listingId: edit ? listing.listingID: null
 					}})} marginBottom={Dimensions.get('window').height*.1} marginTop={Dimensions.get('window').height*.02} size={16} weight={"600"} disabled={isListingPreviewDisabled()} >Preview Listing</ButtonCustom>
 				</View>
 			</ScrollView>

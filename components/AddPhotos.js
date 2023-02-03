@@ -73,10 +73,10 @@ export default function AddPhotos(props) {
     return(
       images.map((image, i) => {
         return (
-          <View>
-            <Image source={{ uri: image.uri }} style={styles.image} key={i} />
-            <TouchableOpacity key={i+1} style={[styles.iconWrapper, {top: 10, left: width-52}]} activeOpacity={.8} onPress={() => removeImage(i)}>
-              <Entypo key={i+2} name='cross' color='#f1f1f1' style={styles.icon} />
+          <View key={i}>
+            <Image source={{ uri: image.uri }} style={styles.image} />
+            <TouchableOpacity  style={[styles.iconWrapper, {top: 10, left: width-52}]} activeOpacity={.8} onPress={() => removeImage(i)}>
+              <Entypo  name='cross' color='#f1f1f1' style={styles.icon} />
             </TouchableOpacity>
           </View>
         );
