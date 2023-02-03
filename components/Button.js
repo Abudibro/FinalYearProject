@@ -5,7 +5,7 @@ export default function ButtonCustom(props) {
         <TouchableOpacity style={{
             width: props.width ? props.width : (Dimensions.get('window').width * 0.85) + 4,
             height: props.height ? props.height : 57,
-            backgroundColor: '#2846c4',
+            backgroundColor: props.bg ? props.bg :'#2846c4',
             borderRadius: props.borderRadius ? props.borderRadius : 12,
             flexDirection: 'row',
             alignItems: 'center',

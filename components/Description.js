@@ -32,7 +32,7 @@ export default function Description(props) {
     });
 
     return (
-    <View>
+    <View style={{marginTop: 20}}>
         <Header paddingLeft={19} size={15} margin={17} weight='600'>{props.label}</Header>
         <View style={styles.borderView}> 
 					<TextInput

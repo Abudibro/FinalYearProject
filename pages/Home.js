@@ -20,8 +20,8 @@ export default function Home({ navigation }) {
     )}
 
     const [user, setUser] = useState({
-        id:15,
-        username: "Usman😈",
+        id:13,
+        username: "Hijazi",
         email: "Hijazi@gmail.com",
         searches: ["Bike", "PS5", "Keyboard"],
         viewed: [121232, 23144, 21443],
@@ -39,8 +39,35 @@ export default function Home({ navigation }) {
         ],
         transactions: [2423534, 43232543, 43264565467]
     });
+		const [recentlyViewed, setRecentlyViewed] = useState([
+			{
+				id: 213,
+				sellerID: 13,
+				image: 'file:///var/mobile/Containers/Data/Application/099A6AD5-697F-449A-B22A-505B1A826615/Library/Caches/ExponentExperienceData/%2540anonymous%252FFinalYearProject-d4a926bf-56ee-4a53-b828-de92aaf5df39/ImagePicker/70F0267A-13AC-4945-96AC-356337626FF7.jpg',
+			}
+		])
     const [search, setSearch] = useState('');
     const [searchResults, setSearchResults] = useState([]); // send this to the search result page. this is pulled from the database, and recommendations for search are taken from this
+
+		const renderRecentlyViewed = () => {
+			return (
+				recentlyViewed.map((item, i) => {
+					return (
+						<HomeProductCard image={item.image} key={i} onPress={() => navigation.navigate('view-listing', {id: item.id, ownItem: user.id === item.sellerID })}/>
+					)
+				})
+			)
+		}
+
+		const renderYourListings = () => {
+			return (
+				recentlyViewed.map((item, i) => {
+					return (
+						<HomeProductCard image={item.image} key={i} onPress={() => navigation.navigate('view-listing', {id: item.id, sellerID: sellerID })}/>
+					)
+				})
+			)
+		}
 
     return (
         <ScrollView style={{flex: 1, backgroundColor: '#0d0d0d'}}>
@@ -61,7 +88,7 @@ export default function Home({ navigation }) {
                         size={15}
                         borderRadius={20}
                         icon={<FontAwesome name='plus' size={30} style={{color: '#f1f1f1'}}/>}
-                        onClick={() => {navigation.navigate('loading')}}
+                        onClick={() => {navigation.navigate('new-listing')}}
                     >
                         New{"\n"}
                         Listing
@@ -80,30 +107,22 @@ export default function Home({ navigation }) {
                 />
             </View>
             {
-                search.length == 0 &&
-                <View style={styles.cardSectionWrapper}>
-                    <View style={styles.cardSection}>
-                        <Header size={23} >You recently viewed</Header>
-                        <ScrollView horizontal={true}>
-                            <HomeProductCard />
-                            <HomeProductCard />
-                            <HomeProductCard />
-                            <HomeProductCard />
-                            <HomeProductCard />
-                        </ScrollView>
-                    </View>
+							search.length == 0 &&
+							<View style={styles.cardSectionWrapper}>
+									<View style={styles.cardSection}>
+											<Header size={23} >You recently viewed</Header>
+											<ScrollView horizontal={true}>
+													{renderRecentlyViewed()}
+											</ScrollView>
+									</View>
 
-                    <View style={styles.cardSection}>
-                        <Header size={23} >Your listed items</Header>
-                        <ScrollView horizontal={true}>
-                            <HomeProductCard />
-                            <HomeProductCard />
-                            <HomeProductCard />
-                            <HomeProductCard />
-                            <HomeProductCard />
-                        </ScrollView>
-                    </View>
-                </View>
+									<View style={styles.cardSection}>
+											<Header size={23} >Your listed items</Header>
+											<ScrollView horizontal={true}>
+												{renderYourListings()}
+											</ScrollView>
+									</View>
+							</View>
             }
             {
                 search.length > 0 &&

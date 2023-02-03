@@ -72,63 +72,62 @@ export default function SignUp({navigation}) {
         <Header size={12} margin={3} align='flex-start'>Please enter your details</Header>
       </View>
       <View style={{flex: 2.9, justifyContent: 'space-between'}}>
-        <View>
-          <TextInputBox placeholder="Enter your username"
-            margin={3}
-            label="Username"
-            icon={checkUsernameIsValid() ? Checkmark : checkUsernameIsValid() != null ? Cross : null}
-            iconColor={checkUsernameIsValid() ? "#019501" : checkUsernameIsValid() != null ? "#b30000" : null}
-            onChange={changeUsername}
-          />
-          <TextInputBox placeholder="Enter your email address"
-            margin={3}
-            label='Email'
-            icon={checkEmailIsValid() ? Checkmark : checkEmailIsValid() != null ? Cross : null}
-            iconColor={checkEmailIsValid() ? "#019501" : checkEmailIsValid() != null ? "#b30000" : null}
-            onChange={changeEmail}
-          />
-          <View style={{margin: 3}}>
-            <Header size={15} margin={12} weight='600' paddingLeft={19} >Password</Header>
-            
-            <View style={{margin: 3, marginLeft: 19, flexDirection: 'row', alignItems: 'center', opacity: eightCharsExist ? 1 : 0.7}}>
-              {
-                Checkmark(23, "#FFF")
-              }
-              <Header size={10} margin={3} weight={"400"}> 8 characters minimum</Header>
-            </View>
+				<TextInputBox placeholder="Enter your username"
+					margin={3}
+					label="Username"
+					icon={checkUsernameIsValid() ? Checkmark : checkUsernameIsValid() != null ? Cross : null}
+					iconColor={checkUsernameIsValid() ? "#019501" : checkUsernameIsValid() != null ? "#b30000" : null}
+					onChange={changeUsername}
+				/>
+				<TextInputBox placeholder="Enter your email address"
+					margin={3}
+					label='Email'
+					icon={checkEmailIsValid() ? Checkmark : checkEmailIsValid() != null ? Cross : null}
+					iconColor={checkEmailIsValid() ? "#019501" : checkEmailIsValid() != null ? "#b30000" : null}
+					onChange={changeEmail}
+				/>
+				<View style={{margin: 3}}>
+					<Header size={15} margin={12} weight='600' paddingLeft={19} >Password</Header>
+					
+					<View style={{margin: 3, marginLeft: 19, flexDirection: 'row', alignItems: 'center', opacity: eightCharsExist ? 1 : 0.7}}>
+						{
+							Checkmark(23, "#FFF")
+						}
+						<Header size={10} margin={3} weight={"400"}> 8 characters minimum</Header>
+					</View>
 
-            <View style={{margin: 3, marginLeft: 19, flexDirection: 'row', alignItems: 'center', opacity: upperAndLowerExist ? 1 : 0.7}}>
-              {
-                Checkmark(23, "#FFF")
-              }
-              <Header size={10} margin={3} weight={"400"}> An uppercase and a lower case letter</Header>
-            </View>
+					<View style={{margin: 3, marginLeft: 19, flexDirection: 'row', alignItems: 'center', opacity: upperAndLowerExist ? 1 : 0.7}}>
+						{
+							Checkmark(23, "#FFF")
+						}
+						<Header size={10} margin={3} weight={"400"}> An uppercase and a lower case letter</Header>
+					</View>
 
-            <View style={{margin: 3, marginLeft: 19, flexDirection: 'row', alignItems: 'center', opacity: numberExists ? 1 : 0.7}}>
-              {
-                Checkmark(23, "#FFF")
-              }
-              <Header size={10} margin={3} weight={"400"}> A number</Header>
-            </View>
+					<View style={{margin: 3, marginLeft: 19, flexDirection: 'row', alignItems: 'center', opacity: numberExists ? 1 : 0.7}}>
+						{
+							Checkmark(23, "#FFF")
+						}
+						<Header size={10} margin={3} weight={"400"}> A number</Header>
+					</View>
 
-            <View style={{margin: 3, marginLeft: 19, marginBottom: 10, flexDirection: 'row', alignItems: 'center', opacity: specialExists ? 1 : 0.7}}>
-              {
-                Checkmark(23, "#FFF")
-              }
-              <Header size={10} margin={3} weight={"400"}> A special character</Header>
-            </View>
+					<View style={{margin: 3, marginLeft: 19, marginBottom: 10, flexDirection: 'row', alignItems: 'center', opacity: specialExists ? 1 : 0.7}}>
+						{
+							Checkmark(23, "#FFF")
+						}
+						<Header size={10} margin={3} weight={"400"}> A special character</Header>
+					</View>
 
-            <TextInputBox
-              noLabel
-              placeholder="Create your password"
-              margin={3}
-              onChange={checkPasswordIsValid}
-              showPassword={hidePassword}
-              icon={hidePassword ? Eye : EyeWithLine}
-              iconColor={"#848484"}
-              noBorder
-            />
-          </View>
+					<TextInputBox
+						noLabel
+						placeholder="Create your password"
+						margin={3}
+						onChange={checkPasswordIsValid}
+						showPassword={hidePassword}
+						icon={hidePassword ? Eye : EyeWithLine}
+						iconColor={"#848484"}
+						noBorder
+					/>
+
         </View>
       </View>
       <View style={{alignItems: 'center', marginTop: 20, flex: 1, justifyContent: 'center'}}>

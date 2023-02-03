@@ -1,28 +1,53 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, Dimensions, Image, View, TouchableOpacity, Text } from "react-native";
 import ButtonCustom from "../components/Button";
 import Header from "../components/Header";
 import AntDesign from 'react-native-vector-icons/AntDesign'
+import Loading from "../components/Loading";
+import Tick from "../components/Tick";
 
 export default function PreviewListing(props) {
 	const [numberRevealed, setNumberRevealed] = useState(false)
 	const [liked, setLiked] = useState(false);
+	const [isLoading, setIsLoading] = useState(null);
+	const [calloutFailed, setCalloutFailed] = useState(false); 
 
 	const width = (Dimensions.get('window').width * 0.85) + 4;
+	const {navigation} = props;
+	const { name, images, condition, description, price } = props.route.params.listing;
 
-	// const {name, images, condition, descriptiom, price } = props.route.params.listing;
-	const {name, images, condition, description, price } = {
-		condition: "New", 
-		description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis ut diam quam nulla porttitor. Venenatis tellus in metus vulputate eu scelerisque felis. Diam in arcu cursus euismod quis viverra. Nibh ipsum consequat nisl vel pretium. Dignissim suspendisse in est ante. Id consectetur purus ut faucibus pulvinar elementum integer enim neque. Pellentesque diam volutpat commodo sed egestas. Vel elit scelerisque mauris pellentesque. Eget duis at tellus at urna. Amet facilisis magna etiam tempor orci eu. Et malesuada fames ac turpis egestas sed tempus urna. Enim praesent elementum facilisis leo vel. Nisi quis eleifend quam adipiscing. Facilisis leo vel fringilla est ullamcorper eget nulla facilisi. Viverra aliquet eget sit amet tellus. Vitae turpis massa sed elementum tempus egestas sed. Enim ut tellus elementum sagittis vitae et. Ultrices mi tempus imperdiet nulla. Et odio pellentesque diam volutpat commodo sed egestas egestas. Urna nunc id cursus metus aliquam. Sed ullamcorper morbi tincidunt ornare massa eget egestas. Id volutpat lacus laoreet non. Molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Vitae suscipit tellus mauris a diam maecenas sed enim. Suspendisse in est ante in nibh mauris. Dignissim sodales ut eu sem integer vitae.",
-		images: [
-			{"assetId": "259C9570-436F-4AC0-A7B1-04C7F745B579/L0/001", "fileName": "IMG_0837.jpg", "fileSize": 5630126, "height": 4032, "type": "image", "uri": "file:///var/mobile/Containers/Data/Application/099A6AD5-697F-449A-B22A-505B1A826615/Library/Caches/ExponentExperienceData/%2540anonymous%252FFinalYearProject-d4a926bf-56ee-4a53-b828-de92aaf5df39/ImagePicker/70F0267A-13AC-4945-96AC-356337626FF7.jpg", "width": 3024},
-			{"assetId": "CD58EA64-21E6-473A-AC5C-45DA4326543C/L0/001", "fileName": "IMG_0838.jpg", "fileSize": 5440396, "height": 4032, "type": "image", "uri": "file:///var/mobile/Containers/Data/Application/099A6AD5-697F-449A-B22A-505B1A826615/Library/Caches/ExponentExperienceData/%2540anonymous%252FFinalYearProject-d4a926bf-56ee-4a53-b828-de92aaf5df39/ImagePicker/828F7669-79FB-41BB-87B4-2070D8FC5B6A.jpg", "width": 3024},
-			{"assetId": "CD58EA64-21E6-473A-AC5C-45DA4326543C/L0/001", "fileName": "IMG_0838.jpg", "fileSize": 5440396, "height": 4032, "type": "image", "uri": "file:///var/mobile/Containers/Data/Application/099A6AD5-697F-449A-B22A-505B1A826615/Library/Caches/ExponentExperienceData/%2540anonymous%252FFinalYearProject-d4a926bf-56ee-4a53-b828-de92aaf5df39/ImagePicker/828F7669-79FB-41BB-87B4-2070D8FC5B6A.jpg", "width": 3024},
-			// {"assetId": "D6DB0804-D09E-4BD6-A332-7A4D818362D4/L0/001", "fileName": "IMG_0836.jpg", "fileSize": 5739259, "height": 4032, "type": "image", "uri": "file:///var/mobile/Containers/Data/Application/099A6AD5-697F-449A-B22A-505B1A826615/Library/Caches/ExponentExperienceData/%2540anonymous%252FFinalYearProject-d4a926bf-56ee-4a53-b828-de92aaf5df39/ImagePicker/FAE11706-8CB9-47D2-AC13-744864BD7075.jpg", "width": 3024}
-		],
-		name: "Boris Bike",
-		price: "35"
+	// const listing = {
+	// 	condition: "New", 
+	// 	description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis ut diam quam nulla porttitor. Venenatis tellus in metus vulputate eu scelerisque felis. Diam in arcu cursus euismod quis viverra. Nibh ipsum consequat nisl vel pretium. Dignissim suspendisse in est ante. Id consectetur purus ut faucibus pulvinar elementum integer enim neque. Pellentesque diam volutpat commodo sed egestas. Vel elit scelerisque mauris pellentesque. Eget duis at tellus at urna. Amet facilisis magna etiam tempor orci eu. Et malesuada fames ac turpis egestas sed tempus urna. Enim praesent elementum facilisis leo vel. Nisi quis eleifend quam adipiscing. Facilisis leo vel fringilla est ullamcorper eget nulla facilisi. Viverra aliquet eget sit amet tellus. Vitae turpis massa sed elementum tempus egestas sed. Enim ut tellus elementum sagittis vitae et. Ultrices mi tempus imperdiet nulla. Et odio pellentesque diam volutpat commodo sed egestas egestas. Urna nunc id cursus metus aliquam. Sed ullamcorper morbi tincidunt ornare massa eget egestas. Id volutpat lacus laoreet non. Molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Vitae suscipit tellus mauris a diam maecenas sed enim. Suspendisse in est ante in nibh mauris. Dignissim sodales ut eu sem integer vitae.",
+	// 	images: [
+	// 		{"assetId": "259C9570-436F-4AC0-A7B1-04C7F745B579/L0/001", "fileName": "IMG_0837.jpg", "fileSize": 5630126, "height": 4032, "type": "image", "uri": "file:///var/mobile/Containers/Data/Application/099A6AD5-697F-449A-B22A-505B1A826615/Library/Caches/ExponentExperienceData/%2540anonymous%252FFinalYearProject-d4a926bf-56ee-4a53-b828-de92aaf5df39/ImagePicker/70F0267A-13AC-4945-96AC-356337626FF7.jpg", "width": 3024},
+	// 		{"assetId": "CD58EA64-21E6-473A-AC5C-45DA4326543C/L0/001", "fileName": "IMG_0838.jpg", "fileSize": 5440396, "height": 4032, "type": "image", "uri": "file:///var/mobile/Containers/Data/Application/099A6AD5-697F-449A-B22A-505B1A826615/Library/Caches/ExponentExperienceData/%2540anonymous%252FFinalYearProject-d4a926bf-56ee-4a53-b828-de92aaf5df39/ImagePicker/828F7669-79FB-41BB-87B4-2070D8FC5B6A.jpg", "width": 3024},
+	// 		{"assetId": "CD58EA64-21E6-473A-AC5C-45DA4326543C/L0/001", "fileName": "IMG_0838.jpg", "fileSize": 5440396, "height": 4032, "type": "image", "uri": "file:///var/mobile/Containers/Data/Application/099A6AD5-697F-449A-B22A-505B1A826615/Library/Caches/ExponentExperienceData/%2540anonymous%252FFinalYearProject-d4a926bf-56ee-4a53-b828-de92aaf5df39/ImagePicker/828F7669-79FB-41BB-87B4-2070D8FC5B6A.jpg", "width": 3024},
+	// 		// {"assetId": "D6DB0804-D09E-4BD6-A332-7A4D818362D4/L0/001", "fileName": "IMG_0836.jpg", "fileSize": 5739259, "height": 4032, "type": "image", "uri": "file:///var/mobile/Containers/Data/Application/099A6AD5-697F-449A-B22A-505B1A826615/Library/Caches/ExponentExperienceData/%2540anonymous%252FFinalYearProject-d4a926bf-56ee-4a53-b828-de92aaf5df39/ImagePicker/FAE11706-8CB9-47D2-AC13-744864BD7075.jpg", "width": 3024}
+	// 	],
+	// 	name: "Boris Bike",
+	// 	price: "35"
+	// }
+	// const { name, images, condition, description, price } = listing
+
+	const renderImages = () => {
+    return(
+      images.map((image, i) => <Image source={{ uri: image.uri }} style={styles.image} key={i} /> )
+    )
+  }
+
+	const onPublishListingClick = () => {
+		setIsLoading(true);
+		setTimeout(() => setIsLoading(false), 5000)
+		
+		// Put your req here - on success, set isloading = false
+		// set calloutfailed to true when err = true 
+	};
+
+	const onItemLike = () => {
+		
 	}
+
 	const styles  = StyleSheet.create({
 		container: {
 			flex: 1,
@@ -72,16 +97,15 @@ export default function PreviewListing(props) {
 		}
 	})
 
-	const renderImages = () => {
-    return(
-      images.map((image, i) => <Image source={{ uri: image.uri }} style={styles.image} key={i} /> )
-    )
-  }
-
-	const onPublishListingClick = () => 1
-
 	return (
+		isLoading ?
+		<Loading />
+		: isLoading === false ?
+		<Tick onTickFinish={() => navigation.navigate('new-listing')} />
+		:
 		<ScrollView bounces={false} style={styles.container} contentContainerStyle={styles.containerChildren}>
+			
+			<ButtonCustom onClick={() => navigation.goBack()} bg='#46484d' marginBottom={10} marginTop={15} size={16} weight={"600"}>Edit Listing</ButtonCustom>
 
 			<ScrollView horizontal={true} style={styles.imagesScroll} bounces={false} pagingEnabled={true}>
 				{renderImages()}
@@ -96,7 +120,7 @@ export default function PreviewListing(props) {
 				</TouchableOpacity>
 			</View>
 
-			<View style={styles.infoWrapper}>
+			<View style={styles.infoWrapper}> 
 				<Header paddingLeft={15} width={width} weight='700' size={16}>Location:{`\t	Selly Oak`}</Header>
 				<Header paddingLeft={15} width={width} weight='700' size={16}>Condition:{`\t	${condition}`}</Header>
 				<Header paddingLeft={15} width={width} weight='700' size={16}>Posted:{`\t	3d ago`}</Header>

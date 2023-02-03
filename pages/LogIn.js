@@ -26,36 +26,37 @@ export default function LogIn({navigation}) {
   
   return (
     <View style={styles.container}>
-        <View style={{flex: 1.5, justifyContent: 'center'}}>
-            <Header size={45} margin={3}>Welcome Back,</Header>
-            <Header size={12} margin={3} align='flex-start'>Please sign in to continue</Header>
-        </View>
-        <View style={{flex: 2.7, justifyContent: 'space-between'}}>
-          <View>
-            <TextInputBox placeholder="Enter your username" margin={3} label="Username" onChange={changeUsername}/>
-            <TextInputBox
-              label='Password'
-              placeholder="Enter your password"
-              margin={3}
-              onChange={changePassword}
-              showPassword={hidePassword}
-              icon={hidePassword ? Eye : EyeWithLine}
-              iconColor={"#848484"}
-              noBorder
-            />
-          </View>
-          <View style={{alignItems: 'center'}}>
-            <ButtonCustom onClick={onSignInClick} size={16} weight={"600"}>Sign In</ButtonCustom>
-            <View style={{flexDirection: 'row', margin: 20}}>
-              <Header size={10}>Don't have an account? </Header>
-              <Header size={10} color={"#2846c4"} onPress={() => navigation.navigate('SignUp')}>Sign Up</Header>
-            </View>
-          </View>
-        </View>
-        <View style={{flex: .7}}>
-        </View>
 
-        
+			<View style={{flex: 2.2, justifyContent: 'center'}}>
+					<Header size={45} margin={3}>Welcome Back,</Header>
+					<Header size={12} margin={3} align='flex-start'>Please sign in to continue</Header>
+			</View>
+
+			<View style={{flex: 1}}>
+				<TextInputBox placeholder="Enter your username" margin={3} label="Username" onChange={changeUsername}/>
+			</View>
+
+			<View style={{flex: 1}}>
+				<TextInputBox
+					label='Password'
+					placeholder="Enter your password"
+					margin={3}
+					onChange={changePassword}
+					showPassword={hidePassword}
+					icon={hidePassword ? Eye : EyeWithLine}
+					iconColor={"#848484"}
+					noBorder
+				/>
+			</View>
+
+			<View style={{alignItems: 'center', flex: 2, justifyContent: 'center'}}>
+				<ButtonCustom onClick={onSignInClick} size={16} weight={"600"}>Sign In</ButtonCustom>
+				<View style={{flexDirection: 'row', margin: 20}}>
+					<Header size={10}>Don't have an account? </Header>
+					<Header size={10} color={"#2846c4"} onPress={() => navigation.navigate('SignUp')}>Sign Up</Header>
+				</View>
+			</View>
+
     </View>
   );
 }

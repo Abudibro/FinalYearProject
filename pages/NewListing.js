@@ -8,7 +8,7 @@ import ButtonCustom from '../components/Button'
 import Header from "../components/Header";
 import TitleSection from "../components/TitleSection";
 
-export default function NewListing({navigation}) {
+export default function NewListing({ navigation }) {
     const [name, setName] = useState(null)
     const [price, setPrice] = useState(null)
     const [condition, setCondition] = useState(null)
@@ -17,30 +17,24 @@ export default function NewListing({navigation}) {
     
     const isListingPreviewDisabled = () => {
         return name == null
-            || price == null
-            || images === null
-            || condition === null
-            || description === null
-            || name.trim().length === 0
-            || price.trim().length === 0
-            || description.trim().length === 0
-            || images[0].uri === undefined
+				|| price == null
+				|| images === null
+				|| condition === null
+				|| description === null
+				|| name.trim().length === 0
+				|| price.trim().length === 0
+				|| description.trim().length === 0
+				|| images[0].uri === undefined
     }
 
     return(
 			<ScrollView style={{flex: 1, backgroundColor: '#0d0d0d'}}>
 				<View style={styles.container}>
-					{/* <Header center margin={25} >
-							Tell us what you're selling
-					</Header> */}
-
 					<TitleSection>
 						<Header center >
 								Tell us what you're selling
 						</Header>
 					</TitleSection>
-
-					
 
 					{/* Name */}
 					<TextInputBox

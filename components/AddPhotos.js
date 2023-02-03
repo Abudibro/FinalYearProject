@@ -96,7 +96,7 @@ export default function AddPhotos(props) {
       <ScrollView horizontal={true} style={styles.imagesScroll} bounces={false} pagingEnabled={true}>
         {renderImages()}
       </ScrollView>
-      <TouchableOpacity style={[styles.iconWrapper, {top: 249+width}]} activeOpacity={.8} onPress={pickImage}>
+      <TouchableOpacity style={[styles.iconWrapper, {top: 229+width}]} activeOpacity={.8} onPress={pickImage}>
         <MaterialIcons name='edit' color='#f1f1f1' style={styles.icon} />
       </TouchableOpacity>
     </>
