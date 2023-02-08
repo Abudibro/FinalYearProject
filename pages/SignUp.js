@@ -1,15 +1,20 @@
 import { useEffect, useState } from 'react';
-import { StyleSheet, View, Dimensions, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, ScrollView, TouchableOpacity } from 'react-native';
 import ButtonCustom from '../components/Button';
 import Header from '../components/Header'
 import TextInputBox from '../components/TextInput'
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo'
+import TitleSection from '../components/TitleSection';
 
 export default function SignUp({navigation}) {
 
   const [username, changeUsername] = useState(null);
   const [email, changeEmail] = useState(null);
+	const [addressLineOne, setAddressLineOne] = useState(null);
+	const [addressLineTwo, setAddressLineTwo] = useState(null);
+	const [postCode, setPostCode] = useState(null);
+	const [city, setCity] = useState(null);
   const [password, changePassword] = useState(null);
   const [hidePassword, toggleHidePassword] = useState(true);
   const [upperAndLowerExist, setUpperAndLowerExist] = useState(false);
@@ -51,6 +56,17 @@ export default function SignUp({navigation}) {
     if (username == "Hijazi" && password == "Test1234!") navigation.navigate('SignedIn');
   }
 
+	const isSignUpButtonDisabled = () => {
+		return !(
+			checkUsernameIsValid()
+			&& checkEmailIsValid()
+			&& upperAndLowerExist
+			&& specialExists
+			&& numberExists
+			&& eightCharsExist
+		)
+	}
+
   const Checkmark = (size, color, style) => {return (<Ionicons name={"checkmark-circle-sharp"} size={size} color={color} style={style} />)}
   const Cross = (size, color, style) => {return (<Entypo name={"circle-with-cross"} size={size} color={color} style={style} />)}
   const EyeWithLine = (size, color, style) => {return (
@@ -66,28 +82,70 @@ export default function SignUp({navigation}) {
 
 
   return (
-    <View style={styles.container}>
-      <View style={{flex: .9, justifyContent: 'center'}}>
-        <Header size={42} margin={3}>Let's Get Started</Header>
-        <Header size={12} margin={3} align='flex-start'>Please enter your details</Header>
-      </View>
-      <View style={{flex: 2.9, justifyContent: 'space-between'}}>
+    <ScrollView style={styles.container} contentContainerStyle={{alignItems: 'center', justifyContent: 'center'}}>
+			
+			{/* Header Section */}
+			<TitleSection left>
+        <Header size={42} >Let's Get Started</Header>
+        <Header size={12} marginT={5} align='flex-start'>Please enter your details</Header>
+			</TitleSection>
+			
+			<View style={{height: 50, alignItems: 'center', justifyContent: 'center', marginVertical: 10}}>
+				<Header color="#848484" size={12} align='flex-start'>All fields marked with * are required</Header>
+			</View>
+
+			{/* Input Section */}
+      <View >
+
+				{/* Username */}
 				<TextInputBox placeholder="Enter your username"
+					marginT={20}
 					margin={3}
-					label="Username"
+					label="Username *"
 					icon={checkUsernameIsValid() ? Checkmark : checkUsernameIsValid() != null ? Cross : null}
 					iconColor={checkUsernameIsValid() ? "#019501" : checkUsernameIsValid() != null ? "#b30000" : null}
 					onChange={changeUsername}
 				/>
+
+				{/* Email Address */}
 				<TextInputBox placeholder="Enter your email address"
 					margin={3}
-					label='Email'
+					marginT={30}
+					label='Email *'
 					icon={checkEmailIsValid() ? Checkmark : checkEmailIsValid() != null ? Cross : null}
 					iconColor={checkEmailIsValid() ? "#019501" : checkEmailIsValid() != null ? "#b30000" : null}
 					onChange={changeEmail}
 				/>
-				<View style={{margin: 3}}>
-					<Header size={15} margin={12} weight='600' paddingLeft={19} >Password</Header>
+
+				<TextInputBox placeholder="Address Line 1 *"
+					margin={3}
+					marginT={30}
+					label='Home Address'
+					onChange={setAddressLineOne}
+				/>
+
+				<TextInputBox placeholder="Address Line 2"
+					margin={3}
+					noLabel
+					onChange={setAddressLineTwo}
+				/>
+
+				<TextInputBox placeholder="Post Code *"
+					margin={3}
+					noLabel
+					onChange={setPostCode}
+				/>
+
+				<TextInputBox placeholder="City *"
+					margin={3}
+					noLabel
+					onChange={setCity}
+				/>
+
+
+				{/* Password */}
+				<View style={{margin: 3, marginTop: 30}}>
+					<Header size={15} marginV={10} weight='600' paddingLeft={19} >Password *</Header>
 					
 					<View style={{margin: 3, marginLeft: 19, flexDirection: 'row', alignItems: 'center', opacity: eightCharsExist ? 1 : 0.7}}>
 						{
@@ -129,28 +187,27 @@ export default function SignUp({navigation}) {
 					/>
 
         </View>
+
       </View>
-      <View style={{alignItems: 'center', marginTop: 20, flex: 1, justifyContent: 'center'}}>
-        <ButtonCustom onClick={onSignUpClick} size={16} weight={"600"} disabled={!(checkUsernameIsValid() && checkEmailIsValid() && upperAndLowerExist && specialExists && numberExists && eightCharsExist)} >Sign Up</ButtonCustom>
+
+			{/* Button and Sign In */}
+      <View style={{alignItems: 'center', marginTop: 20, justifyContent: 'center'}}>
+        <ButtonCustom onClick={onSignUpClick} size={16} weight={"600"} disabled={isSignUpButtonDisabled} >Sign Up</ButtonCustom>
         <View style={{flexDirection: 'row', margin: 20}}>
           <Header size={10}>Already have an account? </Header>
           <Header size={10} color={"#2846c4"} onPress={() => navigation.navigate('LogIn')}>Sign In</Header>
         </View>
       </View>
-    </View>
+
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    height: Dimensions.get('window').height,
-    width: Dimensions.get('window').width,
-    backgroundColor: '#0d0d0d',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
+		flex: 1,
+		backgroundColor: '#0d0d0d'
+	},
   header: {
     color: "#f1f1f1",
     fontSize: "35",

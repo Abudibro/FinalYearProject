@@ -38,6 +38,13 @@ export default function NewListing({ navigation, route }) {
 				|| price.trim().length === 0
 				|| description.trim().length === 0
 				|| images.length === 0
+				|| edit && (
+					listing.name === name
+					&& listing.price === price
+					&& listing.condition === condition
+					&& listing.description === description
+					&& listing.images === images
+				)
     }
 
     return(
