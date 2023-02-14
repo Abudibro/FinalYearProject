@@ -1,0 +1,90 @@
+{
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "St Mary's Church of England",
+        "address": "Bristol Rd, Selly Oak, Birmingham B29 6ND",
+        "area": "Selly Oak",
+        "parking": "true"
+      },
+      "geometry": {
+        "coordinates": [
+          -1.943097,
+          52.439152
+        ],
+        "type": "Point"
+      },
+      "id": "434bef4549ac359d74236f6353867db6"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Selly Oak Station",
+        "area": "Selly Oak",
+        "address": "Selly Oak, Birmingham B29 6NA",
+        "parking": "true"
+      },
+      "geometry": {
+        "coordinates": [
+          -1.935608,
+          52.441858
+        ],
+        "type": "Point"
+      },
+      "id": "a2011b7a9048cac236499bf9ff4037cf"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Tesco Express",
+        "address": "479 Bristol Rd, Bournbrook, Birmingham B29 6BA",
+        "parking": "true",
+        "area": "Selly Oak"
+      },
+      "geometry": {
+        "coordinates": [
+          -1.934392,
+          52.445445
+        ],
+        "type": "Point"
+      },
+      "id": "c28cdd16f6af645fab5314a1ef53edfc"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Selly Oak Shopping Park",
+        "parking": "true",
+        "area": "Selly Oak",
+        "address": "Selly Oak, Birmingham B29 6SN"
+      },
+      "geometry": {
+        "coordinates": [
+          -1.940203,
+          52.443586
+        ],
+        "type": "Point"
+      },
+      "id": "e3a71fba18f68fd4a9774f88a1778ce2"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "ALDI",
+        "address": "Bristol Rd, Selly Oak, Birmingham B29 6AE",
+        "parking": "true",
+        "area": "Selly Oak"
+      },
+      "geometry": {
+        "coordinates": [
+          -1.935651,
+          52.444453
+        ],
+        "type": "Point"
+      },
+      "id": "ecd85982943c2eca5fef115f2e199343"
+    }
+  ],
+  "type": "FeatureCollection"
+}

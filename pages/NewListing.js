@@ -7,10 +7,11 @@ import TextInputBox from "../components/TextInput";
 import ButtonCustom from '../components/Button'
 import Header from "../components/Header";
 import TitleSection from "../components/TitleSection";
+import Map from "../components/Map";
 
 export default function NewListing({ navigation, route }) {
 		var edit = false;
-		var listing = null;
+		var listing = false;
 		if (route.params?.edit) {
 			edit = true;
 			listing = route.params.listing;
@@ -21,6 +22,7 @@ export default function NewListing({ navigation, route }) {
     const [condition, setCondition] = useState(edit ? listing.condition : null)
     const [description, setDescription] = useState(edit ? listing.description : null)
     const [images, setImages] = useState(edit ? listing.images : null);
+		const [selectedLocations, setSelectedLocations] = useState([]);
 		
 		// useEffect(() => {
 		// 	if (route.params.edit) {
@@ -34,6 +36,7 @@ export default function NewListing({ navigation, route }) {
 				|| images === null
 				|| condition === null
 				|| description === null
+				|| selectedLocations.length == 0
 				|| name.trim().length === 0
 				|| price.trim().length === 0
 				|| description.trim().length === 0
@@ -44,6 +47,7 @@ export default function NewListing({ navigation, route }) {
 					&& listing.condition === condition
 					&& listing.description === description
 					&& listing.images === images
+					// && listing.selectedLocations === selectedLocations
 				)
     }
 
@@ -60,7 +64,6 @@ export default function NewListing({ navigation, route }) {
 					<TextInputBox
 							label="Name"
 							placeholder="Name your listing"
-							margin={15}
 							onChange={setName}
 							initialValue={name}
 					/>
@@ -90,6 +93,8 @@ export default function NewListing({ navigation, route }) {
 							onChange={setDescription}
 							initialValue={description}
 					></Description>
+
+					<Map selectedLocations={selectedLocations} setSelectedLocations={setSelectedLocations} />
 
 					{/* Preview Listing */}
 					<ButtonCustom onClick={() => navigation.navigate('preview-listing', {listing: {

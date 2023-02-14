@@ -18,7 +18,7 @@ export default function AddPhotos(props) {
       borderWidth: 3,
       borderColor: '#2846c4',
       backgroundColor: "#181818",
-      margin: 10,
+      margin: 20,
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center'

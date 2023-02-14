@@ -18,7 +18,7 @@ export default function ButtonCustom(props) {
         disabled={!props.disabled || props.disabled == null ? false: true}
         onPress={props.onClick}>
             {props.icon ? props.icon : null}
-            <Text style={{color: '#f1f1f1', alignSelf: 'center', fontSize: props.size, fontWeight: props.weight}}>
+            <Text style={{color: props.color ? props.color : '#f1f1f1', alignSelf: 'center', fontSize: props.size, fontWeight: props.weight}}>
                 {props.children}
             </Text>
         </TouchableOpacity>

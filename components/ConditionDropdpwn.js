@@ -54,7 +54,7 @@ export default function ConditionDropdown(props) {
 
   return (
     <View >
-      <Header paddingLeft={19} size={15} margin={17} weight='600'>Condition</Header>
+      <Header paddingLeft={19} size={15} marginV={10} weight='600'>Condition</Header>
       <Dropdown
         style={styles.box}
         placeholderStyle={styles.text}

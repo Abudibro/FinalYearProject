@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useCallback } from 'react'
 import { ScrollView, StyleSheet, TouchableOpacity, View, Dimensions, Animated, Easing } from 'react-native'
 
 import TextInputBox from '../components/TextInput'
@@ -6,31 +6,25 @@ import TextInputBox from '../components/TextInput'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import Scrollable from "react-native-modal";
-// import SliderScreen from '../components/Slider/Slider'
+import Slider from '../components/Slider'
 
 const width = (Dimensions.get('window').width * 0.85) + 4
 const deviceWidth = Dimensions.get("window").width;
 const deviceHeight = Dimensions.get("window").height
 
 const SearchResult = (props) => {
-	const slideAnim = useRef(new Animated.Value(-170)).current;
-
 	const [search, setSearch ] = useState("props.search");
 	const [filtersShown, setFiltersShown] = useState(true);
 	const [minPrice, setMinPrice] = useState(0);
+	const [min, setMin] = useState(0);
+	const [max, setMax] = useState(100);
+	
+	const handleValueChange = useCallback((min, max) => {
+    setMin(min);
+    setMax(max);
+  }, []);
 
 	console.log(filtersShown)
-
-	// const onFiltersClick = () => {
-	// 	if (filtersHidden) {
-	// 		slideDown();
-	// 		setFiltersHidden(false);
-	// 	} else {
-	// 		slideAnim.setValue(-170)
-	// 		setFiltersHidden(true);
-	// 	}
-	// }
-
 
 	const SearchIcon = (size, color, style) => {return (
 		<TouchableOpacity style={style} onPress={() => navigation.navigate('view-listing')}>
@@ -134,12 +128,9 @@ const SearchResult = (props) => {
 				onBackdropPress={() => setFiltersShown(false)}
 			>
 				<View style={styles.modal}>
-					<SliderScreen/>
+					<Slider min={min} max={max} handleValueChange={handleValueChange} />
 				</View>
 			</Scrollable>
-
-			{/* <Header>yoooo</Header> */}
-
 		</ScrollView>
 	)
 }
