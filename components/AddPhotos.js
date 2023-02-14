@@ -9,6 +9,8 @@ const width = (Dimensions.get('window').width * 0.85) + 4
 export default function AddPhotos(props) {
   const {images, setImages} = props;
 
+	console.log(images)
+
   const styles = StyleSheet.create({
     box: {
       width: width,
@@ -64,8 +66,8 @@ export default function AddPhotos(props) {
       quality: 1,
     });
 
-    if (!result.cancelled) {
-      setImages(result.selected);
+    if (!result.canceled) {
+      setImages(result.assets);
     }
   };
 
@@ -75,7 +77,7 @@ export default function AddPhotos(props) {
         return (
           <View key={i}>
             <Image source={{ uri: image.uri }} style={styles.image} />
-            <TouchableOpacity  style={[styles.iconWrapper, {top: 10, left: width-52}]} activeOpacity={.8} onPress={() => removeImage(i)}>
+            <TouchableOpacity  style={[styles.iconWrapper, {top: 5, left: width-52}]} activeOpacity={.8} onPress={() => removeImage(i)}>
               <Entypo  name='cross' color='#f1f1f1' style={styles.icon} />
             </TouchableOpacity>
           </View>
@@ -85,7 +87,7 @@ export default function AddPhotos(props) {
   }
 
   return (
-    images === null || images.length === 0 ?
+    images.length === 0 ?
     <TouchableOpacity activeOpacity={.8} style={styles.box} onPress={pickImage}>
       <Entypo name='plus' size={60} style={{color: '#848484'}}/>
       <Header size={20} color='#848484' weight='500'>Choose From Library</Header>
@@ -96,7 +98,7 @@ export default function AddPhotos(props) {
       <ScrollView horizontal={true} style={styles.imagesScroll} bounces={false} pagingEnabled={true}>
         {renderImages()}
       </ScrollView>
-      <TouchableOpacity style={[styles.iconWrapper, {top: 229+width}]} activeOpacity={.8} onPress={pickImage}>
+      <TouchableOpacity style={[styles.iconWrapper, {top: 210 + width}]} activeOpacity={.8} onPress={pickImage}>
         <MaterialIcons name='edit' color='#f1f1f1' style={styles.icon} />
       </TouchableOpacity>
     </>

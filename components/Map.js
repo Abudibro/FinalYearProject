@@ -181,17 +181,18 @@ const styles = StyleSheet.create({
 		borderRadius: 13,
   },
 	modal: {
-		height: '50%',
+		// height: '50%',
+		padding: 50,
 		backgroundColor:'#181818',
 		width: deviceWidth,
 		borderTopRightRadius: 20,
 		borderTopLeftRadius: 20,
-		justifyContent: 'center',
+		justifyContent: 'space-around',
 		alignItems: 'center'
 	},
 	locationPreviewingText: {
 		width: width,
 		alignItems: 'flex-start',
-		flex: .7
+		marginBottom: 20
 	}
 });

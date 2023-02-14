@@ -21,7 +21,7 @@ export default function NewListing({ navigation, route }) {
     const [price, setPrice] = useState(edit ? listing.price : null)
     const [condition, setCondition] = useState(edit ? listing.condition : null)
     const [description, setDescription] = useState(edit ? listing.description : null)
-    const [images, setImages] = useState(edit ? listing.images : null);
+    const [images, setImages] = useState(edit ? listing.images : []);
 		const [selectedLocations, setSelectedLocations] = useState([]);
 		
 		// useEffect(() => {

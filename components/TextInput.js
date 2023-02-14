@@ -8,7 +8,7 @@ export default function TextInputBox(props) {
     const height = props.height ? props.height : 57
 
   return (
-    <View style={{margin: props.margin ? props.margin : 20, marginTop: props.marginT ? props.marginT : 0}}>
+    <View style={{margin: props.margin ? props.margin : 0, marginTop: props.marginT ? props.marginT : 0}}>
 			<View style={{paddingLeft: 19}}>
 					{
 							!props.noLabel &&
