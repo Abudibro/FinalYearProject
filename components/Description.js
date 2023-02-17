@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { View, Dimensions, TextInput, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import Header from './Header'
+import constants from '../global';
 
 export default function Description(props) {
     const [isFocusOn, toggleFocus] = useState(false);
-    const width = (Dimensions.get('window').width * 0.85) + 4
     const height = 250
 
     const styles = StyleSheet.create({ 
@@ -16,14 +16,14 @@ export default function Description(props) {
             padding: isFocusOn ? 12 : 14,
             color: "#848484",
             fontSize: 16,
-            width: isFocusOn ? width-4 : width,
+            width: isFocusOn ? constants.width-4 : constants.width,
             paddingTop: isFocusOn ? 14 : 16,
         },
         borderView: {
             margin: 5,
             borderColor: !isFocusOn ? "#181818" : "#2846c4",
             borderWidth: isFocusOn ? 2 : 0,
-            width: width,
+            width: constants.width,
             borderRadius: 13,
             flexDirection: 'row',
             backgroundColor: "#181818",

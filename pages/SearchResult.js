@@ -7,8 +7,8 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import Scrollable from "react-native-modal";
 import Slider from '../components/Slider'
+import constants from '../global'
 
-const width = (Dimensions.get('window').width * 0.85) + 4
 const deviceWidth = Dimensions.get("window").width;
 const deviceHeight = Dimensions.get("window").height
 
@@ -68,7 +68,7 @@ const SearchResult = (props) => {
 			borderRadius: '50%',
 		},
 		filtersWrapper: {
-			width: width,
+			width: constants.width,
 			height: 190,
 			backgroundColor: '#181818',
 			borderRadius: 13,

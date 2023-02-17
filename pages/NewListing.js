@@ -8,6 +8,7 @@ import ButtonCustom from '../components/Button'
 import Header from "../components/Header";
 import TitleSection from "../components/TitleSection";
 import Map from "../components/Map";
+import AvailabilityPicker from "../components/AvailabilityPicker";
 
 export default function NewListing({ navigation, route }) {
 		var edit = false;
@@ -23,6 +24,7 @@ export default function NewListing({ navigation, route }) {
     const [description, setDescription] = useState(edit ? listing.description : null)
     const [images, setImages] = useState(edit ? listing.images : []);
 		const [selectedLocations, setSelectedLocations] = useState([]);
+		const [selectedTimes, setSelectedTimes] = useState([[],[],[],[],[],[],[]]);
 		
 		// useEffect(() => {
 		// 	if (route.params.edit) {
@@ -41,12 +43,13 @@ export default function NewListing({ navigation, route }) {
 				|| price.trim().length === 0
 				|| description.trim().length === 0
 				|| images.length === 0
+				|| !selectedTimes.some( function (a) { return a.length > 0 })
 				|| edit && (
 					listing.name === name
 					&& listing.price === price
 					&& listing.condition === condition
 					&& listing.description === description
-					&& listing.images === images
+					&& listing.images === images 
 					// && listing.selectedLocations === selectedLocations
 				)
     }
@@ -95,6 +98,8 @@ export default function NewListing({ navigation, route }) {
 					></Description>
 
 					<Map selectedLocations={selectedLocations} setSelectedLocations={setSelectedLocations} />
+
+					<AvailabilityPicker selectedTimes={selectedTimes} setSelectedTimes={setSelectedTimes} />
 
 					{/* Preview Listing */}
 					<ButtonCustom onClick={() => navigation.navigate('preview-listing', {listing: {

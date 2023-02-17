@@ -7,6 +7,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import Header from './Header';
 import ButtonCustom from './Button';
+import constants from '../global';
 
 const INITIAL_REGION = {
   latitude: 52.442491884825884,
@@ -76,14 +77,11 @@ const LOCATIONS = [
 
 const deviceWidth = Dimensions.get("window").width;
 const deviceHeight = Dimensions.get("window").height
-const width = (Dimensions.get('window').width * 0.85) + 4
 
 export default function Map({selectedLocations, setSelectedLocations}) {
 	const mapRef = useRef(null);
 	const [previewLocation, setPreviewLocation] = useState(false);
 	const [locationPreviewing, setLocationPreviewing] = useState(LOCATIONS[0]);
-
-	console.log(selectedLocations)
 
   return (
     <View style={styles.container}>
@@ -176,8 +174,8 @@ const styles = StyleSheet.create({
 		marginVertical: 20
   },
   map: {
-    width: width,
-    height: width,
+    width: constants.width,
+    height: constants.width,
 		borderRadius: 13,
   },
 	modal: {
@@ -191,7 +189,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center'
 	},
 	locationPreviewingText: {
-		width: width,
+		width: constants.width,
 		alignItems: 'flex-start',
 		marginBottom: 20
 	}

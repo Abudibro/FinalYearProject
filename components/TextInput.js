@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { View, Dimensions, TextInput, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import Header from './Header'
+import constants from '../global';
 
 export default function TextInputBox(props) {
     const [isFocusOn, toggleFocus] = useState(false);
-    const width = (Dimensions.get('window').width * 0.85) + 4
     const height = props.height ? props.height : 57
 
   return (
@@ -20,7 +20,7 @@ export default function TextInputBox(props) {
 					margin: 5,
 					borderColor: !isFocusOn ? "#181818" : "#2846c4",
 					borderWidth: isFocusOn || props.icon ? 2 : 0,
-					width: width,
+					width: constants.width,
 					borderRadius: 13,
 					flexDirection: 'row',
 					backgroundColor: "#181818",
@@ -45,7 +45,7 @@ export default function TextInputBox(props) {
 								paddingLeft: props.prefix ? 14 : isFocusOn || props.icon ? 12 : 14,
 								color: "#848484",
 								fontSize: 16,
-								width: props.prefix && isFocusOn ? width-36 : props.prefix ? width-40 : isFocusOn ? width-4 : width,
+								width: props.prefix && isFocusOn ? constants.width-36 : props.prefix ? constants.width-40 : isFocusOn ? constants.width-4 : constants.width,
 								paddingTop: 0,
 								paddingBottom: 0
 						}}

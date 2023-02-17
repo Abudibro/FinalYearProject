@@ -5,6 +5,7 @@ import Header from "../components/Header";
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import Loading from "../components/Loading";
 import Tick from "../components/Tick";
+import constants from "../global";
 
 export default function PreviewListing(props) {
 	const [numberRevealed, setNumberRevealed] = useState(false)
@@ -12,7 +13,6 @@ export default function PreviewListing(props) {
 	const [isLoading, setIsLoading] = useState(null);
 	const [calloutFailed, setCalloutFailed] = useState(false); 
 
-	const width = (Dimensions.get('window').width * 0.85) + 4;
 	const {navigation} = props;
 	const { name, images, condition, description, price, edit } = props.route.params.listing;
 
@@ -61,13 +61,13 @@ export default function PreviewListing(props) {
 			justifyContent: 'center',
 		},
 		image: {
-			width: width,
-			height: width,
+			width: constants.width,
+			height: constants.width,
 			borderRadius: 18,
 		},
 		imagesScroll: {
-			width: width,
-			height: width,
+			width: constants.width,
+			height: constants.width,
 			margin: 20,
 			borderRadius: 18,
 			display: 'flex'
@@ -80,7 +80,7 @@ export default function PreviewListing(props) {
 		},
 		sellersNumberWrapper: {
 			height: 50,
-			width: width,
+			width: constants.width,
 			marginVertical: 7,
 			display: 'flex',
 			flexDirection: 'row',
@@ -95,7 +95,7 @@ export default function PreviewListing(props) {
 			minHeight: 100,
 			color: "#848484",
 			fontSize: 16,
-			width: width,
+			width: constants.width,
 			marginVertical: 20
 		}
 	})
@@ -114,7 +114,7 @@ export default function PreviewListing(props) {
 				{renderImages()}
 			</ScrollView>
 
-			<Header width={width} marginV={3} size={27} >{name}</Header>
+			<Header width={constants.width} marginV={3} size={27} >{name}</Header>
 
 			<View style={styles.sellersNumberWrapper}>
 				<Header marginV={3} size={40} >£{price}</Header>
@@ -124,9 +124,9 @@ export default function PreviewListing(props) {
 			</View>
 
 			<View style={styles.infoWrapper}> 
-				<Header paddingLeft={15} width={width} weight='700' size={16}>Location:{`\t	Selly Oak`}</Header>
-				<Header paddingLeft={15} width={width} weight='700' size={16}>Condition:{`\t	${condition}`}</Header>
-				<Header paddingLeft={15} width={width} weight='700' size={16}>Posted:{`\t	3d ago`}</Header>
+				<Header paddingLeft={15} width={constants.width} weight='700' size={16}>Location:{`\t	Selly Oak`}</Header>
+				<Header paddingLeft={15} width={constants.width} weight='700' size={16}>Condition:{`\t	${condition}`}</Header>
+				<Header paddingLeft={15} width={constants.width} weight='700' size={16}>Posted:{`\t	3d ago`}</Header>
 			</View>
 
 			<View style={styles.sellersNumberWrapper}>
@@ -134,12 +134,12 @@ export default function PreviewListing(props) {
 				{
 					numberRevealed ? 
 					<Header size={20} paddingRight={10} >07403785792</Header>
-					: <ButtonCustom onClick={() => setNumberRevealed(true)} width={width/2 - width/10} size={16} weight={"600"} height={50} > Reveal</ButtonCustom>
+					: <ButtonCustom onClick={() => setNumberRevealed(true)} width={constants.width/2 - constants.width/10} size={16} weight={"600"} height={50} > Reveal</ButtonCustom>
 				}
 			</View>
 			
 			<View style={styles.description}>
-				<Text style={{width: width, padding: 14, color: "#848484",}} >
+				<Text style={{width: constants.width, padding: 14, color: "#848484",}} >
 					{description}
 				</Text>
 			</View>

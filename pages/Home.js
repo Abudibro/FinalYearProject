@@ -8,8 +8,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import HomeProductCard from '../components/HomeProductCard';
 import SearchSuggestion from '../components/SearchSuggestion';
 import TitleSection from '../components/TitleSection'
-
-const width = (Dimensions.get('window').width * 0.85) + 4;
+import constants from '../global';
 
 export default function Home({ navigation }) {
 
@@ -149,7 +148,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-end',
-    width: width,
+    width: constants.width,
 		// marginVertical: 30
   },
   searchSection: {

@@ -3,8 +3,7 @@ import * as ImagePicker from 'expo-image-picker';
 import Entypo from 'react-native-vector-icons/Entypo'
 import Header from './Header';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
-
-const width = (Dimensions.get('window').width * 0.85) + 4
+import constants from '../global';
 
 export default function AddPhotos(props) {
   const {images, setImages} = props;
@@ -13,7 +12,7 @@ export default function AddPhotos(props) {
 
   const styles = StyleSheet.create({
     box: {
-      width: width,
+      width: constants.width,
       height: 200,
       borderRadius: 55,
       borderStyle: 'dashed',
@@ -26,13 +25,13 @@ export default function AddPhotos(props) {
       justifyContent: 'center'
     },
     image: {
-      width: width,
-      height: width,
+      width: constants.width,
+      height: constants.width,
       borderRadius: 18,
     },
     imagesScroll: {
-      width: width,
-      height: width,
+      width: constants.width,
+      height: constants.width,
       margin: 20,
       borderRadius: 18,
       display: 'flex'
@@ -42,7 +41,7 @@ export default function AddPhotos(props) {
       padding: 8,
       borderRadius: 15,
       position: 'absolute',
-      left: width-25,
+      left: constants.width-25,
       zIndex: 9999,
       shadowOffset: {width: -2, height: 4},  
       shadowColor: '#000',  
@@ -77,7 +76,7 @@ export default function AddPhotos(props) {
         return (
           <View key={i}>
             <Image source={{ uri: image.uri }} style={styles.image} />
-            <TouchableOpacity  style={[styles.iconWrapper, {top: 5, left: width-52}]} activeOpacity={.8} onPress={() => removeImage(i)}>
+            <TouchableOpacity  style={[styles.iconWrapper, {top: 5, left: constants.width-52}]} activeOpacity={.8} onPress={() => removeImage(i)}>
               <Entypo  name='cross' color='#f1f1f1' style={styles.icon} />
             </TouchableOpacity>
           </View>
@@ -98,7 +97,7 @@ export default function AddPhotos(props) {
       <ScrollView horizontal={true} style={styles.imagesScroll} bounces={false} pagingEnabled={true}>
         {renderImages()}
       </ScrollView>
-      <TouchableOpacity style={[styles.iconWrapper, {top: 210 + width}]} activeOpacity={.8} onPress={pickImage}>
+      <TouchableOpacity style={[styles.iconWrapper, {top: 210 + constants.width}]} activeOpacity={.8} onPress={pickImage}>
         <MaterialIcons name='edit' color='#f1f1f1' style={styles.icon} />
       </TouchableOpacity>
     </>

@@ -12,8 +12,8 @@ export default function HomeRouter() {
 
   return (
     <Stack.Navigator screenOptions={{headerShown: false, gestureEnabled: false}}>
-      <Stack.Screen name="new-listing" component={NewListing} />
       <Stack.Screen name="home-main" component={Home} />
+      <Stack.Screen name="new-listing" component={NewListing} />
       <Stack.Screen name="preview-listing" component={PreviewListing} />
       <Stack.Screen name="view-listing" component={ViewListing} />
       <Stack.Screen name="search-result" component={SearchResult} />
