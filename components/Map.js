@@ -16,72 +16,31 @@ const INITIAL_REGION = {
   longitudeDelta: 0.01,
 };
 
-
-const LOCATIONS = [
-	{
-		title: "St Mary's Church of England",
-		address: "Bristol Rd, Selly Oak, Birmingham B29 6ND",
-		area: "Selly Oak",
-		parking: true,
-		coordinates: [
-			-1.943097,
-			52.439152
-		],
-		id: "434bef4549ac359d74236f6353867db6"
-	},
-	{
-		title: "Selly Oak Station",
-		address: "Selly Oak, Birmingham B29 6NA",
-		area: "Selly Oak",
-		parking: true,
-		coordinates: [
-			-1.935608,
-			52.441858
-		],
-		id: "a2011b7a9048cac236499bf9ff4037cf"
-	},
-	{
-		title: "Tesco Express",
-		address: "479 Bristol Rd, Bournbrook, Birmingham B29 6BA",
-		area: "Selly Oak",
-		parking: true,
-		coordinates: [
-			-1.934392,
-			52.445445
-		],
-		id: "c28cdd16f6af645fab5314a1ef53edfc"
-	},
-	{
-		title: "Selly Oak Shopping Park",
-		address: "Selly Oak, Birmingham B29 6SN",
-		area: "Selly Oak",
-		parking: true,
-		coordinates: [
-			-1.940203,
-			52.443586
-		],
-		id: "e3a71fba18f68fd4a9774f88a1778ce2"
-	},
-	{
-		title: "ALDI",
-		address: "Bristol Rd, Selly Oak, Birmingham B29 6AE",
-		area: "Selly Oak",
-		parking: true,
-		coordinates: [
-			-1.935651,
-			52.444453
-		],
-		id: "ecd85982943c2eca5fef115f2e199343"
-	}
-]
-
 const deviceWidth = Dimensions.get("window").width;
 const deviceHeight = Dimensions.get("window").height
 
-export default function Map({selectedLocations, setSelectedLocations}) {
+export default function Map({locations, selectedLocations, setSelectedLocations, prevScreen}) {
 	const mapRef = useRef(null);
 	const [previewLocation, setPreviewLocation] = useState(false);
-	const [locationPreviewing, setLocationPreviewing] = useState(LOCATIONS[0]);
+	const [locationPreviewing, setLocationPreviewing] = useState(locations[0]);
+
+	const onAddLocationClick = () => {
+		if (prevScreen === 'new-listing') {
+			setSelectedLocations([...selectedLocations, locationPreviewing]);
+		} else {
+			setSelectedLocations(locationPreviewing);
+		}
+		setPreviewLocation(false);
+	}
+
+	const onRemoveLocationClick = () => {
+		if (prevScreen === 'new-listing') {
+			setSelectedLocations(selectedLocations.filter(location => location.title != locationPreviewing.title));
+		} else {
+			setSelectedLocations(null);
+		}
+		setPreviewLocation(false);
+	}
 
   return (
     <View style={styles.container}>
@@ -93,7 +52,7 @@ export default function Map({selectedLocations, setSelectedLocations}) {
         initialRegion={INITIAL_REGION}
       >
 				{
-					LOCATIONS.map((location, i) => {
+					locations.map((location, i) => {
 						return (
 							<Marker
 								key={i}
@@ -103,11 +62,11 @@ export default function Map({selectedLocations, setSelectedLocations}) {
 								}}
 								onPress={() => {
 									console.log('modal')
-									setLocationPreviewing(LOCATIONS[i]);
+									setLocationPreviewing(locations[i]);
 									setPreviewLocation(true);
 								}}
 							>
-								<Ionicons name='location-sharp' color={selectedLocations.indexOf(LOCATIONS[i]) != -1 ? '#2846c4' : '#000'} size={45} />
+								<Ionicons name='location-sharp' color={selectedLocations.indexOf(locations[i]) != -1 ? '#2846c4' : '#000'} size={45} />
 							</Marker>
 						)
 					})
@@ -123,7 +82,7 @@ export default function Map({selectedLocations, setSelectedLocations}) {
 				style={{ justifyContent: 'flex-end', margin: 0}}
 				swipeDirection='down'
 				animationType="slide"
-  			transparent={true}
+  				transparent={true}
 				onBackdropPress={() => setPreviewLocation(false)}
 			>
 				<View style={styles.modal}>
@@ -144,10 +103,7 @@ export default function Map({selectedLocations, setSelectedLocations}) {
 						<ButtonCustom 
 							bg='#f1f1f1'
 							color='#000'
-							onClick={() => {
-								setSelectedLocations(selectedLocations.filter(location => location.title != locationPreviewing.title));
-								setPreviewLocation(false);
-							}}
+							onClick={() => onRemoveLocationClick()}
 							size={16}
 							weight={"600"}
 							marginTop={10}
@@ -156,10 +112,7 @@ export default function Map({selectedLocations, setSelectedLocations}) {
 						<ButtonCustom 
 						bg='#f1f1f1'
 						color='#000'
-						onClick={() => {
-							setSelectedLocations([...selectedLocations, locationPreviewing]);
-							setPreviewLocation(false);
-						}} size={16} weight={"600"} marginTop={10}>Add Location</ButtonCustom>
+						onClick={() => onAddLocationClick()} size={16} weight={"600"} marginTop={10}>Add Location</ButtonCustom>
 					}
 				</View>
 			</Scrollable>

@@ -26,7 +26,9 @@ export default function PreviewListing(props) {
 			// {"assetId": "D6DB0804-D09E-4BD6-A332-7A4D818362D4/L0/001", "fileName": "IMG_0836.jpg", "fileSize": 5739259, "height": 4032, "type": "image", "uri": "file:///var/mobile/Containers/Data/Application/099A6AD5-697F-449A-B22A-505B1A826615/Library/Caches/ExponentExperienceData/%2540anonymous%252FFinalYearProject-d4a926bf-56ee-4a53-b828-de92aaf5df39/ImagePicker/FAE11706-8CB9-47D2-AC13-744864BD7075.jpg", "width": 3024}
 		],
 		name: "Boris Bike",
-		price: "35"
+		price: "35",
+		selectedLocations: [],
+		selectedTimes: []
 	}
 	// const { name, images, condition, description, price } = listing
 
@@ -124,18 +126,8 @@ export default function PreviewListing(props) {
 			</View>
 
 			<View style={styles.infoWrapper}> 
-				<Header paddingLeft={15} width={constants.width} weight='700' size={16}>Location:{`\t	Selly Oak`}</Header>
 				<Header paddingLeft={15} width={constants.width} weight='700' size={16}>Condition:{`\t	${condition}`}</Header>
 				<Header paddingLeft={15} width={constants.width} weight='700' size={16}>Posted:{`\t	3d ago`}</Header>
-			</View>
-
-			<View style={styles.sellersNumberWrapper}>
-				<Header size={20} >Seller's number:</Header>
-				{
-					numberRevealed ? 
-					<Header size={20} paddingRight={10} >07403785792</Header>
-					: <ButtonCustom onClick={() => setNumberRevealed(true)} width={constants.width/2 - constants.width/10} size={16} weight={"600"} height={50} > Reveal</ButtonCustom>
-				}
 			</View>
 			
 			<View style={styles.description}>

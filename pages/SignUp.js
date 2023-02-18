@@ -116,7 +116,7 @@ export default function SignUp({navigation}) {
 					iconColor={checkEmailIsValid() ? "#019501" : checkEmailIsValid() != null ? "#b30000" : null}
 					onChange={changeEmail}
 				/>
-
+{/* 
 				<TextInputBox placeholder="Address Line 1 *"
 					margin={3}
 					marginT={30}
@@ -140,7 +140,7 @@ export default function SignUp({navigation}) {
 					margin={3}
 					noLabel
 					onChange={setCity}
-				/>
+				/> */}
 
 
 				{/* Password */}

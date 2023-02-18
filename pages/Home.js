@@ -52,7 +52,7 @@ export default function Home({ navigation }) {
 			return (
 				recentlyViewed.map((item, i) => {
 					return (
-						<HomeProductCard image={item.image} key={i} onPress={() => navigation.navigate('view-listing', {id: item.id, ownListing: user.id === item.sellerID })}/>
+						<HomeProductCard image={item.image} key={i} onPress={() => navigation.navigate('view-listing', {id: item.id, userOwnsListing: user.id === item.sellerID })}/>
 					)
 				})
 			)
@@ -62,7 +62,7 @@ export default function Home({ navigation }) {
 			return (
 				recentlyViewed.map((item, i) => {
 					return (
-						<HomeProductCard image={item.image} key={i} onPress={() => navigation.navigate('view-listing', {id: item.id, ownListing: true })}/>
+						<HomeProductCard image={item.image} key={i} onPress={() => navigation.navigate('view-listing', {id: item.id, userOwnsListing: true })}/>
 					)
 				})
 			)

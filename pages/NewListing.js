@@ -9,6 +9,7 @@ import Header from "../components/Header";
 import TitleSection from "../components/TitleSection";
 import Map from "../components/Map";
 import AvailabilityPicker from "../components/AvailabilityPicker";
+import constants from "../global";
 
 export default function NewListing({ navigation, route }) {
 		var edit = false;
@@ -23,14 +24,8 @@ export default function NewListing({ navigation, route }) {
     const [condition, setCondition] = useState(edit ? listing.condition : null)
     const [description, setDescription] = useState(edit ? listing.description : null)
     const [images, setImages] = useState(edit ? listing.images : []);
-		const [selectedLocations, setSelectedLocations] = useState([]);
-		const [selectedTimes, setSelectedTimes] = useState([[],[],[],[],[],[],[]]);
-		
-		// useEffect(() => {
-		// 	if (route.params.edit) {
-
-		// 	}
-		// }, []);
+	const [selectedLocations, setSelectedLocations] = useState([]);
+	const [selectedTimes, setSelectedTimes] = useState([[],[],[],[],[],[],[]]);
     
     const isListingPreviewDisabled = () => {
         return name == null
@@ -50,7 +45,7 @@ export default function NewListing({ navigation, route }) {
 					&& listing.condition === condition
 					&& listing.description === description
 					&& listing.images === images 
-					// && listing.selectedLocations === selectedLocations
+					&& listing.selectedLocations.some((a, i) => a.some((e, j) => e != selectedLocations[i][j]))
 				)
     }
 
@@ -97,7 +92,7 @@ export default function NewListing({ navigation, route }) {
 							initialValue={description}
 					></Description>
 
-					<Map selectedLocations={selectedLocations} setSelectedLocations={setSelectedLocations} />
+					<Map locations={constants.LOCATIONS} prevScreen='new-listing' selectedLocations={selectedLocations} setSelectedLocations={setSelectedLocations} />
 
 					<AvailabilityPicker selectedTimes={selectedTimes} setSelectedTimes={setSelectedTimes} />
 

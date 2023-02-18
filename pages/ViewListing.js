@@ -6,7 +6,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
 import constants from "../global";
 
 export default function ViewListing({navigation, route}) {
-	const { id, ownListing } = route.params;
+	const { id, userOwnsListing } = route.params;
 
 	useEffect(() => {
 		// Get item info using id
@@ -26,10 +26,45 @@ export default function ViewListing({navigation, route}) {
 		],
 		name: "Boris Bike",
 		price: "35",
-		sellerID: 13
+		sellerID: 13,
+		selectedLocations: [
+			{
+				title: "St Mary's Church of England",
+				address: "Bristol Rd, Selly Oak, Birmingham B29 6ND",
+				area: "Selly Oak",
+				parking: true,
+				coordinates: [
+					-1.943097,
+					52.439152
+				],
+				id: "434bef4549ac359d74236f6353867db6"
+			},
+			{
+				title: "Selly Oak Station",
+				address: "Selly Oak, Birmingham B29 6NA",
+				area: "Selly Oak",
+				parking: true,
+				coordinates: [
+					-1.935608,
+					52.441858
+				],
+				id: "a2011b7a9048cac236499bf9ff4037cf"
+			},
+			{
+				title: "Tesco Express",
+				address: "479 Bristol Rd, Bournbrook, Birmingham B29 6BA",
+				area: "Selly Oak",
+				parking: true,
+				coordinates: [
+					-1.934392,
+					52.445445
+				],
+				id: "c28cdd16f6af645fab5314a1ef53edfc"
+			}
+		]
 	})
 
-	const {condition, description, images, name, price, sellerID} = listing;
+	const {condition, description, images, name, price, selectedLocations, sellerID} = listing;
 
 	const styles  = StyleSheet.create({
 		container: {
@@ -82,7 +117,7 @@ export default function ViewListing({navigation, route}) {
 
 	const renderImages = () => {
     return(
-      listing.images.map((image, i) => <Image source={{ uri: image.uri }} style={styles.image} key={i} /> )
+      images.map((image, i) => <Image source={{ uri: image.uri }} style={styles.image} key={i} /> )
     )
   }
 
@@ -91,18 +126,21 @@ export default function ViewListing({navigation, route}) {
 
 	return (
 		<ScrollView bounces={false} style={styles.container} contentContainerStyle={styles.containerChildren}>
-
+			{/* Button for user to edit their own listing */}
 			{
-				ownListing &&
+				userOwnsListing &&
 				<ButtonCustom onClick={() => navigation.navigate('new-listing', {listing: listing, edit: true})} bg='#46484d' marginBottom={10} marginTop={15} size={16} weight={"600"}>Edit Listing</ButtonCustom>
 			}
-
+			
+			{/* Images of listing */}
 			<ScrollView horizontal={true} style={styles.imagesScroll} bounces={false} pagingEnabled={true}>
 				{renderImages()}
 			</ScrollView>
 
+			{/* Listing Name */}
 			<Header width={constants.width} marginV={3} size={27} >{name}</Header>
 
+			{/* Listing Price & Like button */}
 			<View style={styles.sellersNumberWrapper}>
 				<Header marginV={3} size={40} >£{price}</Header>
 				<TouchableOpacity activeOpacity={.7} onPress={() => setLiked(!liked)} style={{paddingRight: 10}}>
@@ -110,19 +148,10 @@ export default function ViewListing({navigation, route}) {
 				</TouchableOpacity>
 			</View>
 
+
 			<View style={styles.infoWrapper}>
-				<Header paddingLeft={15} width={constants.width} weight='700' size={16}>Location:{`\t	Selly Oak`}</Header>
 				<Header paddingLeft={15} width={constants.width} weight='700' size={16}>Condition:{`\t	${condition}`}</Header>
 				<Header paddingLeft={15} width={constants.width} weight='700' size={16}>Posted:{`\t	3d ago`}</Header>
-			</View>
-
-			<View style={styles.sellersNumberWrapper}>
-				<Header size={20} >Seller's number:</Header>
-				{
-					numberRevealed ? 
-					<Header size={20} paddingRight={10} >07403785792</Header>
-					: <ButtonCustom onClick={() => setNumberRevealed(true)} width={constants.width/2 - constants.width/10} size={16} weight={"600"} height={50} > Reveal</ButtonCustom>
-				}
 			</View>
 			
 			<View style={styles.description}>
@@ -131,7 +160,7 @@ export default function ViewListing({navigation, route}) {
 				</Text>
 			</View>
 
-			<ButtonCustom disabled={ownListing} onClick={onBuyNowClick} marginBottom={90} marginTop={15} size={16} weight={"600"}>Buy Now</ButtonCustom>
+			<ButtonCustom disabled={userOwnsListing} onClick={() => navigation.navigate('pick-location', {selectedLocations: selectedLocations})} marginBottom={90} marginTop={15} size={16} weight={"600"}>Buy Now</ButtonCustom>
 		</ScrollView>
 	)
 }
