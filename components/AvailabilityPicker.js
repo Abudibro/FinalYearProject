@@ -28,10 +28,8 @@ const timeOptions = [
 function AvailabilityPicker({selectedTimes, setSelectedTimes}) {
 	const [clicked, setClicked] = useState(null);
 
-	console.log(selectedTimes, selectedTimes.length)
-
 	const onDayPress = i => {
-		if (clicked != null) { // hasn
+		if (clicked != null) { 
 			if (i === clicked) setClicked(null)
 			else setClicked(i);
 		}

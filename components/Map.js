@@ -28,7 +28,7 @@ export default function Map({locations, selectedLocations, setSelectedLocations,
 		if (prevScreen === 'new-listing') {
 			setSelectedLocations([...selectedLocations, locationPreviewing]);
 		} else {
-			setSelectedLocations(locationPreviewing);
+			setSelectedLocations([locationPreviewing]);
 		}
 		setPreviewLocation(false);
 	}
@@ -37,7 +37,7 @@ export default function Map({locations, selectedLocations, setSelectedLocations,
 		if (prevScreen === 'new-listing') {
 			setSelectedLocations(selectedLocations.filter(location => location.title != locationPreviewing.title));
 		} else {
-			setSelectedLocations(null);
+			setSelectedLocations([]);
 		}
 		setPreviewLocation(false);
 	}
@@ -78,11 +78,12 @@ export default function Map({locations, selectedLocations, setSelectedLocations,
 				onSwipeComplete={() => setPreviewLocation(false)}
 				deviceWidth={deviceWidth}
 				deviceHeight={deviceHeight}
-				backdropOpacity={0.7}
+				backdropOpacity={0}
+				// useNativeDriver={true} 
 				style={{ justifyContent: 'flex-end', margin: 0}}
 				swipeDirection='down'
 				animationType="slide"
-  				transparent={true}
+  			transparent={true}
 				onBackdropPress={() => setPreviewLocation(false)}
 			>
 				<View style={styles.modal}>
@@ -112,7 +113,7 @@ export default function Map({locations, selectedLocations, setSelectedLocations,
 						<ButtonCustom 
 						bg='#f1f1f1'
 						color='#000'
-						onClick={() => onAddLocationClick()} size={16} weight={"600"} marginTop={10}>Add Location</ButtonCustom>
+						onClick={() => onAddLocationClick()} size={16} weight={"600"} marginTop={10}>{prevScreen === 'view-listing' ? 'Choose Location' : 'Add Location'}</ButtonCustom>
 					}
 				</View>
 			</Scrollable>

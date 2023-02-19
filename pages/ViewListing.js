@@ -5,8 +5,7 @@ import Header from "../components/Header";
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import constants from "../global";
 
-export default function ViewListing({navigation, route}) {
-	const { id, userOwnsListing } = route.params;
+export default function ViewListing({navigation, id, userOwnsListing}) {
 
 	useEffect(() => {
 		// Get item info using id
