@@ -1,9 +1,10 @@
 import { Text, Dimensions, TouchableOpacity } from "react-native";
+import constants from "../global";
 
 export default function ButtonCustom(props) {
     return (
         <TouchableOpacity style={{
-            width: props.width ? props.width : (Dimensions.get('window').width * 0.85) + 4,
+            width: props.width ? props.width : constants.width,
             height: props.height ? props.height : 57,
             backgroundColor: props.bg ? props.bg :'#2846c4',
             borderRadius: props.borderRadius ? props.borderRadius : 12,

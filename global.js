@@ -58,6 +58,15 @@ const constants = {
 			],
 			id: "ecd85982943c2eca5fef115f2e199343"
 		}
+	],
+	MEETUP_TIMES_GRID: [
+		[ false, false, false, false, false, false, false, false, false, false, false, false, false ],
+		[ false, false, false, false, false, false, false, false, false, false, false, false, false ],
+		[ false, false, false, false, false, false, false, false, false, false, false, false, false ],
+		[ false, false, false, false, false, false, false, false, false, false, false, false, false ],
+		[ false, false, false, false, false, false, false, false, false, false, false, false, false ],
+		[ false, false, false, false, false, false, false, false, false, false, false, false, false ],
+		[ false, false, false, false, false, false, false, false, false, false, false, false, false ]
 	]
 }
 

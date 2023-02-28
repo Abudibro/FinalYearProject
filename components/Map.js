@@ -44,7 +44,7 @@ export default function Map({locations, selectedLocations, setSelectedLocations,
 
   return (
     <View style={styles.container}>
-			<Header paddingLeft={19} marginV={14} size={15} weight='600'>Location</Header>
+			{prevScreen == 'new-listing' && <Header paddingLeft={19} marginV={14} size={15} weight='600'>Location</Header>}
       <MapView
         ref={mapRef}
         style={styles.map}
@@ -124,7 +124,7 @@ export default function Map({locations, selectedLocations, setSelectedLocations,
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
 		marginVertical: 20
   },
   map: {

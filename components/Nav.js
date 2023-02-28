@@ -12,6 +12,8 @@ import LikedListings from '../pages/LikedListings';
 import UpcomingMeetups from '../pages/UpcomingMeetups';
 import Account from '../pages/Account';
 
+import constants from '../global';
+
 const Tab = createBottomTabNavigator();
 
 export default function Nav() {
@@ -25,7 +27,7 @@ export default function Nav() {
             backgroundColor: 'black',
             borderRadius: 50,
             height: 60,
-            width: (Dimensions.get('window').width * 0.85) + 4,
+            width: constants.width,
             left: (Dimensions.get('window').width * 0.075) - 2,
             shadowOffset: {width: -2, height: 4},  
             shadowColor: '#000',  

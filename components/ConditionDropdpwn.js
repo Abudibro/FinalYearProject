@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { StyleSheet, Dimensions, View, Text } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import Header from './Header';
+import constants from '../global';
 
 
 export default function ConditionDropdown(props) {
@@ -11,7 +12,7 @@ export default function ConditionDropdown(props) {
   const styles = StyleSheet.create({
     
     box: {
-      width: (Dimensions.get('window').width * 0.85) + 4,
+      width: constants.width,
       height: 57,
       backgroundColor: "#181818",
       paddingRight: !isFocus ? 9 : 7,
