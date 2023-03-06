@@ -46,7 +46,6 @@ function AvailabilityPicker({selectedTimes, setSelectedTimes}) {
 		}
 
 		setSelectedTimes(newSelectedTimes);
-		console.log(selectedTimes)
 	}
 
 	const renderDays = () => {

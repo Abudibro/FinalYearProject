@@ -8,8 +8,6 @@ import constants from '../global';
 export default function AddPhotos(props) {
   const {images, setImages} = props;
 
-	console.log(images)
-
   const styles = StyleSheet.create({
     box: {
       width: constants.width,

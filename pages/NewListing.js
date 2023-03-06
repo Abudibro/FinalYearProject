@@ -8,8 +8,8 @@ import ButtonCustom from '../components/Button'
 import Header from "../components/Header";
 import TitleSection from "../components/TitleSection";
 import Map from "../components/Map";
-import AvailabilityPicker from "../components/AvailabilityPicker";
 import constants from "../global";
+import TimePicker from "../components/TimePicker";
 
 export default function NewListing({ navigation, route }) {
 	var edit = false;
@@ -25,7 +25,7 @@ export default function NewListing({ navigation, route }) {
 	const [description, setDescription] = useState(edit ? listing.description : null)
 	const [images, setImages] = useState(edit ? listing.images : []);
 	const [selectedLocations, setSelectedLocations] = useState(edit ? listing.selectedLocations : []);
-	const [selectedTimes, setSelectedTimes] = useState([[],[],[],[],[],[],[]]);
+	const [selectedTimes, setSelectedTimes] = useState(edit ? listing.selectedTimes : constants.MEETUP_TIMES_GRID);
     
 	const isListingPreviewDisabled = () => {
 		return name == null
@@ -45,8 +45,8 @@ export default function NewListing({ navigation, route }) {
 			&& listing.condition === condition
 			&& listing.description === description
 			&& listing.images === images
-			&& listing.selectedLocations.some((a, i) => a != selectedLocations[i])
-			// && listing.selectedLocations.some((a, i) => {a.some((e, j) => { return e != selectedLocations[i][j]})})
+			&& !listing.selectedLocations.some((a, i) => a != selectedLocations[i])
+			&& !listing.selectedTimes.some((a, i) => a.some((e, j) => e != selectedTimes[i][j]))
 		)
 	}
 
@@ -94,8 +94,11 @@ export default function NewListing({ navigation, route }) {
 				></Description>
 
 				<Map locations={constants.LOCATIONS} prevScreen='new-listing' selectedLocations={selectedLocations} setSelectedLocations={setSelectedLocations} />
-
-				<AvailabilityPicker selectedTimes={selectedTimes} setSelectedTimes={setSelectedTimes} />
+				
+				<View style={{width: constants.width, alignItems: 'flex-start'}}>
+					<Header paddingLeft={19} marginV={14} size={15} weight='600' >When are you available?</Header>
+				</View>
+				<TimePicker times={selectedTimes} setTimes={setSelectedTimes} />
 
 				{/* Preview Listing */}
 				<ButtonCustom onClick={() => navigation.navigate('preview-listing', {listing: {

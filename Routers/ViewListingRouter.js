@@ -4,19 +4,21 @@ import ViewListing from '../pages/ViewListing';
 import NewListing from '../pages/NewListing';
 import PickLocation from '../pages/BuyingItem/PickLocation';
 import PickTime from '../pages/BuyingItem/PickTime';
+import ReviewMeetup from '../pages/BuyingItem/ReviewMeetup';
 
 const Stack = createNativeStackNavigator();
 
 export default function ViewListingRouter({route}) {
 
-	const { id, userOwnsListing } = route.params;
+	const { listingId, userOwnsListing } = route.params;
 
   return (
     <Stack.Navigator screenOptions={{headerShown: false, gestureEnabled: false}}>
-			<Stack.Screen name="pick-time" component={PickTime} />
-      <Stack.Screen name="view-listing" id={id} userOwnsListing={userOwnsListing} component={ViewListing} />
-      <Stack.Screen name="new-listing" component={NewListing} />
+      <Stack.Screen name="view-listing" component={ViewListing} initialParams={{listingId, userOwnsListing}} />
       <Stack.Screen name="pick-location" component={PickLocation} />
+      <Stack.Screen name="new-listing" component={NewListing} />
+			<Stack.Screen name="review-meetup" component={ReviewMeetup} />
+			<Stack.Screen name="pick-time" component={PickTime} />
     </Stack.Navigator>
   );
 } 

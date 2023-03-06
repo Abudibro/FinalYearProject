@@ -5,7 +5,7 @@ import Header from '../components/Header'
 import TextInputBox from '../components/TextInput'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-import HomeProductCard from '../components/HomeProductCard';
+import HomeListingCard from '../components/HomeListingCard';
 import SearchSuggestion from '../components/SearchSuggestion';
 import TitleSection from '../components/TitleSection'
 import constants from '../global';
@@ -40,8 +40,8 @@ export default function Home({ navigation }) {
     });
 		const [recentlyViewed, setRecentlyViewed] = useState([
 			{
-				id: 213,
-				sellerID: 13,
+				listingId: 213,
+				sellerId: 13,
 				image: 'file:///var/mobile/Containers/Data/Application/099A6AD5-697F-449A-B22A-505B1A826615/Library/Caches/ExponentExperienceData/%2540anonymous%252FFinalYearProject-d4a926bf-56ee-4a53-b828-de92aaf5df39/ImagePicker/70F0267A-13AC-4945-96AC-356337626FF7.jpg',
 			}
 		])
@@ -52,7 +52,7 @@ export default function Home({ navigation }) {
 			return (
 				recentlyViewed.map((item, i) => {
 					return (
-						<HomeProductCard image={item.image} key={i} onPress={() => navigation.navigate('view-listing-router', {id: item.id, userOwnsListing: user.id === item.sellerID })}/>
+						<HomeListingCard image={item.image} key={i} onPress={() => navigation.navigate('view-listing-router', {listingId: item.listingId, userOwnsListing: user.id === item.sellerId })}/>
 					)
 				})
 			)
@@ -62,7 +62,7 @@ export default function Home({ navigation }) {
 			return (
 				recentlyViewed.map((item, i) => {
 					return (
-						<HomeProductCard image={item.image} key={i} onPress={() => navigation.navigate('view-listing-router', {id: item.id, userOwnsListing: true })}/>
+						<HomeListingCard image={item.image} key={i} onPress={() => navigation.navigate('view-listing-router', {listingId: item.listingId, userOwnsListing: true })}/>
 					)
 				})
 			)

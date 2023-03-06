@@ -5,12 +5,14 @@ import Header from "../components/Header";
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import constants from "../global";
 
-export default function ViewListing({navigation, id, userOwnsListing}) {
+export default function ViewListing({navigation, route}) {
 
-	useEffect(() => {
-		// Get item info using id
-		// run this every time page is refreshed
-	}, []);
+	const { id, userOwnsListing } = route.params;
+
+	// useEffect(() => {
+	// 	// Get item info using id
+	// 	// run this every time page is refreshed
+	// }, []);
 
 	const [numberRevealed, setNumberRevealed] = useState(false)
 	const [liked, setLiked] = useState(false);
@@ -60,7 +62,8 @@ export default function ViewListing({navigation, id, userOwnsListing}) {
 				],
 				id: "c28cdd16f6af645fab5314a1ef53edfc"
 			}
-		]
+		],
+		selectedTimes: constants.MOCK_MEETUP_TIMES_GRID
 	})
 
 	const {condition, description, images, name, price, selectedLocations, sellerID} = listing;

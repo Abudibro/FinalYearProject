@@ -24,8 +24,6 @@ const SearchResult = (props) => {
     setMax(max);
   }, []);
 
-	console.log(filtersShown)
-
 	const SearchIcon = (size, color, style) => {return (
 		<TouchableOpacity style={style} onPress={() => navigation.navigate('view-listing')}>
 			<MaterialCommunityIcons name={"arrow-right-circle"} size={size} color={color} />

@@ -67,7 +67,17 @@ const constants = {
 		[ false, false, false, false, false, false, false, false, false, false, false, false, false ],
 		[ false, false, false, false, false, false, false, false, false, false, false, false, false ],
 		[ false, false, false, false, false, false, false, false, false, false, false, false, false ]
-	]
+	],
+	MOCK_MEETUP_TIMES_GRID: [
+		[ false, true, true, true, true, true, true, true, true, true, false, false, false ],
+		[ false, true, true, true, true, true, false, false, false, false, false, false, false ],
+		[ false, false, false, false, false, false, false, false, false, false, false, false, false ],
+		[ false, false, false, false, false, false, false, false, false, false, false, false, false ],
+		[ false, true, false, false, true, false, false, false, false, false, false, true, false ],
+		[ false, false, false, false, false, true, true, true, true, true, true, true, true ],
+		[ false, true, true, false, false, false, true, true, true, true, false, false, false ]
+	],
+	WARNING: "This action is irreversible. Once you proceed, a deposit worth 25% of the listing's price will be taken from you. Failure to attend the meeting will result in the loss of your deposit"
 }
 
 export default constants;

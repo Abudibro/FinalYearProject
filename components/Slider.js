@@ -16,8 +16,6 @@ const Slider = ({ }) => {
 	const [min, setMin] = useState(0);
 	const [max, setMax] = useState(100);
 
-	console.log(min, max)
-
   const renderThumb = useCallback(() => <Thumb />, []);
   const renderRail = useCallback(() => <Rail />, []);
   const renderRailSelected = useCallback(() => <RailSelected />, []);

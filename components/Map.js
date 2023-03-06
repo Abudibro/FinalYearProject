@@ -28,7 +28,7 @@ export default function Map({locations, selectedLocations, setSelectedLocations,
 		if (prevScreen === 'new-listing') {
 			setSelectedLocations([...selectedLocations, locationPreviewing]);
 		} else {
-			setSelectedLocations([locationPreviewing]);
+			setSelectedLocations(locationPreviewing);
 		}
 		setPreviewLocation(false);
 	}
@@ -42,9 +42,15 @@ export default function Map({locations, selectedLocations, setSelectedLocations,
 		setPreviewLocation(false);
 	}
 
+	const isSelected = ( location ) => {
+		if (prevScreen === 'new-listing') return selectedLocations.some(e => e.id === location.id);
+		return selectedLocations.id === location.id;
+	}
+	
+
   return (
     <View style={styles.container}>
-			{prevScreen == 'new-listing' && <Header paddingLeft={19} marginV={14} size={15} weight='600'>Location</Header>}
+			{prevScreen == 'new-listing' && <Header paddingLeft={19} marginV={14} size={15} weight='600'>Where are you willing to meet the buyer?</Header>}
       <MapView
         ref={mapRef}
         style={styles.map}
@@ -53,6 +59,7 @@ export default function Map({locations, selectedLocations, setSelectedLocations,
       >
 				{
 					locations.map((location, i) => {
+						const selected = isSelected(location);
 						return (
 							<Marker
 								key={i}
@@ -61,12 +68,11 @@ export default function Map({locations, selectedLocations, setSelectedLocations,
 									longitude: location.coordinates[0]
 								}}
 								onPress={() => {
-									console.log('modal')
 									setLocationPreviewing(locations[i]);
 									setPreviewLocation(true);
 								}}
 							>
-								<Ionicons name='location-sharp' color={selectedLocations.indexOf(locations[i]) != -1 ? '#2846c4' : '#000'} size={45} />
+								<Ionicons name='location-sharp' color={ selected ? '#2846c4' : '#000'} size={45} />
 							</Marker>
 						)
 					})
@@ -79,7 +85,6 @@ export default function Map({locations, selectedLocations, setSelectedLocations,
 				deviceWidth={deviceWidth}
 				deviceHeight={deviceHeight}
 				backdropOpacity={0}
-				// useNativeDriver={true} 
 				style={{ justifyContent: 'flex-end', margin: 0}}
 				swipeDirection='down'
 				animationType="slide"
@@ -100,7 +105,9 @@ export default function Map({locations, selectedLocations, setSelectedLocations,
 					</View>
 					
 					{
-						selectedLocations.indexOf(locationPreviewing) != -1 ?
+						(prevScreen === 'new-listing' &&
+						selectedLocations.some(e => e.id === locationPreviewing.id))
+						|| (prevScreen === 'view-listing' && locationPreviewing.id === selectedLocations.id) ?
 						<ButtonCustom 
 							bg='#f1f1f1'
 							color='#000'

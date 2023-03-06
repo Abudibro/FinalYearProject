@@ -36,16 +36,12 @@ function PickLocation({navigation, route}) {
 					prevScreen='view-listing'
 				/>
 				<View style={{width: constants.width, justifyContent: 'space-between', flexDirection: 'row'}}>
-					<TouchableOpacity activeOpacity={.8} onPress={() => navigation.goBack()}>
-						<AntDesign name='leftcircle' size={45} color='#2846c4'/>
-					</TouchableOpacity>
+					<View/>
 					<TouchableOpacity activeOpacity={.8} disabled={selectedLocation.length === 0} style={{opacity: selectedLocation.length === 0 && .4}} onPress={() => navigation.navigate('pick-time', {selectedLocation: selectedLocation})}>
 						<AntDesign name='rightcircle' size={45} color='#2846c4'/>
 					</TouchableOpacity>
 				</View>
 			</View>
-
-			{/* <AntDesign name='rightcircle' size={45} color='#2846c4' style={{position: 'absolute'}} /> */}
     </View>
   )
 }
