@@ -14,7 +14,7 @@ export default function Header(props) {
 					paddingLeft: props.paddingLeft ? props.paddingLeft : 0,
 					textAlign: props.center ? 'center' : null,
 					width: props.width ? props.width : null,
-					marginTop: props.marginT ? props.marginT : 0
+					marginTop: props.marginT && props.marginT
         }
       }
     onPress={props.onPress}>

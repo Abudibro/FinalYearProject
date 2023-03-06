@@ -103,7 +103,7 @@ export default function NewListing({ navigation, route }) {
 				{/* Preview Listing */}
 				<ButtonCustom onClick={() => navigation.navigate('preview-listing', {listing: {
 					name, price, condition, images, description, edit, listingId: edit ? listing.listingID: null, selectedLocations, selectedTimes
-				}})} marginBottom={Dimensions.get('window').height*.1} marginTop={Dimensions.get('window').height*.02} size={16} weight={"600"} disabled={isListingPreviewDisabled()} >Preview Listing</ButtonCustom>
+				}})} marginBottom={constants.MARGIN_BOTTOM} marginTop={Dimensions.get('window').height*.02} size={16} weight={"600"} disabled={isListingPreviewDisabled()} >Preview Listing</ButtonCustom>
 			</View>
 		</ScrollView>
 	)

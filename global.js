@@ -77,7 +77,15 @@ const constants = {
 		[ false, false, false, false, false, true, true, true, true, true, true, true, true ],
 		[ false, true, true, false, false, false, true, true, true, true, false, false, false ]
 	],
-	WARNING: "This action is irreversible. Once you proceed, a deposit worth 25% of the listing's price will be taken from you. Failure to attend the meeting will result in the loss of your deposit"
+	WARNING_BUYNOW: "This action is irreversible. Once you proceed, a deposit worth 25% of the listing's price will be taken from you. Failure to attend the meeting will result in the loss of your deposit",
+	WARNING_I_AM_HERE: "Confirming you are at the meet-up location at the agreed upon time without actually being there will highly likely result in the loss of your deposit. \n\n Note: Make sure you allow the app to see your location, otherwise we can't tell if you're there",
+	MEETUP_STEPS: [
+		'Attend your booked purchase meet-up',
+		'Once there, click the "I am here" button',
+		'If you want the item, give the buyer your 6 digit code and take the item',
+		'If you change your mind, click the "I didn\'t buy the item" button, note this button only shows after you click "I am here"'
+	],
+	MARGIN_BOTTOM: Dimensions.get('window').height*.1,
 }
 
 export default constants;

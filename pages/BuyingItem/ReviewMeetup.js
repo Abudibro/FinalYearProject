@@ -19,7 +19,10 @@ const ReviewMeetup = ({navigation, route}) => {
 	const { selectedLocation, selectedTime } = route.params;
 	const [modalOpen, setModalOpen] = useState(false);
 
-	const onBookMeetupPress = () => {}
+	const onBookMeetupPress = () => {
+		setModalOpen(false);
+		navigation.navigate('purchase-confirmation', {selectedLocation, selectedTime})
+	}
 
 
 	return (
@@ -70,7 +73,7 @@ const ReviewMeetup = ({navigation, route}) => {
 				onBackdropPress={() => setModalOpen(false)}
 			>
 				<View style={styles.modal}>
-					<View style={[styles.warningContainer]}>
+					<View style={styles.warningContainer}>
 						<View style={[styles.informationContainer, {backgroundColor: 'transparent', marginVertical: 0, paddingVertical: 0, marginBottom: 10}]}>
 							<Ionicons name='warning-outline' size={25} color='#a81811' />
 							<Header size={17} weight='700' color='#a81811' paddingLeft={3}  >

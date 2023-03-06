@@ -3,8 +3,6 @@ import { View, StyleSheet, Dimensions, TouchableOpacity } from "react-native"
 import Header from "../../components/Header"
 import Map from "../../components/Map"
 import TitleSection from "../../components/TitleSection"
-import useIsReady from "../../components/isReady"
-import Loading from "../../components/Loading"
 
 import AntDesign from 'react-native-vector-icons/AntDesign'
 
@@ -14,14 +12,6 @@ function PickLocation({navigation, route}) {
 	// const isReady = useIsReady();
 	const [selectedLocation, setSelectedLocation]  = useState([]);
 	const { selectedLocations } = route.params;
-
-	// useEffect(() => {
-
-	// }, [])
-	
-	// if (!isReady ) {
-	// 	return <Loading />
-	// }
 
   return (
     <View style={styles.container} >
