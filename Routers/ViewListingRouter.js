@@ -11,13 +11,13 @@ const Stack = createNativeStackNavigator();
 
 export default function ViewListingRouter({route}) {
 
-	// const { listingId, userOwnsListing } = route.params;
-	const listingId = '', userOwnsListing = true;
+	const { listingId, userOwnsListing } = route.params;
+	// const listingId = '', userOwnsListing = true;
 
   return (
     <Stack.Navigator screenOptions={{headerShown: false, gestureEnabled: false}}>
-			<Stack.Screen name="purchase-confirmation" component={PurchaseConfirmation} />
       <Stack.Screen name="view-listing" component={ViewListing} initialParams={{listingId, userOwnsListing}} />
+			<Stack.Screen name="purchase-confirmation" component={PurchaseConfirmation} />
       <Stack.Screen name="pick-location" component={PickLocation} />
       <Stack.Screen name="new-listing" component={NewListing} />
 			<Stack.Screen name="review-meetup" component={ReviewMeetup} />

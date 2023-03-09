@@ -38,17 +38,28 @@ export default function NewListing({ navigation, route }) {
 		|| price.trim().length === 0
 		|| description.trim().length === 0
 		|| images.length === 0
-		|| !selectedTimes.some( function (a) { return a.length > 0 })
+		// || 
 		|| edit && (
 			listing.name === name
 			&& listing.price === price
 			&& listing.condition === condition
 			&& listing.description === description
 			&& listing.images === images
-			&& !listing.selectedLocations.some((a, i) => a != selectedLocations[i])
+			&& areEqual(listing.selectedLocations, selectedLocations)
 			&& !listing.selectedTimes.some((a, i) => a.some((e, j) => e != selectedTimes[i][j]))
 		)
 	}
+
+	console.log(timesAreEqual(listing, selectedTimes))
+	
+	const printArr = (arr) => {
+		arr.map(row => console.log('\n' +row))
+		return
+	} 
+	
+	printArr(selectedTimes);
+	console.log('break')
+	printArr(listing.selectedTimes);
 
 	return(
 		<ScrollView style={{flex: 1, backgroundColor: '#0d0d0d'}}>
@@ -93,12 +104,14 @@ export default function NewListing({ navigation, route }) {
 						initialValue={description}
 				></Description>
 
-				<Map locations={constants.LOCATIONS} prevScreen='new-listing' selectedLocations={selectedLocations} setSelectedLocations={setSelectedLocations} />
+				{/* Location Picker */}
+				<Map locations={constants.LOCATIONS} pickMany selectedLocations={selectedLocations} setSelectedLocations={setSelectedLocations} label labelText={'Where are you willing to meet the buyer?'}/>
 				
+				{/* Availability Picker */}
 				<View style={{width: constants.width, alignItems: 'flex-start'}}>
 					<Header paddingLeft={19} marginV={14} size={15} weight='600' >When are you available?</Header>
 				</View>
-				<TimePicker times={selectedTimes} setTimes={setSelectedTimes} />
+				<TimePicker times={selectedTimes} setTimes={setSelectedTimes} meetUpTime={false}/>
 
 				{/* Preview Listing */}
 				<ButtonCustom onClick={() => navigation.navigate('preview-listing', {listing: {
@@ -107,6 +120,36 @@ export default function NewListing({ navigation, route }) {
 			</View>
 		</ScrollView>
 	)
+}
+
+function areEqual(array1, array2) {
+  if (array1.length != array2.length) return false
+	array1.map((loc1, i) => {
+		let found = false;
+		array2.map(loc2 => {
+			if (loc1 == loc2) {
+				found = true;
+				return;
+			}
+		})
+
+		if (!found) {
+			return false
+		};
+	})
+
+  return true;
+}
+
+const timesAreEqual = (listing, selectedTimes) => {
+	listing.selectedTimes.map((row, i) => {
+		row.map((col, j) => {
+			// console.log(col, selectedTimes[i][j])
+			if (col != selectedTimes[i][j]) return false;
+		})
+	})
+
+	return true;
 }
 
 const styles = StyleSheet.create({

@@ -19,13 +19,13 @@ const INITIAL_REGION = {
 const deviceWidth = Dimensions.get("window").width;
 const deviceHeight = Dimensions.get("window").height
 
-export default function Map({locations, selectedLocations, setSelectedLocations, prevScreen}) {
+export default function Map({locations, selectedLocations, setSelectedLocations, pickMany, label, labelText}) {
 	const mapRef = useRef(null);
 	const [previewLocation, setPreviewLocation] = useState(false);
 	const [locationPreviewing, setLocationPreviewing] = useState(locations[0]);
 
 	const onAddLocationClick = () => {
-		if (prevScreen === 'new-listing') {
+		if (pickMany) {
 			setSelectedLocations([...selectedLocations, locationPreviewing]);
 		} else {
 			setSelectedLocations(locationPreviewing);
@@ -34,7 +34,7 @@ export default function Map({locations, selectedLocations, setSelectedLocations,
 	}
 
 	const onRemoveLocationClick = () => {
-		if (prevScreen === 'new-listing') {
+		if (pickMany) {
 			setSelectedLocations(selectedLocations.filter(location => location.title != locationPreviewing.title));
 		} else {
 			setSelectedLocations([]);
@@ -43,14 +43,14 @@ export default function Map({locations, selectedLocations, setSelectedLocations,
 	}
 
 	const isSelected = ( location ) => {
-		if (prevScreen === 'new-listing') return selectedLocations.some(e => e.id === location.id);
+		if (pickMany) return selectedLocations.some(e => e.id === location.id);
 		return selectedLocations.id === location.id;
 	}
 	
 
   return (
     <View style={styles.container}>
-			{prevScreen == 'new-listing' && <Header paddingLeft={19} marginV={14} size={15} weight='600'>Where are you willing to meet the buyer?</Header>}
+			{label && <Header paddingLeft={19} marginV={14} size={15} weight='600'>{labelText}</Header>}
       <MapView
         ref={mapRef}
         style={styles.map}
@@ -105,9 +105,9 @@ export default function Map({locations, selectedLocations, setSelectedLocations,
 					</View>
 					
 					{
-						(prevScreen === 'new-listing' &&
+						(pickMany &&
 						selectedLocations.some(e => e.id === locationPreviewing.id))
-						|| (prevScreen === 'view-listing' && locationPreviewing.id === selectedLocations.id) ?
+						|| (!pickMany && locationPreviewing.id === selectedLocations.id) ?
 						<ButtonCustom 
 							bg='#f1f1f1'
 							color='#000'
@@ -120,7 +120,7 @@ export default function Map({locations, selectedLocations, setSelectedLocations,
 						<ButtonCustom 
 						bg='#f1f1f1'
 						color='#000'
-						onClick={() => onAddLocationClick()} size={16} weight={"600"} marginTop={10}>{prevScreen === 'view-listing' ? 'Choose Location' : 'Add Location'}</ButtonCustom>
+						onClick={() => onAddLocationClick()} size={16} weight={"600"} marginTop={10}>{!pickMany ? 'Choose Location' : 'Add Location'}</ButtonCustom>
 					}
 				</View>
 			</Scrollable>

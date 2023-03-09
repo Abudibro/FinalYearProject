@@ -23,7 +23,8 @@ function PickLocation({navigation, route}) {
 					locations={selectedLocations} // All possible locations buyer can pick from 
 					selectedLocations={selectedLocation} // Location that buyer has picked
 					setSelectedLocations={setSelectedLocation} // function to set location picked by buyer
-					prevScreen='view-listing'
+					pickMany={false}
+					label={false}
 				/>
 				<View style={{width: constants.width, justifyContent: 'space-between', flexDirection: 'row'}}>
 					<View/>

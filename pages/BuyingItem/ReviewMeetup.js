@@ -81,7 +81,7 @@ const ReviewMeetup = ({navigation, route}) => {
 							</Header>
 						</View>
 						<Header size={17} weight='500' color='#a81811' paddingLeft={7} center width={constants.width - 14}  >
-							{constants.WARNING}
+							{constants.WARNING_BUYNOW}
 						</Header>
 					</View>
 

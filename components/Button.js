@@ -12,8 +12,8 @@ export default function ButtonCustom(props) {
             alignItems: 'center',
             justifyContent: 'space-evenly',
             opacity: props.disabled ? .3 : 1,
-            marginTop: props.marginTop? props.marginTop : 0,
-            marginBottom: props.marginBottom ? props.marginBottom : 0
+            marginTop: props.marginTop && props.marginTop,
+            marginBottom: props.marginBottom && props.marginBottom
         }}
         activeOpacity={.7}
         disabled={!props.disabled || props.disabled == null ? false: true}

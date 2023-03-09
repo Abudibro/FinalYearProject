@@ -13,7 +13,7 @@ import constants from '../global';
 export default function Home({ navigation }) {
 
     const SearchIcon = (size, color, style) => {return (
-        <TouchableOpacity style={style} onPress={() => navigation.navigate('view-listing')}>
+        <TouchableOpacity style={style} onPress={() => navigation.navigate('search-result', {search})}>
           <MaterialCommunityIcons name={"arrow-right-circle"} size={size} color={color} />
         </TouchableOpacity>
     )}

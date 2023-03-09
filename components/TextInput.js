@@ -8,7 +8,7 @@ export default function TextInputBox(props) {
     const height = props.height ? props.height : 57
 
   return (
-    <View style={{margin: props.margin ? props.margin : 0, marginTop: props.marginT ? props.marginT : 0}}>
+    <View style={{margin: props.margin && props.margin, marginTop: props.marginT && props.marginT, marginBottom: props.marginB && props.marginB}}>
 			<View style={{paddingLeft: 19}}>
 					{
 							!props.noLabel &&
@@ -16,7 +16,7 @@ export default function TextInputBox(props) {
 					}
 			</View>
 			<View 
-			style={{
+			style={[{
 					margin: 5,
 					borderColor: !isFocusOn ? "#181818" : "#2846c4",
 					borderWidth: isFocusOn || props.icon ? 2 : 0,
@@ -25,7 +25,7 @@ export default function TextInputBox(props) {
 					flexDirection: 'row',
 					backgroundColor: "#181818",
 					alignItems: 'center'
-				}}
+				}, props.styles]}
 			> 
         {
 					props.prefix &&
@@ -38,7 +38,7 @@ export default function TextInputBox(props) {
 					</Text>
         }
 				<TextInput
-						style={{
+						style={[{
 								backgroundColor: "#181818",
 								borderRadius: 13,
 								height: isFocusOn || props.icon ? height-4 : height,
@@ -48,7 +48,7 @@ export default function TextInputBox(props) {
 								width: props.prefix && isFocusOn ? constants.width-36 : props.prefix ? constants.width-40 : isFocusOn ? constants.width-4 : constants.width,
 								paddingTop: 0,
 								paddingBottom: 0
-						}}
+						}, props.styles]}
 						// multiline={true}
 						keyboardType={props.int && 'numeric'}
 						defaultValue={props.initialValue ? props.initialValue : null}
