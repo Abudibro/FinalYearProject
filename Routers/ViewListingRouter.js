@@ -12,7 +12,6 @@ const Stack = createNativeStackNavigator();
 export default function ViewListingRouter({route}) {
 
 	const { listingId, userOwnsListing } = route.params;
-	// const listingId = '', userOwnsListing = true;
 
   return (
     <Stack.Navigator screenOptions={{headerShown: false, gestureEnabled: false}}>

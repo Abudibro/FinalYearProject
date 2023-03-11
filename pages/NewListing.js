@@ -19,7 +19,7 @@ export default function NewListing({ navigation, route }) {
 		listing = route.params.listing;
 	}
 
-	const [name, setName] = useState(edit ? listing.name : null)
+	const [title, setTitle] = useState(edit ? listing.title : null)
 	const [price, setPrice] = useState(edit ? listing.price : null)
 	const [condition, setCondition] = useState(edit ? listing.condition : null)
 	const [description, setDescription] = useState(edit ? listing.description : null)
@@ -28,19 +28,19 @@ export default function NewListing({ navigation, route }) {
 	const [selectedTimes, setSelectedTimes] = useState(edit ? listing.selectedTimes : constants.MEETUP_TIMES_GRID);
     
 	const isListingPreviewDisabled = () => {
-		return name == null
+		return title == null
 		|| price == null
 		|| images === null
 		|| condition === null
 		|| description === null
 		|| selectedLocations.length == 0
-		|| name.trim().length === 0
+		|| title.trim().length === 0
 		|| price.trim().length === 0
 		|| description.trim().length === 0
 		|| images.length === 0
 		// || 
 		|| edit && (
-			listing.name === name
+			listing.title === title
 			&& listing.price === price
 			&& listing.condition === condition
 			&& listing.description === description
@@ -50,16 +50,6 @@ export default function NewListing({ navigation, route }) {
 		)
 	}
 
-	console.log(timesAreEqual(listing, selectedTimes))
-	
-	const printArr = (arr) => {
-		arr.map(row => console.log('\n' +row))
-		return
-	} 
-	
-	printArr(selectedTimes);
-	console.log('break')
-	printArr(listing.selectedTimes);
 
 	return(
 		<ScrollView style={{flex: 1, backgroundColor: '#0d0d0d'}}>
@@ -74,8 +64,8 @@ export default function NewListing({ navigation, route }) {
 				<TextInputBox
 						label="Name"
 						placeholder="Name your listing"
-						onChange={setName}
-						initialValue={name}
+						onChange={setTitle}
+						initialValue={title}
 				/>
 				
 				{/* Image */}
@@ -115,7 +105,7 @@ export default function NewListing({ navigation, route }) {
 
 				{/* Preview Listing */}
 				<ButtonCustom onClick={() => navigation.navigate('preview-listing', {listing: {
-					name, price, condition, images, description, edit, listingId: edit ? listing.listingID: null, selectedLocations, selectedTimes
+					title, price, condition, images, description, edit, listingId: edit ? listing.listingID: null, selectedLocations, selectedTimes
 				}})} marginBottom={constants.MARGIN_BOTTOM} marginTop={Dimensions.get('window').height*.02} size={16} weight={"600"} disabled={isListingPreviewDisabled()} >Preview Listing</ButtonCustom>
 			</View>
 		</ScrollView>
@@ -141,16 +131,16 @@ function areEqual(array1, array2) {
   return true;
 }
 
-const timesAreEqual = (listing, selectedTimes) => {
-	listing.selectedTimes.map((row, i) => {
-		row.map((col, j) => {
-			// console.log(col, selectedTimes[i][j])
-			if (col != selectedTimes[i][j]) return false;
-		})
-	})
+// const timesAreEqual = (listing, selectedTimes) => {
+// 	listing.selectedTimes.map((row, i) => {
+// 		row.map((col, j) => {
+// 			// console.log(col, selectedTimes[i][j])
+// 			if (col != selectedTimes[i][j]) return false;
+// 		})
+// 	})
 
-	return true;
-}
+// 	return true;
+// }
 
 const styles = StyleSheet.create({
     container: {

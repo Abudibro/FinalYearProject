@@ -16,57 +16,9 @@ export default function ViewListing({navigation, route}) {
 
 	const [numberRevealed, setNumberRevealed] = useState(false)
 	const [liked, setLiked] = useState(false);
-	const [listing, setListing] = useState({
-		listingID: id,
-		condition: "New", 
-		description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis ut diam quam nulla porttitor. Venenatis tellus in metus vulputate eu scelerisque felis. Diam in arcu cursus euismod quis viverra. Nibh ipsum consequat nisl vel pretium. Dignissim suspendisse in est ante. Id consectetur purus ut faucibus pulvinar elementum integer enim neque. Pellentesque diam volutpat commodo sed egestas. Vel elit scelerisque mauris pellentesque. Eget duis at tellus at urna. Amet facilisis magna etiam tempor orci eu. Et malesuada fames ac turpis egestas sed tempus urna. Enim praesent elementum facilisis leo vel. Nisi quis eleifend quam adipiscing. Facilisis leo vel fringilla est ullamcorper eget nulla facilisi. Viverra aliquet eget sit amet tellus. Vitae turpis massa sed elementum tempus egestas sed. Enim ut tellus elementum sagittis vitae et. Ultrices mi tempus imperdiet nulla. Et odio pellentesque diam volutpat commodo sed egestas egestas. Urna nunc id cursus metus aliquam. Sed ullamcorper morbi tincidunt ornare massa eget egestas. Id volutpat lacus laoreet non. Molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Vitae suscipit tellus mauris a diam maecenas sed enim. Suspendisse in est ante in nibh mauris. Dignissim sodales ut eu sem integer vitae.",
-		images: [
-			{"assetId": "259C9570-436F-4AC0-A7B1-04C7F745B579/L0/001", "fileName": "IMG_0837.jpg", "fileSize": 5630126, "height": 4032, "type": "image", "uri": "file:///var/mobile/Containers/Data/Application/099A6AD5-697F-449A-B22A-505B1A826615/Library/Caches/ExponentExperienceData/%2540anonymous%252FFinalYearProject-d4a926bf-56ee-4a53-b828-de92aaf5df39/ImagePicker/70F0267A-13AC-4945-96AC-356337626FF7.jpg", "width": 3024},
-			{"assetId": "CD58EA64-21E6-473A-AC5C-45DA4326543C/L0/001", "fileName": "IMG_0838.jpg", "fileSize": 5440396, "height": 4032, "type": "image", "uri": "file:///var/mobile/Containers/Data/Application/099A6AD5-697F-449A-B22A-505B1A826615/Library/Caches/ExponentExperienceData/%2540anonymous%252FFinalYearProject-d4a926bf-56ee-4a53-b828-de92aaf5df39/ImagePicker/828F7669-79FB-41BB-87B4-2070D8FC5B6A.jpg", "width": 3024},
-			{"assetId": "CD58EA64-21E6-473A-AC5C-45DA4326543C/L0/001", "fileName": "IMG_0838.jpg", "fileSize": 5440396, "height": 4032, "type": "image", "uri": "file:///var/mobile/Containers/Data/Application/099A6AD5-697F-449A-B22A-505B1A826615/Library/Caches/ExponentExperienceData/%2540anonymous%252FFinalYearProject-d4a926bf-56ee-4a53-b828-de92aaf5df39/ImagePicker/828F7669-79FB-41BB-87B4-2070D8FC5B6A.jpg", "width": 3024},
-		],
-		name: "Boris Bike",
-		price: "35",
-		sellerID: 13,
-		selectedLocations: [
-			{
-				title: "St Mary's Church of England",
-				address: "Bristol Rd, Selly Oak, Birmingham B29 6ND",
-				area: "Selly Oak",
-				parking: true,
-				coordinates: [
-					-1.943097,
-					52.439152
-				],
-				id: "434bef4549ac359d74236f6353867db6"
-			},
-			{
-				title: "Selly Oak Station",
-				address: "Selly Oak, Birmingham B29 6NA",
-				area: "Selly Oak",
-				parking: true,
-				coordinates: [
-					-1.935608,
-					52.441858
-				],
-				id: "a2011b7a9048cac236499bf9ff4037cf"
-			},
-			{
-				title: "Tesco Express",
-				address: "479 Bristol Rd, Bournbrook, Birmingham B29 6BA",
-				area: "Selly Oak",
-				parking: true,
-				coordinates: [
-					-1.934392,
-					52.445445
-				],
-				id: "c28cdd16f6af645fab5314a1ef53edfc"
-			}
-		],
-		selectedTimes: constants.MOCK_MEETUP_TIMES_GRID
-	})
+	const [listing, setListing] = useState(constants.MOCK_LISTING)
 
-	const {condition, description, images, name, price, selectedLocations, sellerID} = listing;
+	const {condition, description, images, title, price, selectedLocations, sellerID} = listing;
 
 	const styles  = StyleSheet.create({
 		container: {
@@ -140,7 +92,7 @@ export default function ViewListing({navigation, route}) {
 			</ScrollView>
 
 			{/* Listing Name */}
-			<Header width={constants.width} marginV={3} size={27} >{name}</Header>
+			<Header width={constants.width} marginV={3} size={27} >{title}</Header>
 
 			{/* Listing Price & Like button */}
 			<View style={styles.sellersNumberWrapper}>

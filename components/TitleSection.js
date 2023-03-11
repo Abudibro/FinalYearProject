@@ -8,7 +8,7 @@ export default function TitleSection(props) {
 			height: 140,
 			width: constants.width,
 			alignItems: props.left ? 'flex-start' : 'center',
-			justifyContent: 'flex-end'
+			justifyContent: props.jC ? props.jC : 'flex-end'
 		}
 	})
 

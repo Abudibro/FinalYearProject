@@ -5,7 +5,7 @@ import Header from '../components/Header'
 import TextInputBox from '../components/TextInput'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-import HomeListingCard from '../components/HomeListingCard';
+import {ListingImage} from '../components/ListingCard';
 import SearchSuggestion from '../components/SearchSuggestion';
 import TitleSection from '../components/TitleSection'
 import constants from '../global';
@@ -52,7 +52,7 @@ export default function Home({ navigation }) {
 			return (
 				recentlyViewed.map((item, i) => {
 					return (
-						<HomeListingCard image={item.image} key={i} onPress={() => navigation.navigate('view-listing-router', {listingId: item.listingId, userOwnsListing: user.id === item.sellerId })}/>
+						<ListingImage dimensions={130} image={item.image} key={i} onPress={() => navigation.navigate('view-listing-router', {listingId: item.listingId, userOwnsListing: user.id === item.sellerId })}/>
 					)
 				})
 			)
@@ -62,7 +62,7 @@ export default function Home({ navigation }) {
 			return (
 				recentlyViewed.map((item, i) => {
 					return (
-						<HomeListingCard image={item.image} key={i} onPress={() => navigation.navigate('view-listing-router', {listingId: item.listingId, userOwnsListing: true })}/>
+						<ListingImage dimensions = {130} image={item.image} key={i} onPress={() => navigation.navigate('view-listing-router', {listingId: item.listingId, userOwnsListing: true })}/>
 					)
 				})
 			)
@@ -80,17 +80,17 @@ export default function Home({ navigation }) {
                         <Header size={30} margin={0} weight={"500"}>{user.username}</Header>
                     </View>
                     <ButtonCustom
-                        static
-                        height={72}
-                        width={130}
-                        weight={"700"}
-                        size={15}
-                        borderRadius={20}
-                        icon={<FontAwesome name='plus' size={30} style={{color: '#f1f1f1'}}/>}
-                        onClick={() => {navigation.navigate('new-listing')}}
+											static
+											height={72}
+											width={130}
+											weight={"700"}
+											size={15}
+											borderRadius={20}
+											icon={<FontAwesome name='plus' size={30} style={{color: '#f1f1f1'}}/>}
+											onClick={() => {navigation.navigate('new-listing')}}
                     >
-                        New{"\n"}
-                        Listing
+											New{"\n"}
+											Listing
                     </ButtonCustom>
                 </View>
 							</TitleSection>
@@ -109,14 +109,14 @@ export default function Home({ navigation }) {
 							search.length == 0 &&
 							<View style={styles.cardSectionWrapper}>
 									<View style={styles.cardSection}>
-											<Header size={23} >You recently viewed</Header>
+											<Header size={23} >My recently viewed</Header>
 											<ScrollView horizontal={true}>
 													{renderRecentlyViewed()}
 											</ScrollView>
 									</View>
 
 									<View style={styles.cardSection}>
-											<Header size={23} >Your listed items</Header>
+											<Header size={23} >My listings</Header>
 											<ScrollView horizontal={true}>
 												{renderYourListings()}
 											</ScrollView>
@@ -149,7 +149,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'flex-end',
     width: constants.width,
-		// marginVertical: 30
   },
   searchSection: {
     marginTop: 20,

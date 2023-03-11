@@ -13,6 +13,7 @@ import UpcomingMeetups from '../pages/UpcomingMeetups';
 import Account from '../pages/Account';
 
 import constants from '../global';
+import UpcomingMeetupsRouter from '../Routers/UpcomingMeetupsRouter';
 
 const Tab = createBottomTabNavigator();
 
@@ -44,7 +45,7 @@ export default function Nav() {
       <Tab.Navigator {...{ screenOptions }} >
         <Tab.Screen name="home" component={HomeRouter} options={{ tabBarIcon: ({ focused }) => <Entypo name='home' size={35} color={focused ? '#2846c4' : '#848484'} /> }} />
         <Tab.Screen name="liked-listings" options={{ tabBarIcon: ({ focused }) => <AntDesign name='heart' size={35} color={focused ? '#2846c4' : '#848484'} /> }} component={LikedListings} />
-        <Tab.Screen name="upcoming-meetups" options={{ tabBarIcon: ({ focused }) => <FontAwesome5 name='calendar-alt' size={35} color={focused ? '#2846c4' : '#848484'} /> }}  component={UpcomingMeetups} />
+        <Tab.Screen name="upcoming-meetups" options={{ tabBarIcon: ({ focused }) => <FontAwesome5 name='calendar-alt' size={35} color={focused ? '#2846c4' : '#848484'} /> }}  component={UpcomingMeetupsRouter} />
         <Tab.Screen name="account" options={{ tabBarIcon: ({ focused }) => <FontAwesome5 name='user-circle' size={35} color={focused ? '#2846c4' : '#848484'} /> }} component={Account} />
       </Tab.Navigator>
     </NavigationContainer>

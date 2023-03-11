@@ -11,17 +11,38 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
 
 import constants from '../global';
 
-function SearchFilters({navigation}) {
+function SearchFilters({navigation, route}) {
 	const [minPrice, setMinPrice] = useState(0);
-	const [maxPrice, setMaxPrice] = useState(Number.MAX_VALUE);
+	const [maxPrice, setMaxPrice] = useState(null);
 	const [selectedLocations, setSelectedLocations] = useState([])
-	const [selectedTimes, setSelectedTimes] = useState(constants.MEETUP_TIMES_GRID);
+	const [selectedTimes, setSelectedTimes] = useState(constants.MEETUP_TIMES_GRID
+		);
+	const { filters } = route.params;
 
 	const isButtonDisabled = () => {
-		
+		return (
+			minPrice == filters.minPrice &&
+			maxPrice == filters.maxPrice &&
+			constants.SELECTED_LOCATIONS_ARE_EQUAL(selectedLocations, filters.selectedLocations) &&
+			!selectedTimes.some((row, i) => row.some((col, j) => col != filters.selectedTimes[i][j]))
+		)
 	}
 
-	console.log(initialParams.maxPrice.toString() === maxPrice)
+	
+	const printArr = arr => {
+		arr.map(r => console.log(r))
+	}
+	printArr(filters.selectedTimes);
+	
+	const onMinPriceChange = (e) => {
+		if (e == '') setMinPrice(0)
+		else setMinPrice(parseInt(e))
+	}
+
+	const onMaxPriceChange = (e) => {
+		if (e == '') setMaxPrice(null)
+		else setMaxPrice(parseInt(e))
+	}
 
 	return (
 		<ScrollView style={styles.modal} contentContainerStyle={{justifyContent: 'space-around', alignItems: 'center'}} bounces={false} >
@@ -30,22 +51,26 @@ function SearchFilters({navigation}) {
 					<AntDesign name='arrowleft' color='#2846c4' size={35}/>
 				</TouchableOpacity>
 			</View>
+
+			{/* Min Price */}
 			<TextInputBox
 				label='Min Price'
 				placeholder="Enter a min price"
-				onChange={setMinPrice}
+				onChange={onMinPriceChange}
 				prefix={'£'}
 				int
 				initialValue={minPrice}
-				marginT={constants.MARGIN_BOTTOM/2}
+				marginT={20}
 				marginB={10}
 			>
 				{minPrice}
 			</TextInputBox>
+
+			{/* Max Price */}
 			<TextInputBox
 				label='Max Price'
 				placeholder="Enter a max price"
-				onChange={setMaxPrice}
+				onChange={onMaxPriceChange}
 				prefix={'£'}
 				int
 				initialValue={maxPrice}
@@ -55,8 +80,10 @@ function SearchFilters({navigation}) {
 				{maxPrice}
 			</TextInputBox>
 
+			{/* Location Filter */}
 			<Map locations={constants.LOCATIONS} selectedLocations={selectedLocations} setSelectedLocations={setSelectedLocations} pickMany label labelText={'Filter meet-up locations'} />
 
+			{/* Time filter */}
 			<View style={{width: constants.width, alignItems: 'flex-start'}}>
 				<Header paddingLeft={19} marginV={14} marginT={35} size={15} weight='600' >FIlter meet-up times</Header>
 			</View>
@@ -72,7 +99,6 @@ const styles = StyleSheet.create({
 	modal: {
 		flex: 1,
 		backgroundColor:'#0d0d0d',
-		// justifyContent: 'center',
 		flexDirection: 'column',
 	},
 	backArrowWrapper: {

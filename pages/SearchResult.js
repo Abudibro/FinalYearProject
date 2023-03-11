@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from 'react'
-import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native'
+import { Dimensions, ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native'
 
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import TextInputBox from '../components/TextInput'
+import {ListingCard} from '../components/ListingCard'
+import constants from '../global'
 
 
 const SearchResult = ({navigation, route}) => {
 	const [search, setSearch ] = useState("props.search");
-	const [listins, setListing] = useState();
+	const [listings, setListings] = useState([
+		constants.MOCK_LISTING, constants.MOCK_LISTING, constants.MOCK_LISTING, constants.MOCK_LISTING, constants.MOCK_LISTING, constants.MOCK_LISTING,
+		constants.MOCK_LISTING, constants.MOCK_LISTING, constants.MOCK_LISTING, constants.MOCK_LISTING, constants.MOCK_LISTING, constants.MOCK_LISTING,
+	]);
 	const {minPrice, maxPrice, selectedLocations, selectedTimes} = route.params;
 
 	useEffect(() => {
@@ -21,9 +26,7 @@ const SearchResult = ({navigation, route}) => {
 
 		Cases when it shouldn't change:
 		- On search change - Done
-		- When filters dont change 
-
-
+		- When filters dont change
 	*/}
 
 
@@ -31,8 +34,7 @@ const SearchResult = ({navigation, route}) => {
 	}, [route.params]);
 
 	const searchItems = () => {
-		setListing([])
-		console.log('search')
+		// setListings([])
 	}
 
 	const SearchIcon = (size, color, style) => {return (
@@ -45,7 +47,7 @@ const SearchResult = ({navigation, route}) => {
 		return (
 			<TouchableOpacity
 				style={styles.icon}
-				onPress={() => navigation.navigate('search-filters')}
+				onPress={() => navigation.navigate('search-filters', {filters: {minPrice, maxPrice, selectedLocations, selectedTimes}})}
 				activeOpacity={.8}
 			>
 				<FontAwesome name='sliders' size={34} color={'#2846c4'} />
@@ -53,8 +55,20 @@ const SearchResult = ({navigation, route}) => {
 		)
 	}
 
+	const renderListings = () => {
+		return (
+			<View style={styles.listingsContainer} >
+				{listings.map((listing, i) => {
+					return (
+						<ListingCard dimensions={110} listing={listing} key={i} onPress={() => navigation.navigate('view-listing-router', {listingId: listing.listingId, userOwnsListing: listing.userOwnsListing })}/>
+					)
+				})}
+			</View>
+		)
+	}
+
 	return (
-		<ScrollView bounces={false} style={styles.container} contentContainerStyle={styles.containerChildren} >
+		<ScrollView bounces={false} style={styles.container} contentContainerStyle={styles.containerChildren}  >
 			<View style={styles.searchSection}>
 				<TextInputBox
 					placeholder="Search for an item"
@@ -67,6 +81,7 @@ const SearchResult = ({navigation, route}) => {
 				/>
 			</View>
 			{FilterIcon()}
+			{renderListings()}
 		</ScrollView>
 	)
 }
@@ -90,11 +105,20 @@ const styles  = StyleSheet.create({
 		width: 60,
 		justifyContent: 'center',
 		alignItems: 'center',
-		marginTop: 10, zIndex: 999
+		marginTop: 10,
+		zIndex: 999
 	},
 	filterClicked: {
 		backgroundColor: '#2846c4',
 		borderRadius: '50%',
+	},
+	listingsContainer: {
+		width: constants.width,
+		// flex: 1,
+		marginBottom: constants.MARGIN_BOTTOM,
+		flexDirection: 'row',
+		justifyContent: 'space-around',
+		flexWrap: 'wrap'
 	}
 	
 })
