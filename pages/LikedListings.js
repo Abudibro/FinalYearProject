@@ -7,9 +7,10 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import constants from "../global";
 
 export default function LikedListings({navigation}) {
-	const [meetups, setMeetups] = useState([
-		constants.MOCK_LISTING, constants.MOCK_LISTING, constants.MOCK_LISTING, constants.MOCK_LISTING, constants.MOCK_LISTING, 
-	]);
+	const [meetups, setMeetups] = useState([]) 
+	// useState([
+	// 	constants.MOCK_LISTING, constants.MOCK_LISTING, constants.MOCK_LISTING, constants.MOCK_LISTING, constants.MOCK_LISTING, 
+	// ]);
 
 	useEffect(() => {
 
@@ -24,7 +25,7 @@ export default function LikedListings({navigation}) {
 					<Header
 						center
 						size={23}
-						color={'#181818'}
+						color={'#2e2e2e'}
 						width={constants.width}
 					>
 						You don't have any liked listings

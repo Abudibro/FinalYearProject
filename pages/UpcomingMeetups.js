@@ -24,7 +24,7 @@ export default function UpcomingMeetups({navigation}) {
 					<Header
 						center
 						size={23}
-						color={'#181818'}
+						color={'#2e2e2e'}
 						width={constants.width}
 					>
 						You don't have any upcoming meet-ups
