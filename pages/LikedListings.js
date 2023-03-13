@@ -7,10 +7,13 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import constants from "../global";
 
 export default function LikedListings({navigation}) {
-	const [meetups, setMeetups] = useState([]) 
-	// useState([
-	// 	constants.MOCK_LISTING, constants.MOCK_LISTING, constants.MOCK_LISTING, constants.MOCK_LISTING, constants.MOCK_LISTING, 
-	// ]);
+	const [meetups, setMeetups] = 
+	// useState([]) 
+	useState([
+		constants.MOCK_LISTING, constants.MOCK_LISTING, constants.MOCK_LISTING, constants.MOCK_LISTING, constants.MOCK_LISTING,
+		constants.MOCK_LISTING, constants.MOCK_LISTING, constants.MOCK_LISTING, constants.MOCK_LISTING, constants.MOCK_LISTING,
+		constants.MOCK_LISTING, constants.MOCK_LISTING, constants.MOCK_LISTING, constants.MOCK_LISTING, constants.MOCK_LISTING, 
+	]);
 
 	useEffect(() => {
 

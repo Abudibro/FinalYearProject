@@ -11,12 +11,12 @@ export default function LogIn({navigation}) {
   const [password, changePassword] = useState(null);
   const [hidePassword, toggleHidePassword] = useState(true);
 
-  const EyeWithLine = (size, color, style) => {return (
+  const EyeWithLine = (size, color, style, toggleHidePassword) => {return (
     <TouchableOpacity style={style} onPress={() => toggleHidePassword(true)}>
       <Entypo name={"eye-with-line"} size={size} color={color} />
     </TouchableOpacity>
   )}
-  const Eye = (size, color, style) => {return (
+  const Eye = (size, color, style, toggleHidePassword) => {return (
     <TouchableOpacity style={style} onPress={() => toggleHidePassword(false)}>
       <Entypo name={"eye"} size={size} color={color} />
     </TouchableOpacity>
@@ -44,6 +44,7 @@ export default function LogIn({navigation}) {
 					onChange={changePassword}
 					showPassword={hidePassword}
 					icon={hidePassword ? Eye : EyeWithLine}
+					toggleHidePassword={toggleHidePassword}
 					iconColor={"#848484"}
 					noBorder
 				/>

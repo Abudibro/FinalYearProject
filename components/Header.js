@@ -17,6 +17,7 @@ export default function Header(props) {
 				marginTop: props.marginT && props.marginT
 			}
 		}
+		onPress={props.onPress}
 		numberOfLines={props.numOfLines}>
 			{props.children}
     </Text>

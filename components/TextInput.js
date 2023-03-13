@@ -63,7 +63,7 @@ export default function TextInputBox(props) {
 				</TextInput>
 				{
 						props.icon != null ?
-								props.icon(25, props.iconColor, styles.icon)
+								props.icon(25, props.iconColor, styles.icon, props.toggleHidePassword)
 						: null
 				}
 			</View>

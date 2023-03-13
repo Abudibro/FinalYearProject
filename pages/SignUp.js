@@ -69,12 +69,12 @@ export default function SignUp({navigation}) {
 
   const Checkmark = (size, color, style) => {return (<Ionicons name={"checkmark-circle-sharp"} size={size} color={color} style={style} />)}
   const Cross = (size, color, style) => {return (<Entypo name={"circle-with-cross"} size={size} color={color} style={style} />)}
-  const EyeWithLine = (size, color, style) => {return (
+  const EyeWithLine = (size, color, style, toggleHidePassword) => {return (
     <TouchableOpacity style={style} onPress={() => toggleHidePassword(true)}>
       <Entypo name={"eye-with-line"} size={size} color={color} />
     </TouchableOpacity>
   )}
-  const Eye = (size, color, style) => {return (
+  const Eye = (size, color, style, toggleHidePassword) => {return (
     <TouchableOpacity style={style} onPress={() => toggleHidePassword(false)}>
       <Entypo name={"eye"} size={size} color={color} />
     </TouchableOpacity>
@@ -116,33 +116,7 @@ export default function SignUp({navigation}) {
 					iconColor={checkEmailIsValid() ? "#019501" : checkEmailIsValid() != null ? "#b30000" : null}
 					onChange={changeEmail}
 				/>
-{/* 
-				<TextInputBox placeholder="Address Line 1 *"
-					margin={3}
-					marginT={30}
-					label='Home Address'
-					onChange={setAddressLineOne}
-				/>
-
-				<TextInputBox placeholder="Address Line 2"
-					margin={3}
-					noLabel
-					onChange={setAddressLineTwo}
-				/>
-
-				<TextInputBox placeholder="Post Code *"
-					margin={3}
-					noLabel
-					onChange={setPostCode}
-				/>
-
-				<TextInputBox placeholder="City *"
-					margin={3}
-					noLabel
-					onChange={setCity}
-				/> */}
-
-
+				
 				{/* Password */}
 				<View style={{margin: 3, marginTop: 30}}>
 					<Header size={15} marginV={10} weight='600' paddingLeft={19} >Password *</Header>
@@ -182,6 +156,7 @@ export default function SignUp({navigation}) {
 						onChange={checkPasswordIsValid}
 						showPassword={hidePassword}
 						icon={hidePassword ? Eye : EyeWithLine}
+						toggleHidePassword={toggleHidePassword}
 						iconColor={"#848484"}
 						noBorder
 					/>
